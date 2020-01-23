@@ -72,7 +72,7 @@ build_page("Nastavení", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
 <div class="row">
     <div class="col-lg-7">
         '.$message.'
-        <form method="POST" action="/set">
+        <form method="POST" action="/spotGameWebApp/set">
             <div class="form-group">
                 <label for="nickname">Přezdívka</label>
                 <input name="nickname" type="text" class="form-control" id="nickname" placeholder="Zadejte přezdívku">
