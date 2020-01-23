@@ -1,8 +1,7 @@
 <?php
 
-function build_page($title, $viewName, $HTML = '', $toRootRelStr = './') {
+function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessionData = array()) {
   $toRoot = $toRootRelStr;
-
   echo'<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -92,29 +91,28 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './') {
                             <li class="nav-item'; if ($viewName == 'set') { echo ' active'; }; echo'">
                                 <a class="nav-link" href="'.$toRoot.'set?skipHeader=1">Nastavení</a>
                             </li>
-                            <li class="nav-item'; if ($viewName == 'board') { echo ' active'; }; echo'">
-                                <a class="nav-link" href="'.$toRoot.'board?skipHeader=1">Panel</a>
-                            </li>
-                            <li class="nav-item'; if ($viewName == 'statistics') { echo ' active'; }; echo'">
-                                <a class="nav-link" href="'.$toRoot.'statistics?skipHeader=1">Statistika</a>
-                            </li>
                             ';
 
-
-                            echo '
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-                                    Dropdown
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
-                                    <a class="dropdown-item" href="">Něco</a>
-                                    <a class="dropdown-item" href="">Správa</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href=""><i class="fa fa-sign-out-alt"></i> Něco</a>
-                                </div>
-                            </li>
-                            ';
-
+                            if (isset($sessionData['player'])) {
+                                echo '
+                                <li class="nav-item'; if ($viewName == 'board') { echo ' active'; }; echo'">
+                                    <a class="nav-link" href="'.$toRoot.'board?skipHeader=1">Panel</a>
+                                </li>
+                                <li class="nav-item'; if ($viewName == 'statistics') { echo ' active'; }; echo'">
+                                    <a class="nav-link" href="'.$toRoot.'statistics?skipHeader=1">Statistika</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                                        hráč <span class="text-primary">'.$sessionData['player']['nickname'].'</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
+                                        <a class="dropdown-item" href="">Správa</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="./player_signout"><i class="fa fa-sign-out-alt"></i> Odhlásit</a>
+                                    </div>
+                                </li>
+                                ';
+                            }
                             echo'
                         </ul>
                     </div>

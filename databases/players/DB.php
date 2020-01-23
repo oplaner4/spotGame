@@ -1,7 +1,7 @@
 <?php
 
-function get_record ($connection, $targetValue = '0') {
-    $sql = "SELECT * FROM database name WHERE removed = 0 AND some column name IN (".$targetArchivedValue.") AND some other column name IN (".$targetArchivedValue.")  ORDER BY some column value ASC";
+function get_players ($connection, $targetNicknameValues) {
+    $sql = "SELECT * FROM players WHERE removed = 0 AND nickname IN (".$targetNicknameValues.") ORDER BY score ASC";
     $result = $connection->query($sql);
 
     $obj = array();
