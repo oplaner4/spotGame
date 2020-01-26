@@ -5,6 +5,12 @@ $.fn.dataTable.ext.type.order['momentDate-pre'] = function (data) {
     return moment(data, standardDateFormat).toDate().getTime();
 };
 
+var standardTimeFormat = 'HH:mm:ss';
+
+$.fn.dataTable.ext.type.order['momentTime-pre'] = function (data) {
+    return moment.duration(data, standardTimeFormat);
+};
+
 function initDatatable(table, extendSettings) {
     var dt = table.DataTable($.extend(true, {
         fixedHeader: true,
@@ -77,10 +83,6 @@ $(document).ready(function () {
             scrollTop: $("body").offset().top
         }, 800);
     });
-
-    var lazy = $('.lazy');
-    var loaderSrc = lazy.first('[src]').attr('src');
-
  
 
     ww.on('scroll', function () {

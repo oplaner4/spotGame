@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (!isset($_SESSION)) { 
+    session_start(); 
+}
 
 if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
@@ -10,13 +12,22 @@ if (!isset($_SESSION['CREATED'])) {
 }
 
 function getSessionData() {
-    session_start();
-    return $_SESSION["sessionData"];
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    }
+
+    if (isset($_SESSION["sessionData"])) {
+        return $_SESSION["sessionData"];
+    }
+
+    return null;
 }
 
 
 function setSessionData($sessionData) {
-    session_start();
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    }
     $_SESSION["sessionData"] = $sessionData;
 }
 

@@ -1,15 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets\\css",
+    "\\assets",
+    "\\assets\\js",
+    "\\data",
     "\\databases",
     "\\databases\\access",
-    "\\databases\\players",
+    "\\databases\\games",
     "\\databases\\tools",
-    "\\helpers",
     "\\session",
     "\\web"
   ],
-  "SelectedNode": "\\set.php",
+  "SelectedNode": "\\statistics.php",
   "PreviewInSolutionExplorer": false
 }

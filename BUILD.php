@@ -43,8 +43,6 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
     <script type="text/javascript" src="'.$toRoot.'assets/datatables/RowGroup-1.1.1/js/rowGroup.bootstrap4.min.js"></script>
    
     <script type="text/javascript" src="'.$toRoot.'assets/js/index.js"></script>
-    <script type="text/javascript" src="'.$toRoot.'assets/js/set/script.js"></script>
-    <script type="text/javascript" src="'.$toRoot.'assets/js/board/script.js"></script>
 </head>
 <body>
     <noscript>
@@ -85,35 +83,37 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav w-100 my-3 my-lg-0 justify-content-end text-center">
-                            <li class="nav-item'; if ($viewName == 'index') { echo ' active'; }; echo'">
-                                <a class="nav-link" href="'.$toRoot.'index?skipHeader=1">Úvod</a>
-                            </li>
-                            <li class="nav-item'; if ($viewName == 'set') { echo ' active'; }; echo'">
-                                <a class="nav-link" href="'.$toRoot.'set?skipHeader=1">Nastavení</a>
-                            </li>
                             ';
 
                             if (isset($sessionData['player'])) {
                                 echo '
                                 <li class="nav-item'; if ($viewName == 'board') { echo ' active'; }; echo'">
-                                    <a class="nav-link" href="'.$toRoot.'board?skipHeader=1">Panel</a>
+                                    <a class="nav-link" href="'.$toRoot.'board">Panel</a>
                                 </li>
                                 <li class="nav-item'; if ($viewName == 'statistics') { echo ' active'; }; echo'">
-                                    <a class="nav-link" href="'.$toRoot.'statistics?skipHeader=1">Statistika</a>
+                                    <a class="nav-link" href="'.$toRoot.'statistics">Statistika</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-                                        hráč <span class="text-primary">'.$sessionData['player']['nickname'].'</span>
+                                        hráč <span class="text-info"><b>'.$sessionData['player']['nickname'].'</b></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
-                                        <a class="dropdown-item" href="">Správa</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="./player_signout"><i class="fa fa-sign-out-alt"></i> Odhlásit</a>
+                                        <a class="dropdown-item" href="./player_switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
                                     </div>
                                 </li>
                                 ';
                             }
-                            echo'
+                            else {
+                                echo '
+                                   <li class="nav-item'; if ($viewName == 'index') { echo ' active'; }; echo'">
+                                        <a class="nav-link" href="'.$toRoot.'index">Úvod</a>
+                                   </li>
+                                   <li class="nav-item'; if ($viewName == 'set') { echo ' active'; }; echo'">
+                                        <a class="nav-link" href="'.$toRoot.'set">Nastavení</a>
+                                    </li>
+                                ';
+                            }
+                            echo '
                         </ul>
                     </div>
                 </nav>

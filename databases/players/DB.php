@@ -1,10 +1,22 @@
 <?php
 
-function get_players ($connection, $targetNicknameValues) {
-    $sql = "SELECT * FROM players WHERE removed = 0 AND nickname IN (".$targetNicknameValues.") ORDER BY score ASC";
-    $result = $connection->query($sql);
+function get_players ($connection, $targetNicknameValues = '', $targetIdValues = '') {
+    $sql = "SELECT * FROM players WHERE removed = 0 ";
+    if (strlen($targetNicknameValues) > 0) {
+        $sql .= "AND nickname IN ('".$targetNicknameValues."') ";
+    }
+    else if (strlen($targetIdValues) > 0) {
+        $sql .= "AND id IN ('".$targetIdValues."') ";
+    }
 
+    $sql.="ORDER BY nickname ASC";
+
+    $result = $connection->query($sql);
     $obj = array();
+
+    if (!is_object($result)) {
+        return $obj;
+    }
 
     if ($result->num_rows > 0) {
 

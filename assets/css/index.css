@@ -136,10 +136,8 @@ input::-ms-clear {
 
 
 
-
-
 .list-group .list-group-item {
-    padding: .3em .2em;
+    padding: .5em .6em;
 }
 
     .list-group .list-group-item > a.nav-link {

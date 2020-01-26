@@ -22,5 +22,5 @@ RewriteRule ^(.*)$ index [L]
 # ------------------------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .* http://%{HTTP_HOST}/404?skipHeader=1&uri=http://%{HTTP_HOST}%{REQUEST_URI} [L]
+RewriteRule .* http://%{HTTP_HOST}/404?uri=http://%{HTTP_HOST}%{REQUEST_URI} [L]
 </IfModule>

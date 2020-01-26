@@ -1,9 +1,9 @@
 <?php
     function get_connection () {
         $servername = "localhost";
-        $username = "";
+        $username = "root";
         $password = "";
-        $dbname = "";
+        $dbname = "spotGame";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
         mysqli_set_charset($conn,"utf8");
