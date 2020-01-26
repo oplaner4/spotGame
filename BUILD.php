@@ -120,7 +120,7 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
             </div>
         </div>
         <div class="main-container mb-5 mt-3 mt-lg-5">
-            <div class="container-fluid text-center text-md-left mb-4">
+            <div class="container text-center text-md-left mb-4">
                 <h3 class="mb-4">'.$title.'</h3>
                 <div class="pl-md-2">
                     '; echo strlen($HTML) > 0 ? $HTML:file_get_contents('./web/'.$viewName.'.html'); echo'

@@ -38,6 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Výsledky hráče se nepodařilo uložit';
         }
 
+        include_once('./session/session.php');
 
         $connection->close();
         $connection2->close();

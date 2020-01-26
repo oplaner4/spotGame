@@ -1,6 +1,7 @@
 <?php
 
 include_once('./session/session.php');
+include_once('./data/serial.php');
 
 $sessionData = getSessionData();
 if (!isset($sessionData) || count($sessionData) == 0) {
@@ -18,7 +19,7 @@ else {
 
 $output = array();
 
-$handle = fopen("./data/serial.txt", "r");
+$handle = fopen(get_serial_file_path("./"), "r");
 if ($handle) {
 
     $linesDataPartsMerged = array();

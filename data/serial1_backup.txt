@@ -28,11 +28,7 @@
 {"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
 {"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
 {"message":"Počet dosažených správných stisknutí: 14","eventType":"", "mistakesCounter":2}
-
-
-
-
-{"JSONparts":4}
+{"JSONparts":0}
 {"gameMode":"untilMistakeMode","correctCounter":12}
 {"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
 {"ledTurnedOnDurationMiliseconds":180,"gameOver":1,"gameCompleted":0}

@@ -1,3 +1,8 @@
+<div class="btn-group mb-3">
+    <a href="#" class="btn btn-danger btn-game-reset"><i class="fa fa-undo"></i> Resetovat hru</a>
+    <a href="./statistics" class="btn btn-primary">Přejít ke statistikám <i class="fa fa-arrow-right"></i></a>
+</div>
+
 <div class="row mb-3">
     <div class="col-lg-4">
         <h5>Info</h5>
@@ -52,8 +57,8 @@
 </div>
 
 
-<div class="row">
-    <div class="col-lg-6">
+<div class="row mb-3">
+    <div class="col-lg-8">
         <div class="d-flex justify-content-between">
             <h5>Záznamy konsole</h5>
             <a><i style="display:none;" class="fas fa-spinner fa-spin fa-console-updating mr-3"></i></a>
@@ -75,9 +80,10 @@
     </div>
 </div>
 
+
 <script>
     $(document).ready(function () {
-        // board.js
+
         var multipleDataJSONupdateIntervalMiliseconds = 3000;
 
         var dataJSONeventTypesListeners = new Object();
@@ -105,8 +111,6 @@
             listGroupConsole.prepend(newListGroupItemLog.addClass(additionalClasses));
             return newListGroupItemLog;
         };
-
-        dataJSONprependNewLogToConsole('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
 
         var dataJSONoutputElems = new Object({
             listGroupItemMistakesCountTolerance: $('.list-group-item-mistakesCountTolerance'),
@@ -242,6 +246,33 @@
                 }
             });
         };
+
+        $('.btn-game-reset').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "/board_reset",
+                dataType: "text",
+                success: function () {
+                    listGroupConsole.empty();
+
+                    for (var key in dataJSONoutputElems) {
+                        dataJSONupdateElemChangingValue(dataJSONoutputElems[key], 0);
+                    }
+
+                    multipleDataJSONAnalyzed = 0;
+                    dataJSONprependNewLogToConsole('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
+                    clearInterval(actualGameTimeElapsedInterval);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+            return false;
+        }).trigger('click');
+
+
 
 
         var checkForNewMultipleDataJSONInterval = setInterval(function () {

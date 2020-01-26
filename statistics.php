@@ -49,12 +49,12 @@ build_player_page("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), 
         <table class="table table-striped table-borderless player-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
-                    <th class="disableOrdering" scope="col">Přezdívka</th>
-                    <th class="" scope="col">Počet správných stisknutí</th>
-                    <th class="" scope="col">Počet špatných stisknutí</th>
-                    <th class="" scope="col">Doba trvání rozsvícené LED</th>
-                    <th class="" scope="col">Tolerance špatných stisknutí</th>
+                    <th class="" scope="col">Přezdívka</th>
                     <th class="" scope="col">Herní čas</th>
+                    <th class="" scope="col">Počet špatných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Doba trvání rozsvícené LED</th>
+                    <th class="disableOrdering" scope="col">Tolerance špatných stisknutí</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -69,12 +69,12 @@ build_player_page("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), 
         <table class="table table-striped table-borderless best-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
-                    <th class="disableOrdering" scope="col">Přezdívka</th>
-                    <th class="" scope="col">Počet správných stisknutí</th>
-                    <th class="" scope="col">Počet špatných stisknutí</th>
-                    <th class="" scope="col">Doba trvání rozsvícené LED</th>
-                    <th class="" scope="col">Tolerance špatných stisknutí</th>
+                    <th class="" scope="col">Přezdívka</th>
                     <th class="" scope="col">Herní čas</th>
+                    <th class="" scope="col">Počet špatných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Doba trvání rozsvícené LED</th>
+                    <th class="disableOrdering" scope="col">Tolerance špatných stisknutí</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -87,22 +87,22 @@ build_player_page("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), 
         $(function () {
 
             var gamesDatatableOptions = {
-                order: [[1, "desc"], [2, "asc"], [3, "asc"], [4, "asc"], [5, "asc"]],
+                order: [[1, "asc"], [2, "asc"]],
                 columnDefs: [
                     { targets: "disableOrdering", orderable: false },
-                    { type: "num", targets: [1, 2, 3, 4] },
-                    { type: "momentTime", targets: [5] }
+                    { type: "num", targets: [2, 3, 4, 5] },
+                    { type: "momentTime", targets: [1] }
                 ],
                 rowGroup: {
                     dataSrc: "gameMode"
                 },
                 columns: [
                     { data: "nickname" },
-                    { data: "correctCounter" },
+                    { data: "gameTimeElapsed" },
                     { data: "mistakesCounter" },
+                    { data: "correctCounter" },
                     { data: "ledTurnedOnDurationMiliseconds" },
-                    { data: "mistakesCountTolerance" },
-                    { data: "gameTimeElapsed" }
+                    { data: "mistakesCountTolerance" }
                 ]
             };
 

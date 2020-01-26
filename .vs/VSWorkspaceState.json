@@ -2,7 +2,6 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\js",
     "\\data",
     "\\databases",
     "\\databases\\access",
@@ -11,6 +10,6 @@
     "\\session",
     "\\web"
   ],
-  "SelectedNode": "\\statistics.php",
+  "SelectedNode": "\\data\\serial.txt",
   "PreviewInSolutionExplorer": false
 }
