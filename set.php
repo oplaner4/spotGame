@@ -1,13 +1,9 @@
 <?php
 
 include_once('BUILD.php');
-include_once('./session/session.php');
-$message = '';
+include_once('./storage/session.php');
 
-function redir_board () {
-    include_once('./helpers/redirectHelper.php');
-    redirect('board');
-}
+$message = '';
 
 
 if(isset($_POST['submit'])) {
@@ -40,7 +36,8 @@ if(isset($_POST['submit'])) {
                   setSessionData($sessionData);
             }
 
-            redir_board();
+            include_once('./helpers/redirectHelper.php');
+            redirect('board');
         }
         else {
             $message = 'Pole přezdívka musí mít alespoň 3 znaky';
@@ -67,7 +64,7 @@ build_page("Nastavení", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
         <form method="POST" action="/set">
             <div class="form-group">
                 <label for="nickname">Přezdívka</label>
-                <input name="nickname" type="text" class="form-control" id="nickname" placeholder="Zadejte přezdívku">
+                <input name="nickname" type="text" class="form-control" id="nickname" placeholder="Zvolte přezdívku">
             </div>
 
             <button type="submit" name="submit" class="btn btn-primary">Přejít na panel <i class="fa fa-arrow-right"></i></button>
@@ -76,5 +73,5 @@ build_page("Nastavení", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
 </div>
 
 
-', '', getSessionData());
+');
 ?>

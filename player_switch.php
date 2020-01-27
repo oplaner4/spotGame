@@ -1,7 +1,7 @@
 <?php
 
-include_once('./session/session.php');
+include_once('./storage/session.php');
 setSessionData(array());
-header('Location: set');
+header('Location: index');
 
 ?>

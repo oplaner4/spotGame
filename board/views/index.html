@@ -1,0 +1,323 @@
+<div class="btn-group mb-3">
+    <a href="#" class="btn btn-danger btn-game-reset"><i class="fa fa-undo"></i> <span>Resetovat hru</span></a>
+    <a href="../statistics" class="btn btn-primary">Přejít ke statistikám <i class="fa fa-arrow-right"></i></a>
+</div>
+
+<div class="row mb-3">
+    <div class="col-lg-5">
+        <h5>Info</h5>
+        <div class="pl-md-2">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info list-group-item-ledTurnedOnDurationMiliseconds">
+                    Doba trvání rozsvícené LED v milisekundách: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-gameModeTitle">
+                    Mód: <b><span>Zatím nenastaven</span></b>
+
+                    <ul class="list-group p-3">
+                        <li class="list-group-item list-group-item-info list-group-item-mistakesCountTolerance" data-target-mode="untilMistakeMode">
+                            Tolerovaný počet chyb: <b><span>0</span></b>
+                        </li>
+                        <li class="list-group-item list-group-item-danger list-group-item-maxErrorRateIndex" data-target-mode="reachFinalCountCorrectMode">
+                            Maximální povolená chybovost k výhře: <b><span>0</span></b>
+                        </li>
+                        <li class="list-group-item list-group-item-success list-group-item-finalCountCorrect" data-target-mode="reachFinalCountCorrectMode">
+                            Cílový počet správných stisknutí: <b><span>0</span></b>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h5>Průběh</h5>
+        <div class="pl-md-2">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success list-group-item-correctCounter">
+                    Počet správných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-danger list-group-item-mistakesCounter">
+                    Počet špatných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list list-group-item-warning list-group-item-remainsMistakesCountTolerance" data-target-mode="untilMistakeMode">
+                    Počet zbývajících tolerovaných chybných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-info list-group-item-remainsFinalCountCorrect" data-target-mode="reachFinalCountCorrectMode">
+                    Počet zbývajících správných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-warning list-group-item-actualErrorRateIndex" data-target-mode="reachFinalCountCorrectMode">
+                    Aktuální chybovost: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-info list-group-item-actualGameTimeElapsed">
+                    Uběhnutý herní čas: <b><span>00:00:00</span></b>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-3">
+    <div class="col-lg-9">
+        <div class="d-flex justify-content-between">
+            <h5>Záznamy konsole</h5>
+            <a><i style="display:none;" class="fas fa-spinner fa-spin fa-console-updating mr-3"></i></a>
+        </div>
+        <div class="pl-md-2">
+            <ul class="list-group list-group-item-console">
+                <li class="list-group-item list-group-item-log-template d-none">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-9">
+                            <span class="list-group-item-log-message"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-3 text-right">
+                            <span class="list-group-item-log-date text-secondary"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var multipleDataJSONupdateIntervalMiliseconds = 1000;
+
+        var dataJSONeventTypesListeners = new Object();
+        var addDataJSONeventTypesListener = function (eventTypes, callback) {
+            eventTypes.split(/\s+/).forEach(function (eventType) {
+                if (!Array.isArray(dataJSONeventTypesListeners[eventType])) {
+                    dataJSONeventTypesListeners[eventType] = new Array();
+                }
+
+                dataJSONeventTypesListeners[eventType].push(callback);
+            });
+        };
+
+        var dataJSONupdateElemChangingValue = function (dataJSONelem, value) {
+            $('span', dataJSONelem).first().text(value);
+        };
+
+        var listGroupConsole = $('.list-group.list-group-item-console');
+        var listGroupItemConsoleLogTemplate = $('.list-group-item-log-template', listGroupConsole).detach().removeClass('d-none list-group-item-log-template');
+
+        var dataJSONprependNewLogToConsole = function (message, additionalClasses) {
+            var newListGroupItemLog = listGroupItemConsoleLogTemplate.clone(true);
+            $('span.list-group-item-log-message', newListGroupItemLog).html(message);
+            $('span.list-group-item-log-date', newListGroupItemLog).text(new moment().format(standardTimeFormat));
+            listGroupConsole.prepend(newListGroupItemLog.addClass(additionalClasses));
+            return newListGroupItemLog;
+        };
+
+        var dataJSONoutputElems = new Object({
+            listGroupItemMistakesCountTolerance: $('.list-group-item-mistakesCountTolerance'),
+            listGroupItemMaxErrorRateIndex: $('.list-group-item-maxErrorRateIndex'),
+            listGroupItemFinalCountCorrect: $('.list-group-item-finalCountCorrect'),
+            listGroupItemLedTurnedOnDurationMiliseconds: $('.list-group-item-ledTurnedOnDurationMiliseconds'),
+            listGroupItemGameModeTitle: $('.list-group-item-gameModeTitle'),
+            listGroupItemCorrectCounter: $('.list-group-item-correctCounter'),
+            listGroupItemMistakesCounter: $('.list-group-item-mistakesCounter'),
+            listGroupItemRemainsMistakesCountTolerance: $('.list-group-item-remainsMistakesCountTolerance'),
+            listGroupItemRemainsFinalCountCorrect: $('.list-group-item-remainsFinalCountCorrect'),
+            listGroupItemActualErrorRateIndex: $('.list-group-item-actualErrorRateIndex'),
+            listGroupItemActualGameTimeElapsed: $('.list-group-item-actualGameTimeElapsed'),
+            btnGameReset : $('.btn-game-reset')
+        });
+
+        var dataJSONoutputElemsDefaults = new Object({
+            listGroupItemMistakesCountTolerance: '0',
+            listGroupItemMaxErrorRateIndex: '0',
+            listGroupItemFinalCountCorrect: '0',
+            listGroupItemLedTurnedOnDurationMiliseconds: '0',
+            listGroupItemGameModeTitle: 'Zatím nenastaven',
+            listGroupItemCorrectCounter: '0',
+            listGroupItemMistakesCounter: '0',
+            listGroupItemRemainsMistakesCountTolerance: '0',
+            listGroupItemRemainsFinalCountCorrect: '0',
+            listGroupItemActualErrorRateIndex: '0',
+            listGroupItemActualGameTimeElapsed: '00:00:00',
+            btnGameReset: 'Resetovat hru'
+        });
+
+        var gameProperties = new Object({
+            initialized: false,
+            actualTimeElapsedInterval: null,
+            initializedMoment: null,
+            modesAndTitles: new Object({
+                untilMistakeMode: "Dokud se hráč nesplete",
+                reachFinalCountCorrectMode: "Cílový počet správných stisknutí"
+            }),
+            actualTimeElapsed: '00:00:00'
+        });
+
+        var iConsoleUpdating = $('i.fa-console-updating');
+
+        var adjustGameMode = function (dataJSON) {
+            var elemDataTargetMode = 'data-target-mode';
+            var elemsByGameMode = $('[' + elemDataTargetMode + ']');
+            elemsByGameMode.not('[' + elemDataTargetMode + '="' + dataJSON.gameMode + '"]').remove();
+
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemGameModeTitle, gameProperties.modesAndTitles[dataJSON.gameMode]);
+        };
+
+
+        addDataJSONeventTypesListener('gameInitialized', function (dataJSON) {
+            listGroupConsole.empty();
+            dataJSONprependNewLogToConsole('Arduino deska resetována', 'list-group-item-success');
+
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemLedTurnedOnDurationMiliseconds, dataJSON.ledTurnedOnDurationMiliseconds);
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemMaxErrorRateIndex, dataJSON.maxErrorRateIndex);
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemMistakesCountTolerance, dataJSON.mistakesCountTolerance);
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemFinalCountCorrect, dataJSON.finalCountCorrect);
+
+            adjustGameMode(dataJSON);
+
+            gameProperties.initializedMoment = new moment();
+            gameProperties.actualTimeElapsedInterval = setInterval(function () {
+                gameProperties.actualTimeElapsed = moment.utc(new moment().diff(gameProperties.initializedMoment)).format(standardTimeFormat);
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemActualGameTimeElapsed, gameProperties.actualTimeElapsed);
+            }, 1000);
+
+            gameProperties.initialized = true;
+        });
+
+        addDataJSONeventTypesListener('gameCompleted gameOver', function (dataJSON) {
+            clearInterval(checkForNewMultipleDataJSONInterval);
+            clearInterval(gameProperties.actualTimeElapsedInterval);
+            dataJSONupdateElemChangingValue(dataJSONoutputElems.btnGameReset, 'Hrát znovu');
+            savePlayerData(dataJSON);
+            iConsoleUpdating.fadeOut(200);
+        });
+
+        addDataJSONeventTypesListener('mistakesCountIncreased gameOver maxErrorRateIndexExceed', function () {
+            return { logAdditionalClasses: 'list-group-item-danger' };
+        });
+
+        addDataJSONeventTypesListener('correctCountIncreased gameCompleted gameInitialized', function () {
+            return { logAdditionalClasses: 'list-group-item-success' };
+        });
+
+        addDataJSONeventTypesListener('correctCountReached', function () {
+            return { logAdditionalClasses: 'list-group-item-info' };
+        });
+        
+
+
+        var processingDataJSON = function (dataJSON) {
+            var logAdditionalClasses = new Array();
+
+            if (dataJSONeventTypesListeners.hasOwnProperty(dataJSON.eventType)) {
+                dataJSONeventTypesListeners[dataJSON.eventType].forEach(function (callback) {
+                    var eventRetObj = callback(dataJSON);
+                    if (eventRetObj instanceof Object) {
+                        logAdditionalClasses.push(eventRetObj.logAdditionalClasses);
+                    }
+                });
+            }
+
+            if (gameProperties.initialized) {
+                dataJSONprependNewLogToConsole(dataJSON.message, logAdditionalClasses.join(' '));
+
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemCorrectCounter, dataJSON.correctCounter);
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemMistakesCounter, dataJSON.mistakesCounter);
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemRemainsMistakesCountTolerance, dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter > 0 ? dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter : 0);
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemRemainsFinalCountCorrect, dataJSON.finalCountCorrect - dataJSON.correctCounter);
+                dataJSONupdateElemChangingValue(dataJSONoutputElems.listGroupItemActualErrorRateIndex, new Number(dataJSON.correctCounter === 0 ? 0 : dataJSON.mistakesCounter / dataJSON.correctCounter).toFixed(2));
+            }
+        };
+
+        var processingMultipleDataJSON = function (multipleDataJSON) {
+            multipleDataJSON.forEach(function (dataJSON) {
+                processingDataJSON(dataJSON);
+            });
+        };
+
+        var multipleDataJSONAnalyzed = 0;
+
+        var checkForNewMultipleDataJSON = function () {
+            $.ajax({
+                url: "/board/data",
+                data: {
+                    skipMultipleDataJSON: multipleDataJSONAnalyzed
+                },
+                dataType: "json",
+                method: "GET",
+                success: function (multipleDataJSON) {
+                    processingMultipleDataJSON(multipleDataJSON);
+                    multipleDataJSONAnalyzed += multipleDataJSON.length;
+                }
+            });
+        };
+
+        var savePlayerData = function (finalDataJSON) {
+            $.ajax({
+                url: "/board/save",
+                data: {
+                    gameMode: gameProperties.modesAndTitles[finalDataJSON.gameMode],
+                    correctCounter: finalDataJSON.correctCounter,
+                    mistakesCounter: finalDataJSON.mistakesCounter,
+                    ledTurnedOnDurationMiliseconds: finalDataJSON.ledTurnedOnDurationMiliseconds,
+                    mistakesCountTolerance: finalDataJSON.mistakesCountTolerance,
+                    finalCountCorrect: finalDataJSON.finalCountCorrect,
+                    gameTimeElapsed: gameProperties.actualTimeElapsed
+                },
+                dataType: "text",
+                method: "POST",
+                success: function (data) {
+                    dataJSONprependNewLogToConsole(data, 'list-group-item-info');
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        };
+
+
+        var gameReset = function (e) {
+            e.preventDefault();
+            gameProperties.initialized = false;
+
+            $.ajax({
+                url: "/board/reset",
+                dataType: "text",
+                success: function () {
+                    listGroupConsole.empty();
+                    clearInterval(gameProperties.actualTimeElapsedInterval);
+
+                    for (var key in dataJSONoutputElems) {
+                        dataJSONupdateElemChangingValue(dataJSONoutputElems[key], dataJSONoutputElemsDefaults[key]);
+                    }
+
+                    multipleDataJSONAnalyzed = 0;
+                    dataJSONprependNewLogToConsole('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
+
+                    iConsoleUpdating.fadeIn(100);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+            return false;
+        }
+
+
+        $('.btn-game-reset').on('click',
+            gameReset
+        ).trigger('click');
+
+
+
+        var checkForNewMultipleDataJSONInterval = setInterval(function () {
+            checkForNewMultipleDataJSON();
+        }, multipleDataJSONupdateIntervalMiliseconds);
+
+        checkForNewMultipleDataJSON();
+
+
+    });   // do not delete
+</script>

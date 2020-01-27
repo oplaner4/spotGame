@@ -2,14 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\assets",
+    "\\assets\\js",
+    "\\board",
+    "\\board\\views",
+    "\\CoolTermWin",
     "\\data",
-    "\\databases",
-    "\\databases\\access",
-    "\\databases\\games",
-    "\\databases\\tools",
-    "\\session",
-    "\\web"
+    "\\views"
   ],
-  "SelectedNode": "\\data\\serial.txt",
+  "SelectedNode": "\\board\\views\\index.html",
   "PreviewInSolutionExplorer": false
 }

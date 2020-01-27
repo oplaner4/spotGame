@@ -1,14 +1,6 @@
 <?php
 
-
-
-include_once('./session/session.php');
-
-$sessionData = getSessionData();
-if (!isset($sessionData) || count($sessionData) == 0) {
-    echo "unauthorized";
-    exit();
-}
+include_once('BUILD_authorized.php');
 
 $data = array();
 $player_data = array();
@@ -17,11 +9,12 @@ include_once('./databases/access/connection.php');
 include_once('./databases/tools/commands.php');
 include_once('./databases/players/DB.php');
 include_once('./databases/games/DB.php');
+include_once('./storage/session.php');
+$sessionData = getSessionData();
 
 $players =  get_players (get_connection());
-
 $games =  get_games (get_connection());
-
+$current_player_id = $sessionData['player']['id'];
 $players_by_id = array();
 
 for ($i = 0; $i < count($players); $i++) {
@@ -34,14 +27,12 @@ for ($i = 0; $i < count($games); $i++) {
      $game['nickname'] = $game_player['nickname'];
      array_push($data, $game);
 
-     if ($game['playerId'] === $sessionData['player']['id']) {
+     if ($game['playerId'] === $current_player_id) {
          array_push($player_data, $game);
      }
 }
 
-
-include_once('BUILD_player.php');
-build_player_page("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
+build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
 
 <h5>Přihlášený hráč</h5>
 <div class="pl-md-2">

@@ -1,7 +1,11 @@
 <?php
 
-function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessionData = array()) {
+function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootRelStr = './') {
   $toRoot = $toRootRelStr;
+
+  include_once($toRoot.'storage/session.php');
+  $sessionData = getSessionData();
+
   echo'<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -76,7 +80,7 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
             <div class="navbar-area">
                 <nav class="container navbar navbar-expand-lg navbar-dark pl-lg-3 justify-content-around">
                     <a class="navbar-brand" href="'.$toRoot.'index">
-                        <i class="fas fa-lightbulb"></i> SpotGame
+                        <i class="fas fa-lightbulb text-warning"></i> SpotGame
                     </a>
                     <button class="navbar-toggler d-flex d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-white"></i> <h6 class="mb-0 align-self-center pl-2 text-white">MENU</h6>
@@ -87,29 +91,29 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
 
                             if (isset($sessionData['player'])) {
                                 echo '
-                                <li class="nav-item'; if ($viewName == 'board') { echo ' active'; }; echo'">
-                                    <a class="nav-link" href="'.$toRoot.'board">Panel</a>
+                                <li class="nav-item'; if ($subFolderPath == 'board' && $viewName == 'index') { echo ' active'; }; echo'">
+                                    <a class="nav-link" href="'.$toRoot.'board"><i class="fa fa-gamepad"></i> Panel</a>
                                 </li>
-                                <li class="nav-item'; if ($viewName == 'statistics') { echo ' active'; }; echo'">
-                                    <a class="nav-link" href="'.$toRoot.'statistics">Statistika</a>
+                                <li class="nav-item'; if ($subFolderPath == '' && $viewName == 'statistics') { echo ' active'; }; echo'">
+                                    <a class="nav-link" href="'.$toRoot.'statistics"><i class="fa fa-chart-bar"></i> Statistika</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-                                        hráč <span class="text-info"><b>'.$sessionData['player']['nickname'].'</b></span>
+                                        <i class="fa fa-user"></i> hráč <span class="text-info"><b>'.$sessionData['player']['nickname'].'</b></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
-                                        <a class="dropdown-item" href="./player_switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
+                                        <a class="dropdown-item" href="'.$toRoot.'player_switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
                                     </div>
                                 </li>
                                 ';
                             }
                             else {
                                 echo '
-                                   <li class="nav-item'; if ($viewName == 'index') { echo ' active'; }; echo'">
-                                        <a class="nav-link" href="'.$toRoot.'index">Úvod</a>
+                                   <li class="nav-item'; if ($subFolderPath == '' && $viewName == 'index') { echo ' active'; }; echo'">
+                                        <a class="nav-link" href="'.$toRoot.'index"><i class="fa fa-home"></i> Úvod</a>
                                    </li>
-                                   <li class="nav-item'; if ($viewName == 'set') { echo ' active'; }; echo'">
-                                        <a class="nav-link" href="'.$toRoot.'set">Nastavení</a>
+                                   <li class="nav-item'; if ($subFolderPath == '' && $viewName == 'set') { echo ' active'; }; echo'">
+                                        <a class="nav-link" href="'.$toRoot.'set"><i class="fa fa-cog"></i> Nastavení</a>
                                     </li>
                                 ';
                             }
@@ -123,7 +127,7 @@ function build_page($title, $viewName, $HTML = '', $toRootRelStr = './', $sessio
             <div class="container text-center text-md-left mb-4">
                 <h3 class="mb-4">'.$title.'</h3>
                 <div class="pl-md-2">
-                    '; echo strlen($HTML) > 0 ? $HTML:file_get_contents('./web/'.$viewName.'.html'); echo'
+                    '; echo strlen($HTML) > 0 ? $HTML:file_get_contents($toRoot.$subFolderPath.'views/'.$viewName.'.html'); echo'
                 </div>
             </div>
         </div>
