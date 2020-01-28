@@ -1,4 +1,4 @@
-Port = COM3
+Port = 
 BaudRate = 9600
 DataBits = 8
 Parity = N
@@ -24,8 +24,8 @@ CaptureRetainTerminationString = false
 CaptureLocalEcho = false
 CaptureFileStaysOpen = false
 CaptureAutostart = true
-CaptureAutoAppend = false
-CaptureAutoFilename = 
+CaptureAutoAppend = true
+CaptureAutoFilename = serial.txt
 CapturePath = C:\Users\oplan\Documents\DOD_GT_2020\spotGameWebApp\data\
 TerminalMode = Raw
 EnterKeyEmulation = CRLF

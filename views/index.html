@@ -1,46 +1,64 @@
-<h5>O hře</h5>
-<div class="pl-md-2">
-    <p>Probíhá na <b>Arduino</b> desce (jednoduchý počítač - mikrokontroler). Seriová data z desky jsou získávána prostřednictvím aplikace <a target="_blank" title="freeware.the-meiers.org" href="https://freeware.the-meiers.org/">CoolTerm</a>, která je ukládá do textového souboru. Data jsou přenášena ve formátu <b>JSON</b> pro snadné čtení.</p>
+<div class="row mb-3">
+    <div class="col-lg-6">
+        <h5>O hře</h5>
+        <div class="pl-md-2">
+            <p>
+                Probíhá na <b>Arduino</b> desce (jednoduchý počítač - mikrokontroler). Seriová data z desky jsou získávána prostřednictvím aplikace <a target="_blank" title="freeware.the-meiers.org" href="https://freeware.the-meiers.org/"><b>CoolTerm</b></a>, která je ukládá do textového souboru. Data jsou přenášena ve formátu <b>JSON</b> pro snadné čtení.
+            </p>
+            <p class="text-center">
+                <a target="_blank" title="arduino.cc" href="https://www.arduino.cc/"><img style="width: 110px;" src="./img/index/arduino.png" class="img-fluid mx-2" /></a>
+                <a target="_blank" title="w3schoools.com" href="https://www.w3schools.com/js/js_json_intro.asp"><img style="width: 120px;" src="./img/index/json.png" class="img-fluid mx-2" /></a>
+                <a target="_blank" title="freeware.the-meiers.org" href="https://freeware.the-meiers.org/"><img style="width: 80px;" src="./img/index/coolterm.png" class="img-fluid mx-2" /></a>
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h5>Pravidla</h5>
+        <div class="pl-md-2">
+            <p>
+                Cílem této postřehové hry je spravně odhalovat okamžik, kdy je náhodně blikající LED rozsvícena stisknutím tlačítka. První rozsvícení nastane nejdříve po uběhnutí minimální prodlevy mezi rozsvíceními (800 milisekund).
+            </p>
+            <ul>
+                <li><b class="text-success">Správné stisknutí</b> tlačítka je doprovázeno <b>rozsvícením zelené LED</b> (čekání 500 milisekund).</li>
+                <li><b class="text-danger">Špatné stisknutí</b> tlačítka (případně zameškání) je doprovázeno <b>rozsvícením červené LED</b> (čekání 500 milisekund).</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-<h5>Pravidla</h5>
-<div class="pl-md-2">
-    <p>
-        Cílem této postřehové hry je spravně odhalovat okamžik, kdy je náhodně blikající LED rozsvícena stisknutím tlačítka. První rozsvícení nastane nejdříve po uběhnutí minimální prodlevy mezi rozsvíceními (800 milisekund).
-    </p>
-    <ul>
-        <li><b class="text-success">Správné stisknutí</b> tlačítka je doprovázeno <b>rozsvícením zelené LED</b> (čekání 500 milisekund).</li>
-        <li><b class="text-danger">Špatné stisknutí</b> tlačítka (případně zameškání) je doprovázeno <b>rozsvícením červené LED</b> (čekání 500 milisekund).</li>
-    </ul>
+<div class="row mb-5">
+    <div class="col-lg-6">
+        <h5>Výběr ze 2 módů</h5>
+        <div class="pl-md-2">
+            <ol>
+                <li><b class="text-info">Cílový počet správných stisknutí</b> - hráč se snaží dosáhnout daného počtu správných stisknutí v co <b>nejkratším čase</b> a s <b>minimálním počtem chybných stisknutí</b>, přičemž nesmí překročit nastavenou <b>hranici chybovosti</b>. Hra končí výhrou.</li>
+                <li><b class="text-info">Dokud se hráč nesplete (těžší)</b> - hráč se snaží co nejdéle nepřekročit nastavenou <b>toleranci chybných stisknutí</b>.<br><b>Zameškání rozsvícení</b> je také považováno za <b>chybné stisknutí</b>. Hra končí prohrou.</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h5>Konec hry</h5>
+        <div class="pl-md-2">
+            <p>
+                Poznáte podle <b>trvalého nasvícení</b> náhodně blikající LED a dále červené/zelené LED dle módu.
+            </p>
+            <ul>
+                <li><b class="text-danger">Červeně</b> svítící led znázorňuje prohru při módu <b class="text-info">dokud se hráč nesplete</b>.</li>
+                <li><b class="text-success">Zeleně</b> svítící led znázorňuje výhru při módu <b class="text-info">cílový počet správných stisknutí</b>.</li>
+            </ul>
+            <p>
+                Vaše výsledky můžete porovnat s ostatními hráči ve <b>statistice nejlepších hráčů</b>.
+            </p>
+        </div>
+    </div>
 </div>
 
-<h5>Výběr ze 2 módů</h5>
-<div class="pl-md-2">
-    <ol>
-        <li><b class="text-info">Cílový počet správných stisknutí</b> - hráč se snaží dosáhnout daného počtu správných stisknutí v co <b>nejkratším čase</b> a s <b>minimálním počtem chybných stisknutí</b>, přičemž nesmí překročit nastavenou <b>hranici chybovosti</b>. Hra končí výhrou.</li>
-        <li><b class="text-info">Dokud se hráč nesplete (těžší)</b> - hráč se snaží co nejdéle nepřekročit nastavenou <b>toleranci chybných stisknutí</b>.<br><b>Zameškání rozsvícení</b> je také považováno za <b>chybné stisknutí</b>. Hra končí prohrou.</li>
-    </ol>
-</div>
-
-
-<h5>Konec hry</h5>
-<div class="pl-md-2">
-    <p>
-        Poznáte podle <b>trvalého nasvícení</b> náhodně blikající LED a dále červené/zelené LED dle módu.
-    </p>
-    <ul>
-        <li><b class="text-danger">Červeně</b> svítící led znázorňuje prohru při módu <b class="text-info">dokud se hráč nesplete</b>.</li>
-        <li><b class="text-success">Zeleně</b> svítící led znázorňuje výhru při módu <b class="text-info">cílový počet správných stisknutí</b>.</li>
-    </ul>
-</div>
-
-<h5>Výsledky</h5>
-<div class="pl-md-2">
-    <p>
-       Můžete porovnat s ostatními hráči ve <b>statistice nejlepších hráčů</b>.
-    </p>
-</div>
 
 <div class="text-center">
     <a href="./set" class="btn btn-success"><i class="fa fa-play-circle"></i> Začít hrát</a>
 </div>
+
+
+
+
+

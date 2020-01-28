@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Pon 27. led 2020, 20:39
+-- Vytvořeno: Úte 28. led 2020, 16:53
 -- Verze serveru: 10.4.10-MariaDB
 -- Verze PHP: 7.3.12
 
