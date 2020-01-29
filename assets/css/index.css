@@ -31,11 +31,6 @@ a {
 }
 
 
-.bg-site {
-    background-color: #343a40; /*  !! .content-loading div (border-) */
-}
-
-
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -83,6 +78,11 @@ input::-ms-clear {
 }
 
 
+.bg-site {
+    background-color: #00384e; /*  !! .content-loading div (border-) */
+}
+
+
 .container-loading {
     position: absolute;
     background: white;
@@ -100,8 +100,8 @@ input::-ms-clear {
         margin: auto;
         border-radius: 50%;
         border: 0.4em solid white;
-        border-top: 0.4em solid #343a40;
-        border-bottom: 0.4em solid #343a40;
+        border-top: 0.4em solid #00384e;
+        border-bottom: 0.4em solid #00384e;
         -webkit-animation: spin 1s ease-in-out infinite;
         animation: spin 1s ease-in-out infinite;
         padding: 2.5em;

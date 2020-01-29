@@ -1,14 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\assets\\js",
-    "\\board",
-    "\\board\\views",
-    "\\CoolTermWin",
-    "\\data",
-    "\\views"
+    "\\img\\index",
+    "\\views",
+    "\\views\\board"
   ],
-  "SelectedNode": "\\board\\views\\index.html",
+  "SelectedNode": "\\views\\board\\index.html",
   "PreviewInSolutionExplorer": false
 }

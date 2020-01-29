@@ -1,0 +1,83 @@
+<div class="btn-group mb-3">
+    <a href="#" class="btn btn-danger btn-game-reset"><i class="fa fa-undo"></i> <span>Resetovat hru</span></a>
+    <a href="../statistics" class="btn btn-primary">Přejít ke statistikám <i class="fa fa-arrow-right"></i></a>
+</div>
+
+<div class="row mb-3">
+    <div class="col-lg-5">
+        <h5>Info</h5>
+        <div class="pl-md-2">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info list-group-item-ledTurnedOnDurationMiliseconds">
+                    Doba trvání rozsvícené LED v milisekundách: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-gameModeTitle">
+                    Mód: <b><span>Zatím nenastaven</span></b>
+
+                    <ul class="list-group p-3">
+                        <li class="list-group-item list-group-item-info list-group-item-mistakesCountTolerance" data-target-mode="untilMistakeMode">
+                            Tolerovaný počet chyb: <b><span>0</span></b>
+                        </li>
+                        <li class="list-group-item list-group-item-danger list-group-item-maxErrorRateIndex" data-target-mode="reachFinalCountCorrectMode">
+                            Maximální povolená chybovost k výhře: <b><span>0</span></b>
+                        </li>
+                        <li class="list-group-item list-group-item-success list-group-item-finalCountCorrect" data-target-mode="reachFinalCountCorrectMode">
+                            Cílový počet správných stisknutí: <b><span>0</span></b>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h5>Průběh</h5>
+        <div class="pl-md-2">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-success list-group-item-correctCounter">
+                    Počet správných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-danger list-group-item-mistakesCounter">
+                    Počet špatných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list list-group-item-warning list-group-item-remainsMistakesCountTolerance" data-target-mode="untilMistakeMode">
+                    Počet zbývajících tolerovaných chybných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-info list-group-item-remainsFinalCountCorrect" data-target-mode="reachFinalCountCorrectMode">
+                    Počet zbývajících správných stisknutí: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-warning list-group-item-actualErrorRateIndex" data-target-mode="reachFinalCountCorrectMode">
+                    Aktuální chybovost: <b><span>0</span></b>
+                </li>
+                <li class="list-group-item list-group-item-info list-group-item-actualGameTimeElapsed">
+                    Uběhnutý herní čas: <b><span>00:00:00</span></b>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-3">
+    <div class="col-lg-9">
+        <div class="d-flex justify-content-between">
+            <h5>Záznamy konsole</h5>
+            <a><i style="display:none;" class="fas fa-spinner fa-spin fa-console-updating mr-3"></i></a>
+        </div>
+        <div class="pl-md-2">
+            <ul class="list-group list-group-item-console">
+                <li class="list-group-item list-group-item-log-template d-none">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-9">
+                            <span class="list-group-item-log-message"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-3 text-right">
+                            <span class="list-group-item-log-date text-secondary"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../scripts/board/index.js"></script>
