@@ -15,7 +15,8 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemRemainsMistakesCountTolerance: $('.list-group-item-remainsMistakesCountTolerance'),
         listGroupItemRemainsFinalCountCorrect: $('.list-group-item-remainsFinalCountCorrect'),
         listGroupItemActualErrorRateIndex: $('.list-group-item-actualErrorRateIndex'),
-        listGroupItemActualGameTimeElapsed: $('.list-group-item-actualGameTimeElapsed')
+        listGroupItemActualGameTimeElapsed: $('.list-group-item-actualGameTimeElapsed'),
+        listGroupItemMissedCounter: $('.list-group-item-missedCounter')
     });
 
     this.outputElemsDefaults = new Object({
@@ -29,7 +30,8 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemRemainsMistakesCountTolerance: '0',
         listGroupItemRemainsFinalCountCorrect: '0',
         listGroupItemActualErrorRateIndex: '0',
-        listGroupItemActualGameTimeElapsed: '00:00:00'
+        listGroupItemActualGameTimeElapsed: '00:00:00',
+        listGroupItemMissedCounter: '0'
     });
 
     this.checkForNewMultipleInterval = null;
@@ -74,7 +76,11 @@ dataJSONmanager.prototype.processing = function (dataJSON) {
         self.eventTypesListeners[dataJSON.eventType].forEach(function (callback) {
             var eventRetObj = callback(dataJSON, self);
             if (eventRetObj instanceof Object) {
-                logAdditionalClasses.push(eventRetObj.logAdditionalClasses);
+                if (eventRetObj.hasOwnProperty('logAdditionalClasses')) {
+                    if (logAdditionalClasses.indexOf(eventRetObj.logAdditionalClasses) === -1) {
+                        logAdditionalClasses.push(eventRetObj.logAdditionalClasses);
+                    }
+                }
             }
         });
     }

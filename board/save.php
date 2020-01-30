@@ -21,9 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $game['gameMode'] = $_POST['gameMode'];
         $game['correctCounter'] = $_POST['correctCounter'];
         $game['mistakesCounter'] = $_POST['mistakesCounter'];
-        $game['ledTurnedOnDurationMiliseconds'] = $_POST['ledTurnedOnDurationMiliseconds'];
-        $game['mistakesCountTolerance'] = $_POST['mistakesCountTolerance'];
-        $game['finalCountCorrect'] = $_POST['finalCountCorrect'];
+        $game['missedCounter'] = $_POST['missedCounter'];
         $game['gameTimeElapsed'] = $_POST['gameTimeElapsed'];
         $game['removed'] = 0;
         $game['id'] = uniqid();

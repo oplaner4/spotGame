@@ -101,7 +101,7 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
                                         <i class="fa fa-user"></i> hráč <span class="text-warning">'.$sessionData['player']['nickname'].'</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
-                                        <a class="dropdown-item" href="'.$toRootRelStr.'player_switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
+                                        <a class="dropdown-item" href="'.$toRootRelStr.'player/switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
                                     </div>
                                 </li>
                                 ';

@@ -46,8 +46,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     <th class="" scope="col">Herní čas</th>
                     <th class="" scope="col">Počet špatných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Doba trvání rozsvícené LED</th>
-                    <th class="disableOrdering" scope="col">Tolerance špatných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -66,8 +65,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     <th class="" scope="col">Herní čas</th>
                     <th class="" scope="col">Počet špatných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Doba trvání rozsvícené LED</th>
-                    <th class="disableOrdering" scope="col">Tolerance špatných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -80,10 +78,10 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         $(function () {
 
             var gamesDatatableOptions = {
-                order: [[1, "asc"], [2, "asc"]],
+                order: [[1, "asc"], [2, "asc"], [3, "desc"], [4, "asc"]],
                 columnDefs: [
                     { targets: "disableOrdering", orderable: false },
-                    { type: "num", targets: [2, 3, 4, 5] },
+                    { type: "num", targets: [2, 3, 4] },
                     { type: "momentTime", targets: [1] }
                 ],
                 rowGroup: {
@@ -94,8 +92,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     { data: "gameTimeElapsed" },
                     { data: "mistakesCounter" },
                     { data: "correctCounter" },
-                    { data: "ledTurnedOnDurationMiliseconds" },
-                    { data: "mistakesCountTolerance" }
+                    { data: "missedCounter" }
                 ]
             };
 

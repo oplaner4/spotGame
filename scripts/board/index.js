@@ -20,8 +20,11 @@ $(document).ready(function () {
     }).addEventTypesListener('correctCountReached', function () {
         return { logAdditionalClasses: 'list-group-item-info' };
 
-    }).addEventNewDataListener(function (dataJSON, logAdditionalClasses) {
-            spotGameManager.update(dataJSON, logAdditionalClasses);
+    })/*.addEventTypesListener('settingsInfo gameModeSet', function () {
+        return { logAdditionalClasses: 'list-group-item-secondary' };
+
+    })*/.addEventNewDataListener(function (dataJSON, logAdditionalClasses) {
+        spotGameManager.update(dataJSON, logAdditionalClasses);
     });
 
     spotGameReset.on('click', function (e) {

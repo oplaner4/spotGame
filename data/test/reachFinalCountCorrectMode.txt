@@ -1,0 +1,113 @@
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":0,"mistakesCounter":0, "missedCounter":0}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"gameInitialized"}
+{"message":"Hra spuštěna"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":0,"mistakesCounter":1, "missedCounter":3}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"message":"Zvýšen počet špatných stisknutí na: 1"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":1,"mistakesCounter":1, "missedCounter":5}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 1 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":2,"mistakesCounter":1, "missedCounter":7}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 2 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":2,"mistakesCounter":2, "missedCounter":9}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"message":"Zvýšen počet špatných stisknutí na: 2"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":3,"mistakesCounter":2, "missedCounter":11}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 3 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":3,"mistakesCounter":3, "missedCounter":13}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"message":"Zvýšen počet špatných stisknutí na: 3"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":3,"mistakesCounter":4, "missedCounter":13}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"message":"Zvýšen počet špatných stisknutí na: 4"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":4,"mistakesCounter":4, "missedCounter":15}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 4 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":5,"mistakesCounter":4, "missedCounter":17}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 5 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":6,"mistakesCounter":4, "missedCounter":20}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 6 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":0,"mistakesCounter":0, "missedCounter":0}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"maxErrorRateIndexExceed"}
+{"message":"Překročena maximální povolená chybovost"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":1,"mistakesCounter":0, "missedCounter":2}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 1 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":2,"mistakesCounter":0, "missedCounter":4}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 2 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":3,"mistakesCounter":0, "missedCounter":4}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 3 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":4,"mistakesCounter":0, "missedCounter":4}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 4 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":5,"mistakesCounter":0, "missedCounter":5}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 5 z 6 cílových"}
+
+{"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":6,"mistakesCounter":0, "missedCounter":5}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"message":"Zvýšen počet správných stisknutí na: 6 z 6 cílových"}
+
+{"JSONparts":0}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":6,"mistakesCounter":0, "missedCounter":0}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"gameCompleted"}
+{"message":"Hra dokončena"}

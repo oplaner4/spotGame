@@ -30,6 +30,7 @@ gameManager.prototype.savePlayerData = function (finalDataJSON) {
                 gameMode: self.getModeTitle(finalDataJSON),
                 correctCounter: finalDataJSON.correctCounter,
                 mistakesCounter: finalDataJSON.mistakesCounter,
+                missedCounter: finalDataJSON.missedCounter,
                 ledTurnedOnDurationMiliseconds: finalDataJSON.ledTurnedOnDurationMiliseconds,
                 mistakesCountTolerance: finalDataJSON.mistakesCountTolerance,
                 finalCountCorrect: finalDataJSON.finalCountCorrect,
@@ -82,7 +83,7 @@ gameManager.prototype.initialize = function (initializedDataJSON) {
     this.dataJSONconsoleManagerInstance.empty().prependNewLog('Arduino deska resetována', 'list-group-item-success');
     this.dataJSONmanagerInstance
         .updateElemChangingValue('listGroupItemLedTurnedOnDurationMiliseconds', initializedDataJSON.ledTurnedOnDurationMiliseconds)
-        .updateElemChangingValue('listGroupItemMaxErrorRateIndex', initializedDataJSON.maxErrorRateIndex)
+        .updateElemChangingValue('listGroupItemMaxErrorRateIndex', initializedDataJSON.maxErrorRateIndex.toFixed(2))
         .updateElemChangingValue('listGroupItemMistakesCountTolerance', initializedDataJSON.mistakesCountTolerance)
         .updateElemChangingValue('listGroupItemFinalCountCorrect', initializedDataJSON.finalCountCorrect);
 
@@ -135,6 +136,7 @@ gameManager.prototype.update = function (dataJSON, logAdditionalClasses) {
         this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter > 0 ? dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter : 0);
         this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSON.finalCountCorrect - dataJSON.correctCounter);
         this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemActualErrorRateIndex', new Number(dataJSON.correctCounter === 0 ? 0 : dataJSON.mistakesCounter / dataJSON.correctCounter).toFixed(2));
+        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemMissedCounter', dataJSON.missedCounter);
     }
 
     return this;
