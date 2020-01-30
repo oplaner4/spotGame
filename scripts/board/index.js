@@ -1,12 +1,10 @@
 $(document).ready(function () {
     var spotGameDataJSONconsoleManager = new dataJSONconsoleManager();
-    var spotGameDataJSONmanager = new dataJSONmanager(1000).startCheckForNewData();
+    var spotGameDataJSONmanager = new dataJSONmanager(1000);
     var spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
     var spotGameReset = $('.btn.btn-game-reset');
-
     spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function (dataJSON) {
         spotGameManager.initialize(dataJSON);
-
     }).addEventTypesListener('gameCompleted gameOver', function (dataJSON) {
         spotGameManager.end().savePlayerData(dataJSON);
         $('span', spotGameReset).text('Hrát znovu');
@@ -26,6 +24,9 @@ $(document).ready(function () {
     })*/.addEventNewDataListener(function (dataJSON, logAdditionalClasses) {
         spotGameManager.update(dataJSON, logAdditionalClasses);
     });
+
+
+
 
     spotGameReset.on('click', function (e) {
         e.preventDefault();

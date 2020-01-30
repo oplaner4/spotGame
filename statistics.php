@@ -42,6 +42,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         <table class="table table-striped table-borderless player-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
+                    <th class="" scope="col">Herní mód</th>
                     <th class="" scope="col">Přezdívka</th>
                     <th class="" scope="col">Herní čas</th>
                     <th class="" scope="col">Počet špatných stisknutí</th>
@@ -61,6 +62,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         <table class="table table-striped table-borderless best-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
+                    <th class="" scope="col">Herní mód</th>
                     <th class="" scope="col">Přezdívka</th>
                     <th class="" scope="col">Herní čas</th>
                     <th class="" scope="col">Počet špatných stisknutí</th>
@@ -78,7 +80,8 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         $(function () {
 
             var gamesDatatableOptions = {
-                order: [[1, "asc"], [2, "asc"], [3, "desc"], [4, "asc"]],
+                order: [[3, "asc"], [4, "desc"], [5, "asc"], [2, "asc"]],
+                orderFixed: [0, "asc" ],
                 columnDefs: [
                     { targets: "disableOrdering", orderable: false },
                     { type: "num", targets: [2, 3, 4] },
@@ -88,6 +91,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     dataSrc: "gameMode"
                 },
                 columns: [
+                    { data: "gameMode" },
                     { data: "nickname" },
                     { data: "gameTimeElapsed" },
                     { data: "mistakesCounter" },

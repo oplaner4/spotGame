@@ -28,13 +28,10 @@ gameManager.prototype.savePlayerData = function (finalDataJSON) {
             dataType: "text",
             data: {
                 gameMode: self.getModeTitle(finalDataJSON),
+                gameTimeElapsed: self.actualTimeElapsed,
                 correctCounter: finalDataJSON.correctCounter,
                 mistakesCounter: finalDataJSON.mistakesCounter,
-                missedCounter: finalDataJSON.missedCounter,
-                ledTurnedOnDurationMiliseconds: finalDataJSON.ledTurnedOnDurationMiliseconds,
-                mistakesCountTolerance: finalDataJSON.mistakesCountTolerance,
-                finalCountCorrect: finalDataJSON.finalCountCorrect,
-                gameTimeElapsed: self.actualTimeElapsed
+                missedCounter: finalDataJSON.missedCounter
             },
             success: function (data) {
                 self.dataJSONconsoleManagerInstance.prependNewLog(data, 'list-group-item-info');
@@ -105,8 +102,8 @@ gameManager.prototype.end = function () {
 
 gameManager.prototype.start = function () {
     this.ended = false;
-    this.dataJSONmanagerInstance.outputElemsSetDefaults().startCheckForNewData();
     this.dataJSONconsoleManagerInstance.fadeInUpdating().empty().prependNewLog('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
+    this.dataJSONmanagerInstance.outputElemsSetDefaults().startCheckForNewData();
     return this;
 };
 
