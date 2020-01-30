@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sessionData = getSessionData();
         $player_id = $sessionData['player']['id'];
 
-        $players =  get_players (get_connection(), '', $player_id);
+        $players =  get_players ('../', '', $player_id);
         $player = $players [0];
 
         $game = array();

@@ -13,12 +13,20 @@ body {
 
 h1, h2, h3, h4,
 .list-group .list-group-item > a.nav-link i.fa {
-    color: #17a2b8;
+    color: #004560;
+    color: #d5a000;
 }
+
 
 li .list-group .list-group-item > a.nav-link i.fa {
     color: inherit;
 }
+
+
+.bg-site {
+    background-color: #004560; /*  !! .content-loading div (border-) */
+}
+
 
 
 .list-group .list-group-item.active {
@@ -75,11 +83,6 @@ a {
 
 input::-ms-clear {
     display: none;
-}
-
-
-.bg-site {
-    background-color: #00384e; /*  !! .content-loading div (border-) */
 }
 
 

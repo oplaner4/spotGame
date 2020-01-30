@@ -1,6 +1,6 @@
 <?php
 
-function get_games ($connection, $targetPlayerId = '') {
+function get_games ($toRootRelStr = './', $targetPlayerId = '') {
     $sql = "SELECT * FROM games WHERE removed = 0 ";
     if (strlen($targetPlayerId) > 0) {
         $sql .= "AND playerId IN ('".$targetPlayerId."') ";
@@ -8,7 +8,9 @@ function get_games ($connection, $targetPlayerId = '') {
 
     $sql.="ORDER BY correctCounter ASC";
 
-    $result = $connection->query($sql);
+    include_once($toRootRelStr.'databases/access/connection.php');
+    $connection = get_connection();
+    $result = $connection ->query($sql);
 
     $obj = array();
 

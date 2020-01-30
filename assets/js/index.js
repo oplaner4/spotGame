@@ -64,7 +64,7 @@ function initDatatable(table, extendSettings) {
     return dt;
 }
 
-$(document).ready(function () {
+$(function () {
     var header = $(".header");
     var upto = $(".upto");
 
@@ -127,6 +127,13 @@ $(document).ready(function () {
         window.initAndDisplayModalConfirm($this.attr('href'), $this.data('confirm-text'));
         e.preventDefault();
         return false;
+    });
+
+    $("input[data-list]").each(function () {
+        var $this = $(this);
+        $this.autocomplete({
+            source: $this.data('list').split(',')
+        });
     });
 
 });   // do not delete

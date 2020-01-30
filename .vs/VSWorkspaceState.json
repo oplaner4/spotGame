@@ -1,10 +1,17 @@
 {
   "ExpandedNodes": [
     "",
-    "\\img\\index",
-    "\\views",
-    "\\views\\board"
+    "\\assets",
+    "\\assets\\css",
+    "\\board",
+    "\\data",
+    "\\databases",
+    "\\databases\\games",
+    "\\databases\\players",
+    "\\data\\test",
+    "\\scripts",
+    "\\scripts\\board"
   ],
-  "SelectedNode": "\\views\\board\\index.html",
+  "SelectedNode": "\\scripts\\board\\dataJSONconsoleManager.js",
   "PreviewInSolutionExplorer": false
 }

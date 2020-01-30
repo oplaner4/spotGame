@@ -78,8 +78,8 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
         <div class="header d-flex flex-column bg-site">
             <div class="navbar-area">
                 <nav class="container navbar navbar-expand-lg navbar-dark pl-lg-3 justify-content-around">
-                    <a class="navbar-brand text-warning" href="'.$toRootRelStr.'index">
-                        <i class="fas fa-lightbulb"></i> SpotGame
+                    <a class="navbar-brand" href="'.$toRootRelStr.'index">
+                        <i class="fas fa-lightbulb text-warning"></i> SpotGame
                     </a>
                     <button class="navbar-toggler d-flex d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars text-white"></i> <h6 class="mb-0 align-self-center pl-2 text-white">MENU</h6>
@@ -98,7 +98,7 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-                                        <i class="fa fa-user"></i> hráč <span class="text-info"><b>'.$sessionData['player']['nickname'].'</b></span>
+                                        <i class="fa fa-user"></i> hráč <span class="text-warning">'.$sessionData['player']['nickname'].'</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
                                         <a class="dropdown-item" href="'.$toRootRelStr.'player_switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>

@@ -1,6 +1,6 @@
 <?php
 
-function get_players ($connection, $targetNicknameValues = '', $targetIdValues = '') {
+function get_players ($toRootRelStr = './', $targetNicknameValues = '', $targetIdValues = '') {
     $sql = "SELECT * FROM players WHERE removed = 0 ";
     if (strlen($targetNicknameValues) > 0) {
         $sql .= "AND nickname IN ('".$targetNicknameValues."') ";
@@ -10,6 +10,10 @@ function get_players ($connection, $targetNicknameValues = '', $targetIdValues =
     }
 
     $sql.="ORDER BY nickname ASC";
+
+    
+    include_once($toRootRelStr.'databases/access/connection.php');
+    $connection = get_connection();
 
     $result = $connection->query($sql);
     $obj = array();

@@ -10,10 +10,12 @@ include_once('./databases/tools/commands.php');
 include_once('./databases/players/DB.php');
 include_once('./databases/games/DB.php');
 include_once('./storage/session.php');
+
 $sessionData = getSessionData();
 
-$players =  get_players (get_connection());
-$games =  get_games (get_connection());
+$players =  get_players ();
+$games =  get_games ();
+
 $current_player_id = $sessionData['player']['id'];
 $players_by_id = array();
 

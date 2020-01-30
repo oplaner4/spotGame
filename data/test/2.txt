@@ -1,35 +1,35 @@
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":0}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Hra spuštěna","eventType":"gameInitialized", "mistakesCounter":0}
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":0}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Mód: dokud se hráč nesplete, tolerance nastavena na: 3 chyb","eventType":"", "mistakesCounter":0}
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":0}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Nastavení: doba rozsvícené led v milisekundách: 180","eventType":"", "mistakesCounter":0}
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":0}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Zvýšen počet špatných stisknutí na: 1","eventType":"mistakesCountIncreased","mistakesCounter":1}
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":0}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0.9,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0.9,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Zvýšen počet špatných stisknutí na: 2","eventType":"mistakesCountIncreased","mistakesCounter":2}
 {"JSONparts":4}
 {"gameMode":"untilMistakeMode","correctCounter":14}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":0,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Počet dosažených správných stisknutí: 14","eventType":"", "mistakesCounter":2}
 {"JSONparts":0}
 {"gameMode":"untilMistakeMode","correctCounter":12}
-{"mistakesCountTolerance":3,"maxErrorRateIndex":0,"finalCountCorrect":10}
-{"ledTurnedOnDurationMiliseconds":180,"gameOver":1,"gameCompleted":0}
+{"mistakesCountTolerance":1,"maxErrorRateIndex":0,"finalCountCorrect":10}
+{"ledTurnedOnDurationMiliseconds":180}
 {"message":"Hra prohrána","eventType":"gameOver", "mistakesCounter":2}
