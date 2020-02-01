@@ -57,4 +57,4 @@ dataJSONhelper.prototype.getMessage = function () {
 
 dataJSONhelper.prototype.getData = function () {
     return this.dataJSON;
-}
+};

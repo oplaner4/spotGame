@@ -15,6 +15,15 @@ var gameManager = function (dataJSONmanagerInstance, dataJSONconsoleManagerInsta
     this.actualTimeElapsed = '00:00:00';
 };
 
+
+gameManager.prototype.getDataJSONmanager = function () {
+    return this.dataJSONmanagerInstance;
+};
+
+gameManager.prototype.getDataJSONConsoleManager = function () {
+    return this.dataJSONconsoleManagerInstance;
+};
+
 gameManager.prototype.getModeTitle = function (dataJSONhelper) {
     return this.modesAndTitles[dataJSONhelper.getGameModeName()];
 };
@@ -34,7 +43,7 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
                 missedCounter: dataJSONhelper.getMissedCounter()
             },
             success: function (data) {
-                self.dataJSONconsoleManagerInstance.prependNewLog(data, 'list-group-item-info');
+                self.getDataJSONConsoleManager().prependNewLog(data, 'list-group-item-info');
             },
             error: function (data) {
                 console.log(data);
@@ -42,7 +51,7 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
         });
     }
     else {
-        self.dataJSONconsoleManagerInstance.prependNewLog('Deska nebyla správně resetována', 'list-group-item-danger');
+        self.getDataJSONConsoleManager().prependNewLog('Deska nebyla správně resetována', 'list-group-item-danger');
     }
 
     return self;
@@ -53,7 +62,7 @@ gameManager.prototype.initActualTimeElapsed = function () {
     self.initializedMoment = new moment();
     self.actualTimeElapsedInterval = setInterval(function () {
         self.actualTimeElapsed = moment.utc(new moment().diff(self.initializedMoment)).format(standardTimeFormat);
-        self.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemActualGameTimeElapsed', self.actualTimeElapsed);
+        self.getDataJSONmanager().updateElemChangingValue('listGroupItemActualGameTimeElapsed', self.actualTimeElapsed);
     }, 1000);
 
     return self;
@@ -67,7 +76,7 @@ gameManager.prototype.stopActualTimeElapsed = function () {
 gameManager.prototype.adjustOutputElemsToGameMode = function (dataJSONhelper) {
     var elemDataTargetMode = 'data-target-mode';
     $('[' + elemDataTargetMode + ']').css('display', 'none').filter('[' + elemDataTargetMode + '="' + dataJSONhelper.getGameModeName() + '"]').attr('style', '');
-    this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemGameModeTitle', this.getModeTitle(dataJSONhelper));
+    this.getDataJSONmanager().updateElemChangingValue('listGroupItemGameModeTitle', this.getModeTitle(dataJSONhelper));
 
     return this;
 };
@@ -77,7 +86,7 @@ gameManager.prototype.initialize = function (dataJSONhelper) {
     this.ended = false;
     this.adjustOutputElemsToGameMode(dataJSONhelper);
     this.initializeConsole();
-    this.dataJSONmanagerInstance
+    this.getDataJSONmanager()
         .updateElemChangingValue('listGroupItemLedTurnedOnDurationMiliseconds', dataJSONhelper.getData().ledTurnedOnDurationMiliseconds)
         .updateElemChangingValue('listGroupItemMaxErrorRateIndex', dataJSONhelper.getData().maxErrorRateIndex.toFixed(2))
         .updateElemChangingValue('listGroupItemMistakesCountTolerance', dataJSONhelper.getData().mistakesCountTolerance)
@@ -93,20 +102,20 @@ gameManager.prototype.end = function () {
         this.stopActualTimeElapsed();
     }
 
-    this.dataJSONmanagerInstance.stopCheckForNewData();
-    this.dataJSONconsoleManagerInstance.fadeOutUpdating();
+    this.getDataJSONmanager().stopCheckForNewData();
+    this.getDataJSONConsoleManager().fadeOutUpdating();
 
     return this;
 };
 
 gameManager.prototype.initializeConsole = function () {
-    return this.dataJSONconsoleManagerInstance.fadeInUpdating().empty();
+    return this.getDataJSONConsoleManager().fadeInUpdating().empty();
 };
 
 gameManager.prototype.start = function () {
     this.ended = false;
     this.initializeConsole().prependNewLog('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
-    this.dataJSONmanagerInstance.outputElemsSetDefaults().startCheckForNewData();
+    this.getDataJSONmanager().outputElemsSetDefaults().startCheckForNewData();
     return this;
 };
 
@@ -130,8 +139,8 @@ gameManager.prototype.reset = function () {
 
 gameManager.prototype.update = function (dataJSONhelper) {
     if (this.initialized || this.ended) {
-        this.dataJSONconsoleManagerInstance.prependNewLog(dataJSONhelper.getData().message, dataJSONhelper.logAdditionalClasses);
-        this.dataJSONmanagerInstance
+        this.getDataJSONConsoleManager().prependNewLog(dataJSONhelper.getData().message, dataJSONhelper.logAdditionalClasses);
+        this.getDataJSONmanager()
             .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
             .updateElemChangingValue('listGroupItemMistakesCounter', dataJSONhelper.getMistakesCounter())
             .updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSONhelper.getRemainsMistakesCountTolerance())

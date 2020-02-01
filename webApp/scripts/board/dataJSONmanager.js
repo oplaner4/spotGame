@@ -2,7 +2,6 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
     this.updateIntervalMiliseconds = updateIntervalMiliseconds;
     this.countAnalyzed = 0;
     this.eventTypesListeners = new Object();
-    this.eventNewDataListener = function () { };
 
     this.outputElems = new Object({
         listGroupItemMistakesCountTolerance: $('.list-group-item-mistakesCountTolerance'),
@@ -18,7 +17,6 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemActualGameTimeElapsed: $('.list-group-item-actualGameTimeElapsed'),
         listGroupItemMissedCounter: $('.list-group-item-missedCounter')
     });
-
     this.outputElemsDefaults = new Object({
         listGroupItemMistakesCountTolerance: '0',
         listGroupItemMaxErrorRateIndex: '0',
