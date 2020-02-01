@@ -2,6 +2,7 @@ $(document).ready(function () {
     var spotGameDataJSONconsoleManager = new dataJSONconsoleManager();
     var spotGameDataJSONmanager = new dataJSONmanager(1000);
     var spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
+
     var spotGameReset = $('.btn.btn-game-reset');
 
     spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function () {
@@ -17,17 +18,18 @@ $(document).ready(function () {
     }).addEventTypesListener('mistakesCountIncreased gameOver', function () {
         return { logAdditionalClasses: 'list-group-item-danger' };
 
-    }).addEventTypesListener('correctCountIncreased gameCompleted gameInitialized arduinoBoardReseted', function () {
+    }).addEventTypesListener('correctCountIncreased gameCompleted arduinoBoardReseted', function () {
         return { logAdditionalClasses: 'list-group-item-success' };
 
-    }).addEventTypesListener('correctCountReached maxErrorRateIndexExceed', function () {
+    }).addEventTypesListener('correctCountReached gameInitialized', function () {
         return { logAdditionalClasses: 'list-group-item-info' };
 
-    }).addEventNewDataListener(function (dataJSONhelper) {
+    }).addEventTypesListener('maxErrorRateIndexExceed', function () {
+        return { logAdditionalClasses: 'list-group-item-warning' };
+
+    }).addEventTypesListener('newDataJSON', function (dataJSONhelper) {
         spotGameManager.update(dataJSONhelper);
     });
-
-
 
 
     spotGameReset.on('click', function (e) {

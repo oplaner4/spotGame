@@ -130,7 +130,7 @@ gameManager.prototype.reset = function () {
 
 gameManager.prototype.update = function (dataJSONhelper) {
     if (this.initialized || this.ended) {
-        this.dataJSONconsoleManagerInstance.prependNewLog(dataJSONhelper.getData().message, logAdditionalClasses.join(' '));
+        this.dataJSONconsoleManagerInstance.prependNewLog(dataJSONhelper.getData().message, dataJSONhelper.logAdditionalClasses);
         this.dataJSONmanagerInstance
             .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
             .updateElemChangingValue('listGroupItemMistakesCounter', dataJSONhelper.getMistakesCounter())

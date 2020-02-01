@@ -49,30 +49,8 @@ dataJSONmanager.prototype.startCheckForNewData = function () {
     return self;
 };
 
-dataJSONmanager.prototype.addEventTypesListener = function (eventTypes, callback) {
-    var self = this;
-    eventTypes.split(/\s+/).forEach(function (eventType) {
-        if (!Array.isArray(self.eventTypesListeners[eventType])) {
-            self.eventTypesListeners[eventType] = new Array();
-        }
-
-        self.eventTypesListeners[eventType].push(callback);
-    });
-
-    return self;
-};
-
 dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, value) {
     $('span', this.getOutputElem(outputElemName)).first().text(value);
-
-    return this;
-};
-
-dataJSONmanager.prototype.processMultiple = function (multipleDataJSON) {
-    var self = this;
-    multipleDataJSON.forEach(function (dataJSON) {
-        new dataJSONhelper(dataJSON).process(self);
-    });
 
     return this;
 };
@@ -87,7 +65,10 @@ dataJSONmanager.prototype.checkForNewMultiple = function () {
             skipMultipleDataJSON: self.countAnalyzed
         },
         success: function (multipleDataJSON) {
-            self.processMultiple(multipleDataJSON);
+            multipleDataJSON.forEach(function (dataJSON) {
+                new dataJSONhelper(dataJSON).process(self);
+            });
+
             self.countAnalyzed += multipleDataJSON.length;
         }
     });
@@ -112,8 +93,19 @@ dataJSONmanager.prototype.getOutputElem = function (outputElemName) {
     return this.outputElems[outputElemName];
 };
 
-dataJSONmanager.prototype.addEventNewDataListener = function (callback) {
-    this.eventNewDataListener = callback;
-
-    return this;
+dataJSONmanager.prototype.addEventTypesListener = function (eventTypes, callback) {
+    var self = this;
+    eventTypes.split(/\s+/).forEach(function (eventType) {
+        self.getEventTypeListeners(eventType).push(callback);
+    });
+    return self;
 };
+
+dataJSONmanager.prototype.getEventTypeListeners = function (eventTypeName) {
+    if (!this.eventTypesListeners.hasOwnProperty(eventTypeName)) {
+        this.eventTypesListeners[eventTypeName] = new Array();
+    }
+
+    return this.eventTypesListeners[eventTypeName];
+};
+
