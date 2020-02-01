@@ -42,12 +42,12 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         <table class="table table-striped table-borderless player-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
-                    <th class="" scope="col">Herní mód</th>
-                    <th class="" scope="col">Přezdívka</th>
-                    <th class="" scope="col">Herní čas</th>
-                    <th class="" scope="col">Počet špatných stisknutí</th>
+                    <th scope="col">Herní mód</th>
+                    <th scope="col">Přezdívka</th>
+                    <th class="disableOrdering" scope="col">Počet špatných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Herní čas</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -62,12 +62,12 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         <table class="table table-striped table-borderless best-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
-                    <th class="" scope="col">Herní mód</th>
-                    <th class="" scope="col">Přezdívka</th>
-                    <th class="" scope="col">Herní čas</th>
-                    <th class="" scope="col">Počet špatných stisknutí</th>
+                    <th scope="col">Herní mód</th>
+                    <th scope="col">Přezdívka</th>
+                    <th class="disableOrdering" scope="col">Počet špatných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
                     <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
+                    <th class="disableOrdering" scope="col">Herní čas</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -80,7 +80,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
         $(function () {
 
             var gamesDatatableOptions = {
-                order: [[3, "asc"], [4, "desc"], [5, "asc"], [2, "asc"]],
+                order: [[2, "asc"], [3, "desc"], [4, "asc"], [5, "asc"]],
                 orderFixed: [0, "asc" ],
                 columnDefs: [
                     { targets: "disableOrdering", orderable: false },
@@ -93,10 +93,10 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                 columns: [
                     { data: "gameMode" },
                     { data: "nickname" },
-                    { data: "gameTimeElapsed" },
                     { data: "mistakesCounter" },
                     { data: "correctCounter" },
-                    { data: "missedCounter" }
+                    { data: "missedCounter" },
+                    { data: "gameTimeElapsed" }
                 ]
             };
 

@@ -68,32 +68,10 @@ dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, va
     return this;
 };
 
-dataJSONmanager.prototype.processing = function (dataJSON) {
-    var logAdditionalClasses = new Array();
-    var self = this;
-
-    if (self.eventTypesListeners.hasOwnProperty(dataJSON.eventType)) {
-        self.eventTypesListeners[dataJSON.eventType].forEach(function (callback) {
-            var eventRetObj = callback(dataJSON, self);
-            if (eventRetObj instanceof Object) {
-                if (eventRetObj.hasOwnProperty('logAdditionalClasses')) {
-                    if (logAdditionalClasses.indexOf(eventRetObj.logAdditionalClasses) === -1) {
-                        logAdditionalClasses.push(eventRetObj.logAdditionalClasses);
-                    }
-                }
-            }
-        });
-    }
-
-    self.eventNewDataListener(dataJSON, logAdditionalClasses);
-
-    return self;
-};
-
-dataJSONmanager.prototype.processingMultiple = function (multipleDataJSON) {
+dataJSONmanager.prototype.processMultiple = function (multipleDataJSON) {
     var self = this;
     multipleDataJSON.forEach(function (dataJSON) {
-        self.processing(dataJSON);
+        new dataJSONhelper(dataJSON).process(self);
     });
 
     return this;
@@ -109,7 +87,7 @@ dataJSONmanager.prototype.checkForNewMultiple = function () {
             skipMultipleDataJSON: self.countAnalyzed
         },
         success: function (multipleDataJSON) {
-            self.processingMultiple(multipleDataJSON);
+            self.processMultiple(multipleDataJSON);
             self.countAnalyzed += multipleDataJSON.length;
         }
     });

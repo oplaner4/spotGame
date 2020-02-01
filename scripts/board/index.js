@@ -3,26 +3,28 @@ $(document).ready(function () {
     var spotGameDataJSONmanager = new dataJSONmanager(1000);
     var spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
     var spotGameReset = $('.btn.btn-game-reset');
-    spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function (dataJSON) {
-        spotGameManager.initialize(dataJSON);
-    }).addEventTypesListener('gameCompleted gameOver', function (dataJSON) {
-        spotGameManager.end().savePlayerData(dataJSON);
+
+    spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function () {
+        spotGameManager.initActualTimeElapsed();
+
+    }).addEventTypesListener('arduinoBoardReseted', function (dataJSONhelper) {
+        spotGameManager.initialize(dataJSONhelper);
+
+    }).addEventTypesListener('gameCompleted gameOver', function (dataJSONhelper) {
+        spotGameManager.end().savePlayerData(dataJSONhelper);
         $('span', spotGameReset).text('Hrát znovu');
 
-    }).addEventTypesListener('mistakesCountIncreased gameOver maxErrorRateIndexExceed', function () {
+    }).addEventTypesListener('mistakesCountIncreased gameOver', function () {
         return { logAdditionalClasses: 'list-group-item-danger' };
 
-    }).addEventTypesListener('correctCountIncreased gameCompleted gameInitialized', function () {
-
+    }).addEventTypesListener('correctCountIncreased gameCompleted gameInitialized arduinoBoardReseted', function () {
         return { logAdditionalClasses: 'list-group-item-success' };
-    }).addEventTypesListener('correctCountReached', function () {
+
+    }).addEventTypesListener('correctCountReached maxErrorRateIndexExceed', function () {
         return { logAdditionalClasses: 'list-group-item-info' };
 
-    })/*.addEventTypesListener('settingsInfo gameModeSet', function () {
-        return { logAdditionalClasses: 'list-group-item-secondary' };
-
-    })*/.addEventNewDataListener(function (dataJSON, logAdditionalClasses) {
-        spotGameManager.update(dataJSON, logAdditionalClasses);
+    }).addEventNewDataListener(function (dataJSONhelper) {
+        spotGameManager.update(dataJSONhelper);
     });
 
 

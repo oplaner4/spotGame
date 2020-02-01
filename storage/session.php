@@ -6,8 +6,8 @@ if (!isset($_SESSION)) {
 
 if (!isset($_SESSION['CREATED'])) {
     $_SESSION['CREATED'] = time();
-} else if (time() - $_SESSION['CREATED'] > 30*60) {
-    session_regenerate_id(true);
+} else if (time() - $_SESSION['CREATED'] > 60*60) {
+    session_destroy();
     $_SESSION['CREATED'] = time();
 }
 

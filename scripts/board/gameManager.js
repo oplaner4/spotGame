@@ -15,11 +15,11 @@ var gameManager = function (dataJSONmanagerInstance, dataJSONconsoleManagerInsta
     this.actualTimeElapsed = '00:00:00';
 };
 
-gameManager.prototype.getModeTitle = function (dataJSON) {
-    return this.modesAndTitles[dataJSON.gameMode];
+gameManager.prototype.getModeTitle = function (dataJSONhelper) {
+    return this.modesAndTitles[dataJSONhelper.getGameModeName()];
 };
 
-gameManager.prototype.savePlayerData = function (finalDataJSON) {
+gameManager.prototype.savePlayerData = function (dataJSONhelper) {
     var self = this;
     if (self.initialized && self.ended) {
         $.ajax({
@@ -27,11 +27,11 @@ gameManager.prototype.savePlayerData = function (finalDataJSON) {
             method: "POST",
             dataType: "text",
             data: {
-                gameMode: self.getModeTitle(finalDataJSON),
+                gameMode: self.getModeTitle(dataJSONhelper),
                 gameTimeElapsed: self.actualTimeElapsed,
-                correctCounter: finalDataJSON.correctCounter,
-                mistakesCounter: finalDataJSON.mistakesCounter,
-                missedCounter: finalDataJSON.missedCounter
+                correctCounter: dataJSONhelper.getCorrectCounter(),
+                mistakesCounter: dataJSONhelper.getMistakesCounter(),
+                missedCounter: dataJSONhelper.getMissedCounter()
             },
             success: function (data) {
                 self.dataJSONconsoleManagerInstance.prependNewLog(data, 'list-group-item-info');
@@ -64,25 +64,24 @@ gameManager.prototype.stopActualTimeElapsed = function () {
     return this;
 };
 
-gameManager.prototype.adjustOutputElemsToGameMode = function (initializedDataJSON) {
+gameManager.prototype.adjustOutputElemsToGameMode = function (dataJSONhelper) {
     var elemDataTargetMode = 'data-target-mode';
-    $('[' + elemDataTargetMode + ']').css('display', 'none').filter('[' + elemDataTargetMode + '="' + initializedDataJSON.gameMode + '"]').attr('style', '');
-    this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemGameModeTitle', this.getModeTitle(initializedDataJSON));
+    $('[' + elemDataTargetMode + ']').css('display', 'none').filter('[' + elemDataTargetMode + '="' + dataJSONhelper.getGameModeName() + '"]').attr('style', '');
+    this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemGameModeTitle', this.getModeTitle(dataJSONhelper));
 
     return this;
 };
 
-gameManager.prototype.initialize = function (initializedDataJSON) {
+gameManager.prototype.initialize = function (dataJSONhelper) {
     this.initialized = true;
     this.ended = false;
-    this.initActualTimeElapsed();
-    this.adjustOutputElemsToGameMode(initializedDataJSON);
-    this.dataJSONconsoleManagerInstance.empty().prependNewLog('Arduino deska resetována', 'list-group-item-success');
+    this.adjustOutputElemsToGameMode(dataJSONhelper);
+    this.initializeConsole();
     this.dataJSONmanagerInstance
-        .updateElemChangingValue('listGroupItemLedTurnedOnDurationMiliseconds', initializedDataJSON.ledTurnedOnDurationMiliseconds)
-        .updateElemChangingValue('listGroupItemMaxErrorRateIndex', initializedDataJSON.maxErrorRateIndex.toFixed(2))
-        .updateElemChangingValue('listGroupItemMistakesCountTolerance', initializedDataJSON.mistakesCountTolerance)
-        .updateElemChangingValue('listGroupItemFinalCountCorrect', initializedDataJSON.finalCountCorrect);
+        .updateElemChangingValue('listGroupItemLedTurnedOnDurationMiliseconds', dataJSONhelper.getData().ledTurnedOnDurationMiliseconds)
+        .updateElemChangingValue('listGroupItemMaxErrorRateIndex', dataJSONhelper.getData().maxErrorRateIndex.toFixed(2))
+        .updateElemChangingValue('listGroupItemMistakesCountTolerance', dataJSONhelper.getData().mistakesCountTolerance)
+        .updateElemChangingValue('listGroupItemFinalCountCorrect', dataJSONhelper.getData().finalCountCorrect);
 
 
     return this;
@@ -100,9 +99,13 @@ gameManager.prototype.end = function () {
     return this;
 };
 
+gameManager.prototype.initializeConsole = function () {
+    return this.dataJSONconsoleManagerInstance.fadeInUpdating().empty();
+};
+
 gameManager.prototype.start = function () {
     this.ended = false;
-    this.dataJSONconsoleManagerInstance.fadeInUpdating().empty().prependNewLog('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
+    this.initializeConsole().prependNewLog('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
     this.dataJSONmanagerInstance.outputElemsSetDefaults().startCheckForNewData();
     return this;
 };
@@ -125,15 +128,16 @@ gameManager.prototype.reset = function () {
     return self;
 };
 
-gameManager.prototype.update = function (dataJSON, logAdditionalClasses) {
+gameManager.prototype.update = function (dataJSONhelper) {
     if (this.initialized || this.ended) {
-        this.dataJSONconsoleManagerInstance.prependNewLog(dataJSON.message, logAdditionalClasses.join(' '));
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemCorrectCounter', dataJSON.correctCounter);
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemMistakesCounter', dataJSON.mistakesCounter);
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter > 0 ? dataJSON.mistakesCountTolerance - dataJSON.mistakesCounter : 0);
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSON.finalCountCorrect - dataJSON.correctCounter);
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemActualErrorRateIndex', new Number(dataJSON.correctCounter === 0 ? 0 : dataJSON.mistakesCounter / dataJSON.correctCounter).toFixed(2));
-        this.dataJSONmanagerInstance.updateElemChangingValue('listGroupItemMissedCounter', dataJSON.missedCounter);
+        this.dataJSONconsoleManagerInstance.prependNewLog(dataJSONhelper.getData().message, logAdditionalClasses.join(' '));
+        this.dataJSONmanagerInstance
+            .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
+            .updateElemChangingValue('listGroupItemMistakesCounter', dataJSONhelper.getMistakesCounter())
+            .updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSONhelper.getRemainsMistakesCountTolerance())
+            .updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSONhelper.getRemainsFinalCountCorrect())
+            .updateElemChangingValue('listGroupItemActualErrorRateIndex', dataJSONhelper.getActualErrorRateIndex().toFixed(2))
+            .updateElemChangingValue('listGroupItemMissedCounter', dataJSONhelper.getMissedCounter());
     }
 
     return this;

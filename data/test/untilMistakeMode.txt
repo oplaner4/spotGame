@@ -1,4 +1,10 @@
 {"JSONparts":4}
+{"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":6}
+{"correctCounter":0,"mistakesCounter":0, "missedCounter":0}
+{"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.50,"eventType":"arduinoBoardReseted"}
+{"message":"Arduino deska úspěšně resetována"}
+
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
 {"correctCounter":0,"mistakesCounter":0, "missedCounter":0}
 {"ledTurnedOnDurationMiliseconds":180,"maxErrorRateIndex":0.5,"eventType":"gameInitialized"}
