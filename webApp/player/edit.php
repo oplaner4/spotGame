@@ -17,20 +17,29 @@ if(isset($_POST['submit'])) {
         if (strlen($nickname) > 2) {
             include_once('../databases/access/connection.php');
             include_once('../databases/tools/commands.php');
+            include_once('../databases/players/DB.php');
 
-            $current_player['nickname'] = $nickname;
+            $players_by_nickname = get_players ('../', $nickname);
 
-            $connection = get_connection();
-            if ($connection->query(get_update_sql_command ('players', $current_player)) === TRUE) {
-                $sessionData = array();
-                $sessionData['player'] = $current_player;
-                setSessionData($sessionData);
-                $messageSuccess = 'Vlastnosti hráče úspěšně uloženy';
-            } else {
-                 $messageError = 'Nastavení se nepodařilo uložit';
+            if (count($players_by_nickname) === 0) {
+                $current_player['nickname'] = $nickname;
+
+                $connection = get_connection();
+                if ($connection->query(get_update_sql_command ('players', $current_player)) === TRUE) {
+                    $sessionData = array();
+                    $sessionData['player'] = $current_player;
+                    setSessionData($sessionData);
+                    $messageSuccess = 'Vlastnosti hráče úspěšně uloženy';
+                } else {
+                     $messageError = 'Nastavení se nepodařilo uložit';
+                }
+
+                $connection->close();
+            }
+            else {
+                $messageError = 'Hráč s touto přezdívkou již existuje';
             }
 
-            $connection->close();
         }
         else {
             $messageError = 'Pole přezdívka musí mít alespoň 3 znaky';
