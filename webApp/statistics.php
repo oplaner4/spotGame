@@ -44,10 +44,10 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                 <tr>
                     <th scope="col">Herní mód</th>
                     <th scope="col">Přezdívka</th>
-                    <th class="disableOrdering" scope="col">Počet špatných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Herní čas</th>
+                    <th scope="col">Počet špatných stisknutí</th>
+                    <th scope="col">Počet správných stisknutí</th>
+                    <th scope="col">Počet zameškaných stisknutí</th>
+                    <th scope="col">Herní čas</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -64,10 +64,10 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                 <tr>
                     <th scope="col">Herní mód</th>
                     <th scope="col">Přezdívka</th>
-                    <th class="disableOrdering" scope="col">Počet špatných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Počet správných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Počet zameškaných stisknutí</th>
-                    <th class="disableOrdering" scope="col">Herní čas</th>
+                    <th scope="col">Počet špatných stisknutí</th>
+                    <th scope="col">Počet správných stisknutí</th>
+                    <th scope="col">Počet zameškaných stisknutí</th>
+                    <th scope="col">Herní čas</th>
                 </tr>
             </thead>
             <tbody></tbody>

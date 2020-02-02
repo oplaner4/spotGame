@@ -23,7 +23,8 @@ if(isset($_POST['submit'])) {
                  $new_player['removed'] = 0;
                  $new_player['nickname'] = $nickname;
                  
-                 if (get_connection()->query(get_insert_sql_command ('players', $new_player)) === TRUE) {
+                 $connection = get_connection();
+                 if ($connection->query(get_insert_sql_command ('players', $new_player)) === TRUE) {
                      $sessionData = array();
                      $sessionData['player'] = $new_player;
                      setSessionData($sessionData);
@@ -31,6 +32,8 @@ if(isset($_POST['submit'])) {
                  } else {
                       $message = 'Nastavení se nepodařilo uložit';
                  }
+
+                 $connection->close();
             }
             else {
                   $sessionData = array();

@@ -1,12 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\board",
+    "\\data",
     "\\data\\test",
-    "\\scripts",
     "\\scripts\\board",
-    "\\views",
     "\\views\\board"
   ],
-  "SelectedNode": "\\scripts\\board\\gameManager.js",
+  "SelectedNode": "\\board\\save.php",
   "PreviewInSolutionExplorer": false
 }

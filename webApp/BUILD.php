@@ -96,11 +96,13 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
                                 <li class="nav-item'; if ($subFolderPath == '' && $viewName == 'statistics') { echo ' active'; }; echo'">
                                     <a class="nav-link" href="'.$toRootRelStr.'statistics"><i class="fa fa-chart-bar"></i> Statistika</a>
                                 </li>
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown'; if ($subFolderPath == 'player/') { echo ' active'; }; echo'">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarAdministraceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
                                         <i class="fa fa-user"></i> hráč <span class="text-warning">'.$sessionData['player']['nickname'].'</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdministraceDropdown">
+                                        <a class="dropdown-item'; if ($subFolderPath == 'player/' && $viewName == 'edit') { echo ' active'; }; echo'" href="'.$toRootRelStr.'player/edit"><i class="fa fa-pen"></i> Upravit</a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="'.$toRootRelStr.'player/switch"><i class="fa fa-sign-out-alt"></i> Jiný hráč</a>
                                     </div>
                                 </li>
