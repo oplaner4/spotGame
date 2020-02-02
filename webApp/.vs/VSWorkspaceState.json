@@ -1,12 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\board",
-    "\\data",
+    "\\databases",
     "\\data\\test",
-    "\\scripts\\board",
-    "\\views\\board"
+    "\\storage"
   ],
-  "SelectedNode": "\\board\\save.php",
+  "SelectedNode": "\\databases\\create.sql",
   "PreviewInSolutionExplorer": false
 }
