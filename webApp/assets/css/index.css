@@ -266,10 +266,6 @@ a.img-container {
     a.img-container.zoom:hover:before, a.img-container.zoom:hover:after {
         opacity: 0.8;
     }
-
-    .navbar-nav {
-        max-width: 850px;
-    }
 }
 
 

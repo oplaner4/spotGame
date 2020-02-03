@@ -1,12 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\databases",
-    "\\player",
-    "\\storage",
+    "\\board",
+    "\\data",
+    "\\data\\test",
+    "\\scripts",
+    "\\scripts\\board",
     "\\views",
     "\\views\\board"
   ],
-  "SelectedNode": "\\views\\index.html",
+  "SelectedNode": "\\BUILD_authorized.php",
   "PreviewInSolutionExplorer": false
 }
