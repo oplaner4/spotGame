@@ -37,7 +37,7 @@ for ($i = 0; $i < count($games); $i++) {
 build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
 
 <h5>Přihlášený hráč</h5>
-<div class="pl-md-2">
+<div class="pl-md-2 mb-5">
     <div class="d-inline-block mb-3 table-responsive-sm">
         <table class="table table-striped table-borderless player-games-table" style="width: 100%">
             <thead class="bg-site text-white">
@@ -101,7 +101,8 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
             };
 
             var bestGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
-                data: '.json_encode($data).'
+                data: '.json_encode($data).',
+                lengthMenu: [3, 10, 25, 50],
             });
 
             var playerGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
