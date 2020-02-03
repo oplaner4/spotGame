@@ -3,7 +3,7 @@ $(document).ready(function () {
     var spotGameDataJSONmanager = new dataJSONmanager(1000);
     var spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
 
-    var spotGameReset = $('.btn.btn-game-reset');
+    var btnSpotGameReset = $('.btn.btn-game-reset');
 
     spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function () {
         spotGameManager.initActualTimeElapsed();
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     }).addEventTypesListener('gameCompleted gameOver', function (dataJSONhelper) {
         spotGameManager.end().savePlayerData(dataJSONhelper);
-        $('span', spotGameReset).text('Hrát znovu');
+        $('span', btnSpotGameReset).text('Hrát znovu');
 
     }).addEventTypesListener('mistakesCountIncreased gameOver', function () {
         return { logAdditionalClasses: 'list-group-item-danger' };
@@ -32,10 +32,10 @@ $(document).ready(function () {
     });
 
 
-    spotGameReset.on('click', function (e) {
+    btnSpotGameReset.on('click', function (e) {
         e.preventDefault();
         $('span', this).text('Resetovat hru');
         spotGameManager.reset();
     }).trigger('click');
 
-});   // do not delete
+});

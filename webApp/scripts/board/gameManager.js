@@ -126,7 +126,8 @@ gameManager.prototype.reset = function () {
     $.ajax({
         url: "/board/reset",
         dataType: "text",
-        success: function () {
+        success: function (data) {
+            console.log(data);
             self.start();
         },
         error: function (data) {

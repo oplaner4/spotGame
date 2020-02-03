@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\databases",
-    "\\data\\test",
-    "\\storage"
+    "\\player",
+    "\\storage",
+    "\\views",
+    "\\views\\board"
   ],
-  "SelectedNode": "\\databases\\create.sql",
+  "SelectedNode": "\\views\\index.html",
   "PreviewInSolutionExplorer": false
 }

@@ -35,14 +35,29 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
     this.checkForNewMultipleInterval = null;
 };
 
-dataJSONmanager.prototype.startCheckForNewData = function () {
+dataJSONmanager.prototype.startCheckForNewDataInit = function (countOldDataAnalyzed) {
     var self = this;
-    self.countAnalyzed = 0;
+    self.countAnalyzed = countOldDataAnalyzed;
     self.checkForNewMultipleInterval = setInterval(function () {
         self.checkForNewMultiple();
     }, self.updateIntervalMiliseconds);
 
     self.checkForNewMultiple();
+
+    return self;
+};
+
+dataJSONmanager.prototype.startCheckForNewData = function () {
+    var self = this;
+
+    if (self.countAnalyzed === 0) {
+        self.getData(0, function (oldMultipleDataJSON) {
+            self.startCheckForNewDataInit(oldMultipleDataJSON.length);
+        });
+    }
+    else {
+        self.startCheckForNewDataInit(self.countAnalyzed);
+    }
 
     return self;
 };
@@ -55,23 +70,32 @@ dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, va
 
 dataJSONmanager.prototype.checkForNewMultiple = function () {
     var self = this;
-    $.ajax({
-        url: "/board/data",
-        method: "GET",
-        dataType: "json",
-        data: {
-            skipMultipleDataJSON: self.countAnalyzed
-        },
-        success: function (multipleDataJSON) {
+
+    self.getData(self.countAnalyzed,
+        function (multipleDataJSON) {
             multipleDataJSON.forEach(function (dataJSON) {
                 new dataJSONhelper(dataJSON).process(self);
             });
 
             self.countAnalyzed += multipleDataJSON.length;
         }
-    });
+    );
 
     return self;
+};
+
+dataJSONmanager.prototype.getData = function (skipMultipleDataJSON, onSuccessCallback) {
+    $.ajax({
+        url: "/board/data",
+        method: "GET",
+        dataType: "json",
+        data: {
+            skipMultipleDataJSON: skipMultipleDataJSON
+        },
+        success: onSuccessCallback
+    });
+
+    return this;
 };
 
 dataJSONmanager.prototype.stopCheckForNewData = function () {
