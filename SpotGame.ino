@@ -12,6 +12,7 @@
 // 23/1/2020 - JSON refactor
 // 24/1/2020 - JSON String bugfix, String length bugfix
 // 30/1/2020 - zameskana stisknuti
+// 3/2/2020 - BUGFIX - maximalni povolena chybovost pretypovani
 
 // _____________________________________________________________________________________
 // POPIS
@@ -348,7 +349,7 @@ void loop() {
            // dosahl poctu uspesnych stisknuti
            if (reachFinalCountCorrectMode) {
               // mod dosahnuti poctu uspesnych stisknuti 
-              if (mistakesCounter/correctCounter > maxErrorRateIndex) {
+              if ((double)mistakesCounter/(double)correctCounter > maxErrorRateIndex) {
                 // prekrocena chybovost, nelze ukoncit hru
                 // vynulovani poctu spravnych, spatnych a zameskanych stisknuti
                 mistakesCounter = 0;  correctCounter = 0; missedCounter = 0;
