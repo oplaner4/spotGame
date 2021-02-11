@@ -5,7 +5,7 @@ function get_players ($toRootRelStr = './', $targetNicknameValues = '', $targetI
     if (strlen($targetNicknameValues) > 0) {
         $sql .= "AND nickname IN ('".$targetNicknameValues."') ";
     }
-    else if (strlen($targetIdValues) > 0) {
+    if (strlen($targetIdValues) > 0) {
         $sql .= "AND id IN ('".$targetIdValues."') ";
     }
 
