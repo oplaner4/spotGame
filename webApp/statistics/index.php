@@ -1,38 +1,10 @@
 <?php
 
-include_once('BUILD_authorized.php');
-
-$data = array();
-$player_data = array();
-
-include_once('./databases/access/connection.php');
-include_once('./databases/tools/commands.php');
-include_once('./databases/players/DB.php');
-include_once('./databases/games/DB.php');
-include_once('./storage/session.php');
+include_once('../BUILD_authorized.php');
+include_once('../storage/session.php');
 
 $sessionData = getSessionData();
-
-$players =  get_players ();
-$games =  get_games ();
-
 $current_player_id = $sessionData['player']['id'];
-$players_by_id = array();
-
-for ($i = 0; $i < count($players); $i++) {
-    $players_by_id[$players[$i]['id']] = $players[$i];
-}
-
-for ($i = 0; $i < count($games); $i++) {
-     $game = $games[$i];
-     $game_player = $players_by_id[$game['playerId']];
-     $game['nickname'] = $game_player['nickname'];
-     array_push($data, $game);
-
-     if ($game['playerId'] === $current_player_id) {
-         array_push($player_data, $game);
-     }
-}
 
 build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php' ), '
 
@@ -100,21 +72,40 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                 ]
             };
 
-            var bestGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
-                data: '.json_encode($data).',
+            let currentPlayerId = "'.$current_player_id.'";
+
+            let bestGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
                 lengthMenu: [3, 10, 25, 50],
             });
 
-            var playerGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
-                data: '.json_encode($player_data).'
+            let playerGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
+                data: [],
             });
 
-            initDatatable($(".table.best-games-table"), bestGamesDatatableOptions);
-            initDatatable($(".table.player-games-table"), playerGamesDatatableOptions);
+            let bestGamesTable = $(".table.best-games-table");
+            let playerGamesTable = $(".table.player-games-table");
+
+            initDatatable(bestGamesTable, bestGamesDatatableOptions);
+            initDatatable(playerGamesTable, playerGamesDatatableOptions);
+
+            const loadData = () => {
+                $.ajax({
+                    url: "/statistics/data",
+                    method: "GET",
+                    dataType: "json",
+                    success: (data) => {
+                        bestGamesTable.DataTable().clear().rows.add(data).draw();
+                        playerGamesTable.DataTable().clear().rows.add(data.filter(r => r.playerId === currentPlayerId)).draw();
+                    }
+                });
+            };
+
+            loadData();
+            setInterval(loadData, 30 * 1000);
     });
     </script>
 
 
-');
+', 'statistics', '../');
 
 ?>
