@@ -1,3 +1,6 @@
+#include "SpotGame.h";
+
+
 // Ondrej Planer, oplaner4@gmail.com, 10/2019
 // SPOT GAME
 
@@ -14,6 +17,7 @@
 // 30/1/2020 - zameskana stisknuti
 // 3/2/2020 - BUGFIX - maximalni povolena chybovost pretypovani
 // 11/2/2021 - Refactor
+// 27/1/2023 - Pouzit enum
 
 // _____________________________________________________________________________________
 // POPIS
@@ -53,40 +57,39 @@ const int correctLedGreen = 2;
 // pin tlacitka, ktere se ma stisknout pri rozsviceni nahodne blikajici led
 const int pressButton = 5;
 
+
+
+
 // minimalni delka pausy mezi bliknutimi v milisekundach
 const int minPauseMiliseconds = 800;
 
 // maximalni delka pausy mezi bliknutimi v milisekundach
 const int maxPauseMiliseconds = 3000;
 
-
-
-
-
 // delka trvani rozsvicene led (behem teto doby se musi stisknout tlacitko) v milisekundach
 const int ledTurnedOnDurationMiliseconds = 300;
 
-// cilovy pocet spravnych stisknuti - je ignorovano pri tezsim modu dokud se hrac nesplete
+// cekani po zmene skore pri hre (aby si toho hrac stihl vsimnout) v milisekundach
+const int waitAfterGameUpdateState = 500;
+
+
+// mod, ktery se pouzije
+enum GameMode useGameMode = MODE_REACH_FINAL_COUNT_CORRECT;
+
+
+// MODE_REACH_FINAL_COUNT_CORRECT: cilovy pocet spravnych stisknuti - je ignorovano pri tezsim modu dokud se hrac nesplete
 const int finalCountCorrect = 10;
 
-// maximalni povolena chybovost k dokonceni hry pri modu dosahnuti
+// MODE_REACH_FINAL_COUNT_CORRECT: maximalni povolena chybovost k dokonceni hry pri modu dosahnuti
 // poctu uspesnych stisknuti (napr. aby hrac nedrzel tlacitko stisknute neustale)
 // po prekroceni se pocty stisknuti vynuluji
 //   = pocet chybnych stisknuti / pocet spravnych stisknuti
 const double maxErrorRateIndex = 5.0/(double)finalCountCorrect;
 
-// hrat mod dosahnuti poctu uspesnych stisknuti
-const bool reachFinalCountCorrectMode = true;
+// MODE_UNTIL_MISTAKE_MODE: tolerovany pocet chyb hrace pri modu dokud se nesplete
+const int mistakesCountTolerance = 3;
 
-// hrat tezsi mod dokud se hrac nespete
-// ignoruje cilovy pocet spravnych stisknuti
-const bool untilMistakeMode = !reachFinalCountCorrectMode;
 
-    // tolerovany pocet chyb hrace pri modu dokud se nesplete
-    const int mistakesCountTolerance = 3;
-
-// cekani po zmene skore pri hre (aby si toho hrac stihl vsimnout)
-const int waitAfterGameUpdateState = 500;
 
 
 
@@ -100,29 +103,6 @@ const int waitAfterGameUpdateState = 500;
 int getRandomPauseMiliseconds () {
   return random(minPauseMiliseconds, maxPauseMiliseconds);
 }
-
-
-// _____________________________________________________________________________________
-// globalni pomocne promene
-
-unsigned long intervalRandomPauseElapsedMiliseconds = 0;
-unsigned long intervalRandomPauseMiliseconds = getRandomPauseMiliseconds();
-
-unsigned long intervalLedTurnedOnDurationElapsedMiliseconds = 0;
-
-
-int correctCounter = 0;
-int mistakesCounter = 0;
-int missedCounter = 0;
-
-bool ledBlinkingMode = false;
-
-bool gameOver = false;
-bool gameCompleted = false;
-
-bool buttonPressedExecuteOnce = true;
-bool gameDoneExecuteOnce = true;
-
 
 // _____________________________________________________________________________________
 // metody pro serializaci dat do JSON
@@ -157,11 +137,14 @@ String constructJSON (String properties) {
 
 void writeToSerialMonitor (String message, String eventType = "") { 
   String gameMode = "";
-  if (untilMistakeMode) {
-    gameMode = "untilMistakeMode";
-  }
-  else if (reachFinalCountCorrectMode) {
-    gameMode = "reachFinalCountCorrectMode";
+
+  switch (useGameMode) {
+    case MODE_REACH_FINAL_COUNT_CORRECT:
+        gameMode = "reachFinalCountCorrectMode";
+        break;
+    case MODE_UNTIL_MISTAKE_MODE:
+        gameMode = "untilMistakeMode";
+        break;
   }
 
   // data je potreba posilat po castech! 300KB max.
@@ -182,9 +165,9 @@ void writeToSerialMonitor (String message, String eventType = "") {
 
   Serial.println(
       constructJSON (
-         constructJSONpropertyInt ("correctCounter", correctCounter, true) +
-         constructJSONpropertyInt ("mistakesCounter", mistakesCounter, true) +
-         constructJSONpropertyInt ("missedCounter", missedCounter, false)
+         constructJSONpropertyInt ("correctCounter", useGameState.correctCounter, true) +
+         constructJSONpropertyInt ("mistakesCounter", useGameState.mistakesCounter, true) +
+         constructJSONpropertyInt ("missedCounter", useGameState.missedCounter, false)
       )
   );
 
@@ -209,7 +192,7 @@ void gameDone() {
       digitalWrite(randomBlinkingLed, HIGH);
 
       // potreba manualni RESET
-      if (gameOver) {
+      if (useGameState.gameOver) {
           // hra prohrana - nasviceni cervene led
           digitalWrite(mistakeLedRed, HIGH);
           writeToSerialMonitor ("Hra prohrána", "gameOver");
@@ -223,7 +206,7 @@ void gameDone() {
 
 
 bool checkMaxErrorRateIndexExceed() {
-    return (double)mistakesCounter / (double)correctCounter > maxErrorRateIndex;
+    return (double)useGameState.mistakesCounter / (double)useGameState.correctCounter > maxErrorRateIndex;
 }
 
 
@@ -233,24 +216,24 @@ void onFinalCountCorrectReached() {
     if (checkMaxErrorRateIndexExceed()) {
         // prekrocena chybovost, nelze ukoncit hru
         // vynulovani poctu spravnych, spatnych a zameskanych stisknuti
-        mistakesCounter = 0;
-        correctCounter = 0;
-        missedCounter = 0;
+        useGameState.mistakesCounter = 0;
+        useGameState.correctCounter = 0;
+        useGameState.missedCounter = 0;
         writeToSerialMonitor("Překročena maximální povolená chybovost", "maxErrorRateIndexExceed");
     }
     else {
-        gameCompleted = true;
+        useGameState.gameCompleted = true;
     }
 }
 
 
 void evalCorrect() {
     // zvyseni poctu uspesnych stisknuti
-    correctCounter += 1;
+    useGameState.correctCounter += 1;
 
-    writeToSerialMonitor("Zvýšen počet správných stisknutí na: " + String(correctCounter) + (reachFinalCountCorrectMode ? (" z "+String(finalCountCorrect) + " cílových") : ""), "correctCountIncreased");
+    writeToSerialMonitor("Zvýšen počet správných stisknutí na: " + String(useGameState.correctCounter) + (useGameMode == MODE_REACH_FINAL_COUNT_CORRECT ? (" z "+String(finalCountCorrect) + " cílových") : ""), "correctCountIncreased");
 
-    if (reachFinalCountCorrectMode && correctCounter >= finalCountCorrect) {
+    if (useGameMode == MODE_REACH_FINAL_COUNT_CORRECT && useGameState.correctCounter >= finalCountCorrect) {
         onFinalCountCorrectReached();
     }
 
@@ -262,14 +245,14 @@ void evalMistake() {
     digitalWrite(mistakeLedRed, HIGH);
 
     // zvyseni poctu chyb
-    mistakesCounter += 1;
+    useGameState.mistakesCounter += 1;
 
-    writeToSerialMonitor("Zvýšen počet špatných stisknutí na: " + String(mistakesCounter) + (untilMistakeMode ? (" z " + String(mistakesCountTolerance) + " tolerovaných") : ""), "mistakesCountIncreased");
+    writeToSerialMonitor("Zvýšen počet špatných stisknutí na: " + String(useGameState.mistakesCounter) + (useGameMode == MODE_UNTIL_MISTAKE_MODE ? (" z " + String(mistakesCountTolerance) + " tolerovaných") : ""), "mistakesCountIncreased");
 
-    if (untilMistakeMode && mistakesCounter > mistakesCountTolerance) {
+    if (useGameMode == MODE_UNTIL_MISTAKE_MODE && useGameState.mistakesCounter > mistakesCountTolerance) {
         // mod dokud se hrac nesplete a presahnuti tolerance poctu chyb
-        writeToSerialMonitor("Počet dosažených správných stisknutí: " + String(correctCounter), "correctCountReached");
-        gameOver = true;
+        writeToSerialMonitor("Počet dosažených správných stisknutí: " + String(useGameState.correctCounter), "correctCountReached");
+        useGameState.gameOver = true;
     }
 
     delay(waitAfterGameUpdateState);
@@ -287,9 +270,9 @@ void evalBlinkingMode() {
         // tlacitko bylo stisknuto - zapnuti led signalizujici uspesne stisknuti
         digitalWrite(correctLedGreen, HIGH);
 
-        if (buttonPressedExecuteOnce) {
+        if (useGameState.buttonPressedExecuteOnce) {
             evalCorrect();
-            buttonPressedExecuteOnce = !buttonPressedExecuteOnce;
+            useGameState.buttonPressedExecuteOnce = !useGameState.buttonPressedExecuteOnce;
         }
     }
 }
@@ -302,18 +285,18 @@ void evalPauseMode() {
 
     if (digitalRead(pressButton) == HIGH) {
         // tlacitko se stisklo mezi bliknutimi = chyba
-        if (buttonPressedExecuteOnce) {
+        if (useGameState.buttonPressedExecuteOnce) {
             evalMistake();
-            buttonPressedExecuteOnce = !buttonPressedExecuteOnce;
+            useGameState.buttonPressedExecuteOnce = !useGameState.buttonPressedExecuteOnce;
         }
     }
 }
 
 
 void evalOnMissed() {
-    missedCounter += 1;
+    useGameState.missedCounter += 1;
 
-    if (untilMistakeMode) {
+    if (useGameMode == MODE_UNTIL_MISTAKE_MODE) {
         // v modu dokud se hrac nesplete povazovano za chybu
         evalMistake();
     }
@@ -321,6 +304,19 @@ void evalOnMissed() {
 
 
 void setup() {
+    useGameState.intervalRandomPauseElapsedMiliseconds = 0;
+    useGameState.intervalRandomPauseElapsedMiliseconds = 0;
+    useGameState.intervalRandomPauseMiliseconds = getRandomPauseMiliseconds();
+    useGameState.intervalLedTurnedOnDurationElapsedMiliseconds = 0;
+    useGameState.correctCounter = 0;
+    useGameState.mistakesCounter = 0;
+    useGameState.missedCounter = 0;
+    useGameState.ledBlinkingMode = false;
+    useGameState.gameOver = false;
+    useGameState.gameCompleted = false;
+    useGameState.buttonPressedExecuteOnce = true;
+    useGameState.gameDoneExecuteOnce = true;
+
     pinMode(randomBlinkingLed, OUTPUT);
     pinMode(mistakeLedRed, OUTPUT);
     pinMode(correctLedGreen, OUTPUT);
@@ -336,46 +332,46 @@ void setup() {
 void loop() {
     unsigned long currentMillis = millis();
 
-    if (gameOver || gameCompleted) {
-        if (gameDoneExecuteOnce) {
+    if (useGameState.gameOver || useGameState.gameCompleted) {
+        if (useGameState.gameDoneExecuteOnce) {
             gameDone();
-            gameDoneExecuteOnce = !gameDoneExecuteOnce;
+            useGameState.gameDoneExecuteOnce = !useGameState.gameDoneExecuteOnce;
         }
     }
-    else if (ledBlinkingMode) {
+    else if (useGameState.ledBlinkingMode) {
         evalBlinkingMode();
         
-        if (currentMillis - intervalLedTurnedOnDurationElapsedMiliseconds >= ledTurnedOnDurationMiliseconds) {
+        if (currentMillis - useGameState.intervalLedTurnedOnDurationElapsedMiliseconds >= ledTurnedOnDurationMiliseconds) {
             // po ubehnuti doby zapnute led
             // deaktivace modu svitici led
-            ledBlinkingMode = false;
+            useGameState.ledBlinkingMode = false;
         
-            intervalRandomPauseElapsedMiliseconds = currentMillis;
-            intervalLedTurnedOnDurationElapsedMiliseconds = currentMillis;
+            useGameState.intervalRandomPauseElapsedMiliseconds = currentMillis;
+            useGameState.intervalLedTurnedOnDurationElapsedMiliseconds = currentMillis;
 
-            if (buttonPressedExecuteOnce) {
+            if (useGameState.buttonPressedExecuteOnce) {
                 // zameskano stisknuti
                 evalOnMissed();
             }
             
-            buttonPressedExecuteOnce = true;
+            useGameState.buttonPressedExecuteOnce = true;
         }
     }
     else {
         evalPauseMode();
 
-        if (currentMillis - intervalRandomPauseElapsedMiliseconds >= intervalRandomPauseMiliseconds) {
+        if (currentMillis - useGameState.intervalRandomPauseElapsedMiliseconds >= useGameState.intervalRandomPauseMiliseconds) {
             // po ubehnuti intervalu mezi bliknutimi
             // aktivace doby rozsvicene led
-            ledBlinkingMode = true;
+            useGameState.ledBlinkingMode = true;
         
-            intervalRandomPauseElapsedMiliseconds = currentMillis;
-            intervalLedTurnedOnDurationElapsedMiliseconds = currentMillis;
+            useGameState.intervalRandomPauseElapsedMiliseconds = currentMillis;
+            useGameState.intervalLedTurnedOnDurationElapsedMiliseconds = currentMillis;
 
             // nova nahodna pristi pausa mezi rozsvicenimi led
-            intervalRandomPauseMiliseconds = getRandomPauseMiliseconds();
+            useGameState.intervalRandomPauseMiliseconds = getRandomPauseMiliseconds();
 
-            buttonPressedExecuteOnce = true;
+            useGameState.buttonPressedExecuteOnce = true;
         }
     }
 }
