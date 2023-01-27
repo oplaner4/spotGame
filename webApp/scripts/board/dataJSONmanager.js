@@ -1,6 +1,5 @@
 var dataJSONmanager = function (updateIntervalMiliseconds) {
     this.updateIntervalMiliseconds = updateIntervalMiliseconds;
-    this.countAnalyzed = 0;
     this.eventTypesListeners = new Object();
 
     this.outputElems = new Object({
@@ -33,11 +32,12 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
     });
 
     this.checkForNewMultipleInterval = null;
+    this.skipOffset = 0;
 };
 
-dataJSONmanager.prototype.startCheckForNewDataInit = function (countOldDataAnalyzed) {
+dataJSONmanager.prototype.startCheckForNewData = function () {
     var self = this;
-    self.countAnalyzed = countOldDataAnalyzed;
+
     self.checkForNewMultipleInterval = setInterval(function () {
         self.checkForNewMultiple();
     }, self.updateIntervalMiliseconds);
@@ -47,20 +47,9 @@ dataJSONmanager.prototype.startCheckForNewDataInit = function (countOldDataAnaly
     return self;
 };
 
-dataJSONmanager.prototype.startCheckForNewData = function () {
-    var self = this;
-
-    if (self.countAnalyzed === 0) {
-        self.getData(0, function (oldMultipleDataJSON) {
-            self.startCheckForNewDataInit(oldMultipleDataJSON.length);
-        });
-    }
-    else {
-        self.startCheckForNewDataInit(self.countAnalyzed);
-    }
-
-    return self;
-};
+dataJSONmanager.prototype.reset = function () {
+    this.skipOffset = 0;
+}
 
 dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, value) {
     $('span', this.getOutputElem(outputElemName)).first().text(value);
@@ -71,31 +60,25 @@ dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, va
 dataJSONmanager.prototype.checkForNewMultiple = function () {
     var self = this;
 
-    self.getData(self.countAnalyzed,
-        function (multipleDataJSON) {
-            multipleDataJSON.forEach(function (dataJSON) {
-                new dataJSONhelper(dataJSON).process(self);
-            });
-
-            self.countAnalyzed += multipleDataJSON.length;
-        }
-    );
-
-    return self;
-};
-
-dataJSONmanager.prototype.getData = function (skipMultipleDataJSON, onSuccessCallback) {
     $.ajax({
         url: "/board/data",
         method: "GET",
         dataType: "json",
         data: {
-            skipMultipleDataJSON: skipMultipleDataJSON
+            skipOffset: this.skipOffset,
         },
-        success: onSuccessCallback
+        success: function (res) {
+            if (res.skipOffset >= 0) {
+                self.skipOffset = res.skipOffset;
+            }
+            
+            res.queue.forEach(function (dataJSON) {
+                new dataJSONhelper(dataJSON).process(self);
+            });
+        }
     });
 
-    return this;
+    return self;
 };
 
 dataJSONmanager.prototype.stopCheckForNewData = function () {

@@ -4,15 +4,17 @@ include_once('../data/serial.php');
 include_once('../BUILD_authorized.php');
 check_authorized ('../');
 
-$skipMultipleDataJSON = 0;
-if (isset($_GET['skipMultipleDataJSON'])) {
-    $skipMultipleDataJSON = intval($_GET['skipMultipleDataJSON']);
+$skipOffset = 0;
+if (isset($_GET['skipOffset'])) {
+    $skipOffset = intval($_GET['skipOffset']);
 }
 
-$output = array();
+$dataToProcess = array();
 
 $handle = fopen(get_serial_file_path("../"), "r");
+
 if ($handle) {
+    fseek($handle, $skipOffset, SEEK_SET);
 
     $linesDataPartsMerged = array();
     $linesDataTakeParts = 0;
@@ -27,13 +29,7 @@ if ($handle) {
             }
 
             if ($linesDataTakeParts === 0) {
-                if ($skipMultipleDataJSON == 0) {
-                     array_push($output, $linesDataPartsMerged);
-                }
-                else {
-                    $skipMultipleDataJSON-= 1;
-                }
-                
+                array_push($dataToProcess, $linesDataPartsMerged);
                 $linesDataPartsMerged = array();
             }
         }
@@ -45,13 +41,17 @@ if ($handle) {
         }
     }
 
+    echo json_encode(array(
+        "queue" => $dataToProcess,
+        "skipOffset" => ftell($handle),
+    ));
+
     fclose($handle);
 } else {
-    
+    echo json_encode(array(
+        "queue" => array(array("eventType" => "unableToReadSerial", "message" => "Nelze získat data ze zd Arduino desky")),
+        "skipOffset" => -1,
+    ));
 }
-
-
-echo json_encode($output);
-
 
 ?>

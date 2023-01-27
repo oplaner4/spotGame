@@ -121,17 +121,13 @@ gameManager.prototype.start = function () {
 
 gameManager.prototype.reset = function () {
     var self = this;
-    self.end();
+    self.end().getDataJSONmanager().reset();
 
     $.ajax({
         url: "/board/reset",
         dataType: "text",
-        success: function (data) {
-            console.log(data);
+        success: function () {
             self.start();
-        },
-        error: function (data) {
-            console.log(data);
         }
     });
 
@@ -139,7 +135,7 @@ gameManager.prototype.reset = function () {
 };
 
 gameManager.prototype.update = function (dataJSONhelper) {
-    if (this.initialized || this.ended) {
+    //if (this.initialized || this.ended) {
         this.getDataJSONConsoleManager().prependNewLog(dataJSONhelper.getData().message, dataJSONhelper.logAdditionalClasses);
         this.getDataJSONmanager()
             .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
@@ -148,7 +144,7 @@ gameManager.prototype.update = function (dataJSONhelper) {
             .updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSONhelper.getRemainsFinalCountCorrect())
             .updateElemChangingValue('listGroupItemActualErrorRateIndex', dataJSONhelper.getActualErrorRateIndex().toFixed(2))
             .updateElemChangingValue('listGroupItemMissedCounter', dataJSONhelper.getMissedCounter());
-    }
+    //}
 
     return this;
 };

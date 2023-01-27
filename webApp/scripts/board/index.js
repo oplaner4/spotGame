@@ -15,7 +15,7 @@ $(document).ready(function () {
         spotGameManager.end().savePlayerData(dataJSONhelper);
         $('span', btnSpotGameReset).text('Hrát znovu');
 
-    }).addEventTypesListener('mistakesCountIncreased gameOver', function () {
+    }).addEventTypesListener('mistakesCountIncreased gameOver unableToReadSerial', function () {
         return { logAdditionalClasses: 'list-group-item-danger' };
 
     }).addEventTypesListener('correctCountIncreased gameCompleted arduinoBoardReseted', function () {
