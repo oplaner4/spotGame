@@ -5,21 +5,11 @@
 // Ondrej Planer, oplaner4@gmail.com, 10/2019
 // SPOT GAME
 
-// _____________________________________________________________________________________
-// DESCRIPTION
-
-// Cilem teto postrehove hry je spravne odhalovat moment, kdy je led rozsvicena stiskem tlacitka.
-// Prvni rozsviceni nenastane drive nez je minimalni delka pausy mezi rozsvicenimi.
-// 1. mod - cilem hry je dosahnout daneho poctu spravnych stisknuti v co nejkratsim case (hra konci vyhrou).
-// 2. mod - cilem hry je hrat co nejdele, dokud se neprekroci pocet tolerovanych spatnych stisknuti (hra konci prohrou).
-// nastaveni nize upravi obtiznost hry
-// Jakmile hrac prohral nebo vyhral (dle modu), nahodne blikajici led se trvale nasviti a zelena/cervena led znazornuje vyhru/prohru
-
 
 // _____________________________________________________________________________________
 // EQUIPMENT
 
-// 3x LED - red, green and another color.
+// 3x LED - red, green and other color.
 // Button
 
 // _____________________________________________________________________________________
@@ -30,10 +20,10 @@ GameStateProps gameStateProps;
 PinSettings pinSettings;
 GameSettings gameSettings;
 
-PinSettings initPinSettings () {
+void initPinSettings () {
     pinSettings = {};
 
-    // DO NOT USE PIN 0 and 1, THE PROGRAM WOULD NOT WORK PROPERLY,
+    // DO NOT USE PIN 0 and 1, THE PROGRAM WOULD NOT WORK PROPERLY.
     // THESE ARE RESERVED FOR COMMUNICATION WITH SERIAL MONITOR.
     pinSettings.randomBlinkingLed = 6;
     pinSettings.mistakeLedRed = 4;
@@ -44,7 +34,7 @@ PinSettings initPinSettings () {
     return pinSettings;
 }
 
-GameSettings initGameSettings () {
+void initGameSettings () {
     gameSettings = {};
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
@@ -179,6 +169,7 @@ void setup() {
     gameStateProps.correctCounter = 0;
     gameStateProps.mistakesCounter = 0;
     gameStateProps.missedCounter = 0;
+    gameStateProps.correctDelayMillisCounter = 0;
     gameStateProps.pressButtonExecuteOnce = true;
     gameStateProps.doneExecuteOnce = true;
 

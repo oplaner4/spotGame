@@ -46,6 +46,8 @@ void writeToSerialMonitor (String message, String eventType, GameSettings settin
   // Data have to be sent as parts.
   
   Serial.println(
+      // The first JSON describes how many parts are going
+      // to be sent.
       constructJSON (
         constructJSONpropertyInt ("JSONparts", 5, false)
       )
@@ -75,7 +77,7 @@ void writeToSerialMonitor (String message, String eventType, GameSettings settin
 
   Serial.println(
       constructJSON (
-        constructJSONpropertyInt ("ledTurnedOnDurationMiliseconds", settings.ledTurnedOnDurationMillis, true) + 
+        constructJSONpropertyInt ("ledTurnedOnDurationMillis", settings.ledTurnedOnDurationMillis, true) + 
         constructJSONpropertyDouble ("maxErrorRateIndex", settings.maxErrorRateIndex, true) +
         constructJSONpropertyString ("eventType", eventType, false)
       )

@@ -87,7 +87,7 @@ gameManager.prototype.initialize = function (dataJSONhelper) {
     this.adjustOutputElemsToGameMode(dataJSONhelper);
     this.initializeConsole();
     this.getDataJSONmanager()
-        .updateElemChangingValue('listGroupItemLedTurnedOnDurationMiliseconds', dataJSONhelper.getData().ledTurnedOnDurationMiliseconds)
+        .updateElemChangingValue('listGroupItemLedTurnedOnDurationMillis', dataJSONhelper.getData().ledTurnedOnDurationMillis)
         .updateElemChangingValue('listGroupItemMaxErrorRateIndex', dataJSONhelper.getData().maxErrorRateIndex.toFixed(2))
         .updateElemChangingValue('listGroupItemMistakesCountTolerance', dataJSONhelper.getData().mistakesCountTolerance)
         .updateElemChangingValue('listGroupItemFinalCountCorrect', dataJSONhelper.getData().finalCountCorrect);
