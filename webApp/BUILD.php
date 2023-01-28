@@ -93,7 +93,7 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
                                 <li class="nav-item'; if ($subFolderPath == 'board/' && $viewName == 'index') { echo ' active'; }; echo'">
                                     <a class="nav-link" href="'.$toRootRelStr.'board"><i class="fa fa-gamepad"></i> Panel</a>
                                 </li>
-                                <li class="nav-item'; if ($subFolderPath == '' && $viewName == 'statistics') { echo ' active'; }; echo'">
+                                <li class="nav-item'; if ($subFolderPath == 'statistics/' && $viewName == 'index') { echo ' active'; }; echo'">
                                     <a class="nav-link" href="'.$toRootRelStr.'statistics"><i class="fa fa-chart-bar"></i> Statistika</a>
                                 </li>
                                 <li class="nav-item dropdown'; if ($subFolderPath == 'player/') { echo ' active'; }; echo'">

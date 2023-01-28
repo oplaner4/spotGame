@@ -106,6 +106,6 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
     </script>
 
 
-', 'statistics', '../');
+', 'statistics/', '../');
 
 ?>
