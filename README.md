@@ -37,13 +37,13 @@ Attention game for Arduino board with a few components and ability to report pro
 ## Build & Installation
 
 1) Prepare Arduino board and components based on the Demo (`./arduino/preparedBoard.jpg`).
-1) Upload `./arduino/SpotGame/SpotGame.ino` to your Arduino board.
-2) 
+2) Upload `./arduino/SpotGame/SpotGame.ino` to your Arduino board.
+3) Access Arduino Serial output:
 * **Windows:** open `./CoolTermWin/CaptureArduinoSerial.stc`.
 * **Unix systems**: capture Arduino Serial output **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
-3) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
-4) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
-5) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.
+4) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
+5) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
+6) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.
 
 ## Author
 
