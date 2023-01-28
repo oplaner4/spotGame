@@ -79,6 +79,7 @@ String constructJSON (String properties);
 
 /**
  * Converts game mode to the string which identifies that mode.
+ * @param mode: Mode to convert.
  * @returns Representing string.
  */
 String gameModeToString (GameMode mode);

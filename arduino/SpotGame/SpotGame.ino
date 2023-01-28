@@ -4,11 +4,12 @@
 
 // Ondrej Planer, oplaner4@gmail.com, 10/2019
 // SPOT GAME
-
+// Visit README.md in the root directory for more information.
 
 // _____________________________________________________________________________________
 // EQUIPMENT
 
+// Arduino board
 // 3x LED - red, green and other color.
 // Button
 
@@ -36,6 +37,7 @@ void initPinSettings () {
 
 void initGameSettings () {
     gameSettings = {};
+
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
     gameSettings.ledTurnedOnDurationMillis = 300;
@@ -48,6 +50,10 @@ void initGameSettings () {
     // Check SpotGame.Settings.h file for detailed information.
     return gameSettings;
 }
+
+
+// _____________________________________________________________________________________
+// IMPLEMENTATION
 
 int getRandomPauseMillis () {
   return random(gameSettings.minPauseMillis, gameSettings.maxPauseMillis);

@@ -34,15 +34,21 @@ Attention game for Arduino board with a few components and ability to report pro
 * Permanently lighting red LED indicates end of the game. 
 
 
-## Installation
+## Build & Installation
 
-TODO
+1) Prepare Arduino board and components based on the Demo (`./arduino/preparedBoard.jpg`).
+1) Upload `./arduino/SpotGame/SpotGame.ino` to your Arduino board.
+2) 
+* **Windows:** open `./CoolTermWin/CaptureArduinoSerial.stc`.
+* **Unix systems**: capture Arduino Serial output **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
+3) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
+4) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
+5) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.
 
 ## Author
 
 * Developed by Ondrej Planer ([oplaner4@gmail.com](mailto:oplaner4@gmail.com)).
 * Co-workers: Vojtech Varecha (troubleshooter), Ondrej Nemec (idea), Jiri Pokorny (board).
-
 
 ## License
 
