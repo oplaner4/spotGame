@@ -8,10 +8,6 @@ var gameManager = function (dataJSONmanagerInstance, dataJSONconsoleManagerInsta
     this.actualTimeElapsedInterval = null;
     this.initializedMoment = null;
 
-    this.modesAndTitles = new Object({
-        untilMistakeMode: "Dokud se hráč nesplete",
-        reachFinalCountCorrectMode: "Cílový počet správných stisknutí"
-    });
     this.actualTimeElapsed = '00:00:00';
 };
 
@@ -22,10 +18,6 @@ gameManager.prototype.getDataJSONmanager = function () {
 
 gameManager.prototype.getDataJSONConsoleManager = function () {
     return this.dataJSONconsoleManagerInstance;
-};
-
-gameManager.prototype.getModeTitle = function (dataJSONhelper) {
-    return this.modesAndTitles[dataJSONhelper.getGameModeName()];
 };
 
 gameManager.prototype.savePlayerData = function (dataJSONhelper) {
@@ -40,7 +32,7 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
                 gameTimeElapsed: self.actualTimeElapsed,
                 correctCounter: dataJSONhelper.getCorrectCounter(),
                 mistakesCounter: dataJSONhelper.getMistakesCounter(),
-                missedCounter: dataJSONhelper.getMissedCounter()
+                missedCounter: dataJSONhelper.getMissedCounter(),
             },
             success: function (data) {
                 self.getDataJSONConsoleManager().prependNewLog(data, 'list-group-item-info');

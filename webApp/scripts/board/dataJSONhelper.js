@@ -51,6 +51,10 @@ dataJSONhelper.prototype.getMissedCounter = function () {
     return this.getData().missedCounter;
 };
 
+dataJSONhelper.prototype.getCorrectDelayMillisCounter = function () {
+    return this.getData().correctDelayMillisCounter;
+};
+
 dataJSONhelper.prototype.getMessage = function () {
     return this.getData().message;
 };

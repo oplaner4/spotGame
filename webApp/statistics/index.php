@@ -10,15 +10,15 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
 
 <h5>Přihlášený hráč</h5>
 <div class="pl-md-2 mb-5">
-    <div class="d-inline-block mb-3 table-responsive-sm">
+    <div class="mb-3 table-responsive-sm">
         <table class="table table-striped table-borderless player-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
                     <th scope="col">Herní mód</th>
                     <th scope="col">Přezdívka</th>
-                    <th scope="col">Počet špatných stisknutí</th>
-                    <th scope="col">Počet správných stisknutí</th>
-                    <th scope="col">Počet zameškaných stisknutí</th>
+                    <th scope="col">Špatná stisknutí</th>
+                    <th scope="col">Správná stisknutí</th>
+                    <th scope="col">Zameškaná stisknutí</th>
                     <th scope="col">Herní čas</th>
                 </tr>
             </thead>
@@ -30,15 +30,15 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
 
 <h5>Nejlepší hráči</h5>
 <div class="pl-md-2">
-    <div class="d-inline-block mb-3 table-responsive-sm">
+    <div class="mb-3 table-responsive-sm">
         <table class="table table-striped table-borderless best-games-table" style="width: 100%">
             <thead class="bg-site text-white">
                 <tr>
                     <th scope="col">Herní mód</th>
                     <th scope="col">Přezdívka</th>
-                    <th scope="col">Počet špatných stisknutí</th>
-                    <th scope="col">Počet správných stisknutí</th>
-                    <th scope="col">Počet zameškaných stisknutí</th>
+                    <th scope="col">Špatná stisknutí</th>
+                    <th scope="col">Správná stisknutí</th>
+                    <th scope="col">Zameškaná stisknutí</th>
                     <th scope="col">Herní čas</th>
                 </tr>
             </thead>
@@ -51,16 +51,26 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
     <script>
         $(function () {
 
+            let modeAndTitle = {
+                untilMistakeMode: "Dokud se hráč nesplete",
+                reachFinalCountCorrectMode: "Cílový počet správných stisknutí"
+            };
+
             var gamesDatatableOptions = {
                 order: [[2, "asc"], [3, "desc"], [4, "asc"], [5, "asc"]],
                 orderFixed: [0, "asc" ],
                 columnDefs: [
                     { targets: "disableOrdering", orderable: false },
                     { type: "num", targets: [2, 3, 4] },
-                    { type: "momentTime", targets: [1] }
+                    { type: "momentTime", targets: [1] },
+                    { targets: 0, render: (val) => { return val in modeAndTitle ? modeAndTitle[val] : "Edit modeAndTitle"; },  }
                 ],
                 rowGroup: {
-                    dataSrc: "gameMode"
+                    dataSrc: "gameMode",
+                    endRender: null,
+                    startRender: function ( _, mode) {
+                        return mode in modeAndTitle ? modeAndTitle[mode] : "Edit modeAndTitle";
+                     }
                 },
                 columns: [
                     { data: "gameMode" },
