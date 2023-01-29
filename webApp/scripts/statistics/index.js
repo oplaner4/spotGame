@@ -4,9 +4,16 @@ $(function () {
         orderFixed: [0, "asc" ],
         columnDefs: [
             { targets: "disableOrdering", orderable: false },
-            { type: "num", targets: [2, 3, 4, 5, 6] },
+            { type: "num", targets: [2, 3, 4] },
             { targets: 0, render: (val) => getModeTitle(val),  },
-            { targets: [5, 6], render: (val) => moment.utc(parseInt(val)).format(standardTimeFormat) },
+            { type: "num", targets: [5, 6], render: (val, type) => {
+                if(type === 'display') {
+                    return moment.utc(parseInt(val)).format(standardTimeFormat);
+                }
+
+                return val;
+
+             }},
         ],
         rowGroup: {
             dataSrc: "gameMode",
