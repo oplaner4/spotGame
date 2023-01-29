@@ -42,7 +42,7 @@ struct GameSettings {
     int waitAfterCounterChangeMillis;
     // Game mode to use (see available modes above).
     enum GameMode mode;
-    // MODE_REACH_FINAL_COUNT_CORRECT only: final count of correct presses
+    // MODE_REACH_FINAL_COUNT_CORRECT only: final count of correct presses.
     int finalCountCorrect;
     // MODE_REACH_FINAL_COUNT_CORRECT only: maximal allowed error rate for game to be
     // completed. For instance, to prevent user from pressing button continuously.

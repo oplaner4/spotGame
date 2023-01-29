@@ -10,7 +10,7 @@
 // EQUIPMENT
 
 // Arduino board
-// 3x LED - red, green and other color.
+// 3x LED - red, green and other color
 // Button
 
 // _____________________________________________________________________________________
@@ -32,7 +32,6 @@ void initPinSettings () {
     pinSettings.pressButton = 5;
 
     // Check SpotGame.Settings.h file for detailed information.
-    return pinSettings;
 }
 
 void initGameSettings () {
@@ -48,7 +47,6 @@ void initGameSettings () {
     gameSettings.mistakesCountTolerance = 3;
 
     // Check SpotGame.Settings.h file for detailed information.
-    return gameSettings;
 }
 
 

@@ -23,10 +23,12 @@ Do not use Pin `0` and `1`. These are reserved for communication with Serial mon
 `*.h` files are used for declaration and explanation of variables / methods. These files **should not be modified**.
 
 * `SpotGame.ino`: main file to be compiled and uploaded. Default settings can be changed here.
-* `SpotGame.Settings.h`: just **declaration and explanation** of possible settings. Change `SpotGame.ino` file for **customization** of settings.
+* `SpotGame.Settings.h`: just **declaration and explanation** of possible settings.
 * `SpotGame.State.h`: declaration of game state and state props used by main program.
 * `SpotGame.Serial.h` library: declaration of methods used for generating Serial output.
 * `SpotGame.Serial.ino` library: implementation of methods described in `SpotGame.Serial.h`. Do not modify this file.
+
+Modify `initPinSettings` and `initGameSettings` methods in `SpotGame.ino` file for **customization** of settings.
 
 ## Author
 
