@@ -1,8 +1,8 @@
 var dataJSONmanager = function (updateIntervalMiliseconds) {
     this.updateIntervalMiliseconds = updateIntervalMiliseconds;
-    this.eventTypesListeners = new Object();
+    this.eventTypesListeners = {};
 
-    this.outputElems = new Object({
+    this.outputElems = {
         listGroupItemMistakesCountTolerance: $('.list-group-item-mistakesCountTolerance'),
         listGroupItemMaxErrorRateIndex: $('.list-group-item-maxErrorRateIndex'),
         listGroupItemFinalCountCorrect: $('.list-group-item-finalCountCorrect'),
@@ -15,8 +15,8 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemActualErrorRateIndex: $('.list-group-item-actualErrorRateIndex'),
         listGroupItemActualGameTimeElapsed: $('.list-group-item-actualGameTimeElapsed'),
         listGroupItemMissedCounter: $('.list-group-item-missedCounter')
-    });
-    this.outputElemsDefaults = new Object({
+    };
+    this.outputElemsDefaults = {
         listGroupItemMistakesCountTolerance: '0',
         listGroupItemMaxErrorRateIndex: '0',
         listGroupItemFinalCountCorrect: '0',
@@ -29,7 +29,7 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemActualErrorRateIndex: '0',
         listGroupItemActualGameTimeElapsed: '00:00:00',
         listGroupItemMissedCounter: '0'
-    });
+    };
 
     this.checkForNewMultipleInterval = null;
     this.skipOffset = 0;

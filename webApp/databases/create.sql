@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Čtv 30. led 2020, 18:31
+-- Vytvořeno: Ned 29. led 2023, 17:11
 -- Verze serveru: 10.4.10-MariaDB
 -- Verze PHP: 7.3.12
 
@@ -33,11 +33,12 @@ CREATE TABLE IF NOT EXISTS `games` (
   `gameMode` varchar(50) COLLATE utf8_czech_ci NOT NULL,
   `correctCounter` int(255) NOT NULL,
   `mistakesCounter` int(255) NOT NULL,
-  `gameTimeElapsed` varchar(20) COLLATE utf8_czech_ci NOT NULL,
   `id` varchar(20) COLLATE utf8_czech_ci NOT NULL,
   `playerId` varchar(20) COLLATE utf8_czech_ci NOT NULL,
   `removed` tinyint(1) NOT NULL,
   `missedCounter` int(255) NOT NULL,
+  `correctDelayMillisCounter` bigint(20) NOT NULL,
+  `totalTimeMillis` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_playerId` (`playerId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;

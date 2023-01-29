@@ -6,9 +6,7 @@ var gameManager = function (dataJSONmanagerInstance, dataJSONconsoleManagerInsta
     this.ended = false;
 
     this.actualTimeElapsedInterval = null;
-    this.initializedMoment = null;
-
-    this.actualTimeElapsed = '00:00:00';
+    this.totalTimeMillis = 0;
 };
 
 
@@ -28,17 +26,18 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
             method: "POST",
             dataType: "text",
             data: {
-                gameMode: self.getModeTitle(dataJSONhelper),
-                gameTimeElapsed: self.actualTimeElapsed,
+                gameMode: dataJSONhelper.getGameModeName(),
                 correctCounter: dataJSONhelper.getCorrectCounter(),
                 mistakesCounter: dataJSONhelper.getMistakesCounter(),
                 missedCounter: dataJSONhelper.getMissedCounter(),
+                correctDelayMillisCounter: dataJSONhelper.getCorrectDelayMillisCounter(),
+                totalTimeMillis: self.totalTimeMillis,
             },
             success: function (data) {
                 self.getDataJSONConsoleManager().prependNewLog(data, 'list-group-item-info');
             },
-            error: function (data) {
-                console.log(data);
+            error: function () {
+                self.getDataJSONConsoleManager().prependNewLog('Výsledky hráče se nepodařilo uložit', 'list-group-item-danger');
             }
         });
     }
@@ -51,10 +50,10 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
 
 gameManager.prototype.initActualTimeElapsed = function () {
     var self = this;
-    self.initializedMoment = new moment();
     self.actualTimeElapsedInterval = setInterval(function () {
-        self.actualTimeElapsed = moment.utc(new moment().diff(self.initializedMoment)).format(standardTimeFormat);
-        self.getDataJSONmanager().updateElemChangingValue('listGroupItemActualGameTimeElapsed', self.actualTimeElapsed);
+        self.totalTimeMillis += 1000;
+        self.getDataJSONmanager().updateElemChangingValue('listGroupItemActualGameTimeElapsed',
+            moment.utc(self.totalTimeMillis).format(standardTimeFormat));
     }, 1000);
 
     return self;
@@ -68,7 +67,7 @@ gameManager.prototype.stopActualTimeElapsed = function () {
 gameManager.prototype.adjustOutputElemsToGameMode = function (dataJSONhelper) {
     var elemDataTargetMode = 'data-target-mode';
     $('[' + elemDataTargetMode + ']').css('display', 'none').filter('[' + elemDataTargetMode + '="' + dataJSONhelper.getGameModeName() + '"]').attr('style', '');
-    this.getDataJSONmanager().updateElemChangingValue('listGroupItemGameModeTitle', this.getModeTitle(dataJSONhelper));
+    this.getDataJSONmanager().updateElemChangingValue('listGroupItemGameModeTitle', getModeTitle(dataJSONhelper.getGameModeName()));
 
     return this;
 };

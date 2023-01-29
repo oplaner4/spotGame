@@ -1,14 +1,14 @@
 var ww = $(window);
 var standardDateFormat = 'DD.MM.YYYY HH:mm';
-
-$.fn.dataTable.ext.type.order['momentDate-pre'] = function (data) {
-    return moment(data, standardDateFormat).toDate().getTime();
-};
-
 var standardTimeFormat = 'HH:mm:ss';
 
-$.fn.dataTable.ext.type.order['momentTime-pre'] = function (data) {
-    return moment.duration(data, standardTimeFormat);
+const modeAndTitle = {
+    untilMistakeMode: "Dokud se hráč nesplete",
+    reachFinalCountCorrectMode: "Cílový počet správných stisknutí",
+}
+
+var getModeTitle = (mode) => {
+    return mode in modeAndTitle ? modeAndTitle[mode] : 'Mód nepřidándo ./scripts/general/modes.js';
 };
 
 function initDatatable(table, extendSettings) {

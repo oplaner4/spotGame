@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $game['mistakesCounter'] = $_POST['mistakesCounter'];
         $game['missedCounter'] = $_POST['missedCounter'];
         $game['correctDelayMillisCounter'] = $_POST['correctDelayMillisCounter'];
-        $game['gameTimeElapsed'] = $_POST['gameTimeElapsed'];
+        $game['totalTimeMillis'] = $_POST['totalTimeMillis'];
         $game['removed'] = 0;
         $game['id'] = uniqid();
 

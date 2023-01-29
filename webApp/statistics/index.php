@@ -20,6 +20,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     <th scope="col">Správná stisknutí</th>
                     <th scope="col">Zameškaná stisknutí</th>
                     <th scope="col">Herní čas</th>
+                    <th scope="col">Celkové zpoždění</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -40,6 +41,7 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
                     <th scope="col">Správná stisknutí</th>
                     <th scope="col">Zameškaná stisknutí</th>
                     <th scope="col">Herní čas</th>
+                    <th scope="col">Celkové zpoždění</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -48,73 +50,8 @@ build_page_authorized("Statistika", basename($_SERVER["SCRIPT_FILENAME"], '.php'
     <div class="clearfix"></div>
 </div>
 
-    <script>
-        $(function () {
-
-            let modeAndTitle = {
-                untilMistakeMode: "Dokud se hráč nesplete",
-                reachFinalCountCorrectMode: "Cílový počet správných stisknutí"
-            };
-
-            var gamesDatatableOptions = {
-                order: [[2, "asc"], [3, "desc"], [4, "asc"], [5, "asc"]],
-                orderFixed: [0, "asc" ],
-                columnDefs: [
-                    { targets: "disableOrdering", orderable: false },
-                    { type: "num", targets: [2, 3, 4] },
-                    { type: "momentTime", targets: [1] },
-                    { targets: 0, render: (val) => { return val in modeAndTitle ? modeAndTitle[val] : "Edit modeAndTitle"; },  }
-                ],
-                rowGroup: {
-                    dataSrc: "gameMode",
-                    endRender: null,
-                    startRender: function ( _, mode) {
-                        return mode in modeAndTitle ? modeAndTitle[mode] : "Edit modeAndTitle";
-                     }
-                },
-                columns: [
-                    { data: "gameMode" },
-                    { data: "nickname" },
-                    { data: "mistakesCounter" },
-                    { data: "correctCounter" },
-                    { data: "missedCounter" },
-                    { data: "gameTimeElapsed" }
-                ]
-            };
-
-            let currentPlayerId = "'.$current_player_id.'";
-
-            let bestGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
-                lengthMenu: [3, 10, 25, 50],
-            });
-
-            let playerGamesDatatableOptions = $.extend(true, {}, gamesDatatableOptions, {
-                data: [],
-            });
-
-            let bestGamesTable = $(".table.best-games-table");
-            let playerGamesTable = $(".table.player-games-table");
-
-            initDatatable(bestGamesTable, bestGamesDatatableOptions);
-            initDatatable(playerGamesTable, playerGamesDatatableOptions);
-
-            const loadData = () => {
-                $.ajax({
-                    url: "/statistics/data",
-                    method: "GET",
-                    dataType: "json",
-                    success: (data) => {
-                        bestGamesTable.DataTable().clear().rows.add(data).draw();
-                        playerGamesTable.DataTable().clear().rows.add(data.filter(r => r.playerId === currentPlayerId)).draw();
-                    }
-                });
-            };
-
-            loadData();
-            setInterval(loadData, 30 * 1000);
-    });
-    </script>
-
+    <input type="hidden" name="currentPlayerId" value="'.$current_player_id.'" />
+    <script type="text/javascript" src="../scripts/statistics/index.js"></script>
 
 ', 'statistics/', '../');
 
