@@ -24,29 +24,32 @@ GameSettings gameSettings;
 void initPinSettings () {
     pinSettings = {};
 
-    // DO NOT USE PIN 0 and 1, THE PROGRAM WOULD NOT WORK PROPERLY.
+    // Pin settings can be changed here.
+    // Check SpotGame.Settings.h file for detailed information.
+    // DO NOT USE PIN 0 AND 1, THE PROGRAM WOULD NOT WORK PROPERLY.
     // THESE ARE RESERVED FOR COMMUNICATION WITH SERIAL MONITOR.
     pinSettings.randomBlinkingLed = 6;
     pinSettings.mistakeLedRed = 4;
     pinSettings.correctLedGreen = 2;
     pinSettings.pressButton = 5;
-
-    // Check SpotGame.Settings.h file for detailed information.
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
 }
 
 void initGameSettings () {
     gameSettings = {};
 
+    // Game settings can be changed here.
+    // Check SpotGame.Settings.h file for detailed information.
+    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
     gameSettings.ledTurnedOnDurationMillis = 300;
     gameSettings.waitAfterCounterChangeMillis = 500;
-    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
     gameSettings.finalCountCorrect = 10;
     gameSettings.maxErrorRateIndex = 5.0/(double)gameSettings.finalCountCorrect;
     gameSettings.mistakesCountTolerance = 3;
-
-    // Check SpotGame.Settings.h file for detailed information.
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
 
