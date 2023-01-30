@@ -5,10 +5,30 @@ var standardTimeFormat = 'HH:mm:ss';
 const modeAndTitle = {
     untilMistakeMode: "Dokud se hráč nesplete",
     reachFinalCountCorrectMode: "Cílový počet správných stisknutí",
-}
+};
+
+const eventTypeAndMessage = {
+    waitingForArduinoBoardReset: 'Čekání na manuální resetování Arduino desky',
+    arduinoBoardInvalidReset: 'Deska nebyla správně resetována',
+    arduinoBoardReseted: 'Arduino deska úspěšně resetována',
+    unableToReadSerial: 'Nelze získat data ze Serial výstupu Arduino desky',
+    gameInitialized: 'Hra spuštěna',
+    gameOver: 'Hra prohrána',
+    gameWon: 'Hra dokončena',
+    maxErrorRateIndexExceeded: 'Překročena maximální povolená chybovost',
+    correctCountIncreased: 'Zvýšen počet správných stisknutí',
+    mistakesCountIncreased: 'Zvýšen počet chyb',
+    mistakesToleranceExceeded: 'Překročen počet tolerovaných chyb',
+    unableToSaveResults: 'Výsledky hráče se nepodařilo uložit',
+    gameResultsSaved: 'Výsledky hráče úspěšně uloženy',
+};
 
 var getModeTitle = (mode) => {
-    return mode in modeAndTitle ? modeAndTitle[mode] : 'Mód nepřidándo ./scripts/general/modes.js';
+    return mode in modeAndTitle ? modeAndTitle[mode] : 'Mód nepřidán do ./assets/js/index.js';
+};
+
+var getEventMessage = (eventType) => {
+    return eventType in eventTypeAndMessage ? eventTypeAndMessage[eventType] : 'Zpráva nepřidána do ./assets/js/index.js';
 };
 
 function initDatatable(table, extendSettings) {

@@ -50,7 +50,7 @@ if ($handle) {
     fclose($handle);
 } else {
     echo json_encode(array(
-        "queue" => array(array("eventType" => "unableToReadSerial", "message" => "Nelze získat data z Arduino desky")),
+        "queue" => array(array("eventType" => "unableToReadSerial")),
         "skipOffset" => -1,
     ));
 }
