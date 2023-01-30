@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    var spotGameDataJSONconsoleManager = new dataJSONconsoleManager();
-    var spotGameDataJSONmanager = new dataJSONmanager(1000);
-    var spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
+$(function () {
+    let spotGameDataJSONconsoleManager = new dataJSONconsoleManager();
+    let spotGameDataJSONmanager = new dataJSONmanager(1000);
+    let spotGameManager = new gameManager(spotGameDataJSONmanager, spotGameDataJSONconsoleManager);
 
-    var btnSpotGameReset = $('.btn.btn-game-reset');
+    let btnSpotGameReset = $('.btn.btn-game-reset');
 
     spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function () {
         spotGameManager.initActualTimeElapsed();

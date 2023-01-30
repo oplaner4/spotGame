@@ -31,6 +31,7 @@ if ($handle) {
             if ($linesDataTakeParts === 0) {
                 array_push($dataToProcess, $linesDataPartsMerged);
                 $linesDataPartsMerged = array();
+                $skipOffset = ftell($handle);
             }
         }
 
@@ -43,7 +44,7 @@ if ($handle) {
 
     echo json_encode(array(
         "queue" => $dataToProcess,
-        "skipOffset" => $linesDataTakeParts > 0 ? $skipOffset : ftell($handle),
+        "skipOffset" => $skipOffset,
     ));
 
     fclose($handle);
