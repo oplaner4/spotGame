@@ -31,6 +31,7 @@ if ($handle) {
             if ($linesDataTakeParts === 0) {
                 array_push($dataToProcess, $linesDataPartsMerged);
                 $linesDataPartsMerged = array();
+                $skipOffset = ftell($handle);
             }
         }
 
@@ -43,13 +44,13 @@ if ($handle) {
 
     echo json_encode(array(
         "queue" => $dataToProcess,
-        "skipOffset" => ftell($handle),
+        "skipOffset" => $skipOffset,
     ));
 
     fclose($handle);
 } else {
     echo json_encode(array(
-        "queue" => array(array("eventType" => "unableToReadSerial", "message" => "Nelze získat data ze zd Arduino desky")),
+        "queue" => array(array("eventType" => "unableToReadSerial", "message" => "Nelze získat data z Arduino desky")),
         "skipOffset" => -1,
     ));
 }
