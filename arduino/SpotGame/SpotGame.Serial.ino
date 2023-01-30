@@ -48,7 +48,7 @@ void writeToSerialMonitor (String eventType, GameSettings settings, GameStatePro
   Serial.println(
       // The first JSON describes how many parts are going to be sent.
       constructJSON (
-        constructJSONpropertyInt ("JSONparts", 5, false)
+        constructJSONpropertyInt ("JSONparts", 4, false)
       )
   );
   
