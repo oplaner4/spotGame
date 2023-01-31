@@ -1,6 +1,6 @@
 var ww = $(window);
 var standardDateFormat = 'DD.MM.YYYY HH:mm';
-var standardTimeFormat = 'HH:mm:ss';
+var standardTimeFormat = 'mm:ss';
 
 const modeAndTitle = {
     untilMistakeMode: "Dokud se hráč nesplete",

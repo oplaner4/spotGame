@@ -4,11 +4,19 @@ $(function () {
         orderFixed: [0, "asc" ],
         columnDefs: [
             { targets: "disableOrdering", orderable: false },
-            { type: "num", targets: [2, 3, 4] },
+            { type: "num", targets: [2, 3, 4, 5, 6] },
             { targets: 0, render: (val) => getModeTitle(val),  },
-            { type: "num", targets: [5, 6], render: (val, type) => {
+            { targets: [5], render: (val, type) => {
                 if(type === 'display') {
                     return moment.utc(parseInt(val)).format(standardTimeFormat);
+                }
+
+                return val;
+
+             }},
+             { targets: [6], render: (val, type) => {
+                if(type === 'display') {
+                    return moment.utc(parseInt(val)).format('mm:ss.SSS');
                 }
 
                 return val;

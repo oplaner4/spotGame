@@ -1,59 +1,40 @@
-{"JSONparts":3}
-{"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":6}
-{"correctCounter":0,"mistakesCounter":0, "missedCounter":0, "correctDelayMillisCounter": 0}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.50,"eventType":"arduinoBoardReseted"}
-
-{"JSONparts":3}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":0,"mistakesCounter":0, "missedCounter":0, "correctDelayMillisCounter": 0}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"gameInitialized"}
-
-{"JSONparts":3}
+{"correctCounter":0,"mistakesCounter":0,"missedCounter":0}
+{"correctDelayMillisCounter":0}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"arduinoBoardReseted"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":0,"mistakesCounter":1, "missedCounter":1, "correctDelayMillisCounter": 0}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"mistakesCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":0,"mistakesCounter":0,"missedCounter":0}
+{"correctDelayMillisCounter":0}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"gameInitialized"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":1,"mistakesCounter":1, "missedCounter":1, "correctDelayMillisCounter": 300}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"correctCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":0,"mistakesCounter":1,"missedCounter":1}
+{"correctDelayMillisCounter":0}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":2,"mistakesCounter":1, "missedCounter":1, "correctDelayMillisCounter": 600}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"correctCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":0,"mistakesCounter":2,"missedCounter":2}
+{"correctDelayMillisCounter":0}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":2,"mistakesCounter":2, "missedCounter":2, "correctDelayMillisCounter": 600}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"mistakesCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":1,"mistakesCounter":2,"missedCounter":2}
+{"correctDelayMillisCounter":270}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"correctCountIncreased"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":3,"mistakesCounter":2, "missedCounter":2, "correctDelayMillisCounter": 800}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"correctCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":1,"mistakesCounter":3,"missedCounter":3}
+{"correctDelayMillisCounter":270}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"mistakesCountIncreased"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":3,"mistakesCounter":3, "missedCounter":3, "correctDelayMillisCounter": 800}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"mistakesCountIncreased"}
-
-{"JSONparts":3}
+{"correctCounter":1,"mistakesCounter":4,"missedCounter":4}
+{"correctDelayMillisCounter":270}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"mistakesToleranceExceeded"}
+{"JSONparts":4}
 {"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":4,"mistakesCounter":3, "missedCounter":3, "correctDelayMillisCounter": 1000}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"correctCountIncreased"}
-
-{"JSONparts":3}
-{"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":5,"mistakesCounter":3, "missedCounter":3, "correctDelayMillisCounter": 1100}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"correctCountIncreased"}
-
-{"JSONparts":3}
-{"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":5,"mistakesCounter":4, "missedCounter":4, "correctDelayMillisCounter": 1100}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"mistakesToleranceExceeded"}
-
-{"JSONparts":3}
-{"gameMode":"untilMistakeMode","mistakesCountTolerance":3,"finalCountCorrect":10}
-{"correctCounter":5,"mistakesCounter":4, "missedCounter":4, "correctDelayMillisCounter": 2000}
-{"ledTurnedOnDurationMillis":500,"maxErrorRateIndex":0.5,"eventType":"gameOver"}
+{"correctCounter":1,"mistakesCounter":4,"missedCounter":4}
+{"correctDelayMillisCounter":270}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"gameOver"}

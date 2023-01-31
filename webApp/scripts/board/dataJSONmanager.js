@@ -27,7 +27,7 @@ var dataJSONmanager = function (updateIntervalMiliseconds) {
         listGroupItemRemainsMistakesCountTolerance: '0',
         listGroupItemRemainsFinalCountCorrect: '0',
         listGroupItemActualErrorRateIndex: '0',
-        listGroupItemActualGameTimeElapsed: '00:00:00',
+        listGroupItemActualGameTimeElapsed: '00:00',
         listGroupItemMissedCounter: '0'
     };
 
