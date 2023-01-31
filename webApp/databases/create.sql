@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Databáze: `spotgame`
 --
 
+DROP DATABASE IF EXISTS `spotgame`;
+CREATE DATABASE `spotgame` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `spotgame`;
+
 -- --------------------------------------------------------
 
 --
