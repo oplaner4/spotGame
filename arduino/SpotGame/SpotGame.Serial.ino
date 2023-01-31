@@ -42,13 +42,13 @@ String gameModeToString (GameMode mode) {
   }
 }
 
-void writeToSerialMonitor (String message, String eventType, GameSettings settings, GameStateProps stateProps) { 
+void writeToSerialMonitor (String eventType, GameSettings settings, GameStateProps stateProps) { 
   // Data have to be sent as parts.
   
   Serial.println(
       // The first JSON describes how many parts are going to be sent.
       constructJSON (
-        constructJSONpropertyInt ("JSONparts", 5, false)
+        constructJSONpropertyInt ("JSONparts", 4, false)
       )
   );
   
@@ -79,12 +79,6 @@ void writeToSerialMonitor (String message, String eventType, GameSettings settin
         constructJSONpropertyInt ("ledTurnedOnDurationMillis", settings.ledTurnedOnDurationMillis, true) + 
         constructJSONpropertyDouble ("maxErrorRateIndex", settings.maxErrorRateIndex, true) +
         constructJSONpropertyString ("eventType", eventType, false)
-      )
-  );
-
-  Serial.println(
-      constructJSON (
-        constructJSONpropertyString ("message", message, false)
       )
   );
 }

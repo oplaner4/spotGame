@@ -30,7 +30,7 @@ Attention game for Arduino board with a few components and ability to report pro
 ### Until mistake mode
 * Player always loses.
 * The goal in this mode is to play for the **longest possible time**, until the **mistakes count tolerance** is exceeded.
-* Mistake also occur in the situation when lighting of the LED was missed.
+* Mistake also occurs in the situation when lighting of the LED was missed.
 * Permanently lighting red LED indicates end of the game. 
 
 ## Arduino project

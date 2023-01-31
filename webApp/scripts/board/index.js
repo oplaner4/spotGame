@@ -11,20 +11,20 @@ $(function () {
     }).addEventTypesListener('arduinoBoardReseted', function (dataJSONhelper) {
         spotGameManager.initialize(dataJSONhelper);
 
-    }).addEventTypesListener('gameCompleted gameOver', function (dataJSONhelper) {
+    }).addEventTypesListener('gameWon gameOver', function (dataJSONhelper) {
         spotGameManager.end().savePlayerData(dataJSONhelper);
         $('span', btnSpotGameReset).text('Hrát znovu');
 
     }).addEventTypesListener('mistakesCountIncreased gameOver unableToReadSerial', function () {
         return { logAdditionalClasses: 'list-group-item-danger' };
 
-    }).addEventTypesListener('correctCountIncreased gameCompleted arduinoBoardReseted', function () {
+    }).addEventTypesListener('correctCountIncreased gameWon arduinoBoardReseted', function () {
         return { logAdditionalClasses: 'list-group-item-success' };
 
-    }).addEventTypesListener('correctCountReached gameInitialized', function () {
+    }).addEventTypesListener('gameInitialized mistakesToleranceExceeded', function () {
         return { logAdditionalClasses: 'list-group-item-info' };
 
-    }).addEventTypesListener('maxErrorRateIndexExceed', function () {
+    }).addEventTypesListener('maxErrorRateIndexExceeded', function () {
         return { logAdditionalClasses: 'list-group-item-warning' };
 
     }).addEventTypesListener('newDataJSON', function (dataJSONhelper) {

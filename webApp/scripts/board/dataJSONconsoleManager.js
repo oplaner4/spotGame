@@ -4,9 +4,9 @@ var dataJSONconsoleManager = function () {
     this.iConsoleUpdating = $('i.fa-console-updating');
 };
 
-dataJSONconsoleManager.prototype.prependNewLog = function (message, additionalClasses) {
+dataJSONconsoleManager.prototype.prependNewLog = function (eventType, additionalClasses) {
     var newListGroupItemLog = this.listGroupItemConsoleLogTemplate.clone(true);
-    $('span.list-group-item-log-message', newListGroupItemLog).html(message);
+    $('span.list-group-item-log-message', newListGroupItemLog).html(getEventMessage(eventType));
     $('span.list-group-item-log-date', newListGroupItemLog).text(new moment().format(standardTimeFormat));
     this.listGroupConsole.prepend(newListGroupItemLog.addClass(additionalClasses));
     return newListGroupItemLog;

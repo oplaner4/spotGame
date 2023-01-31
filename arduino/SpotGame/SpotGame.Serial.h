@@ -86,12 +86,11 @@ String gameModeToString (GameMode mode);
 
 /**
  * Writes progress / result information to the Serial monitor.
- * 
- * @param message: Message describing information.
+ *
  * @param eventType: Event type for machine processing.
  * @param settings: Used game settings instance.
  * @param stateProps: Actual game state props instance.
  */
-void writeToSerialMonitor (String message, String eventType, GameSettings settings, GameStateProps stateProps);
+void writeToSerialMonitor (String eventType, GameSettings settings, GameStateProps stateProps);
 
 #endif

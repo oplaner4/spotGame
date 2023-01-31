@@ -24,29 +24,32 @@ GameSettings gameSettings;
 void initPinSettings () {
     pinSettings = {};
 
-    // DO NOT USE PIN 0 and 1, THE PROGRAM WOULD NOT WORK PROPERLY.
+    // Pin settings can be changed here.
+    // Check SpotGame.Settings.h file for detailed information.
+    // DO NOT USE PIN 0 AND 1, THE PROGRAM WOULD NOT WORK PROPERLY.
     // THESE ARE RESERVED FOR COMMUNICATION WITH SERIAL MONITOR.
     pinSettings.randomBlinkingLed = 6;
     pinSettings.mistakeLedRed = 4;
     pinSettings.correctLedGreen = 2;
     pinSettings.pressButton = 5;
-
-    // Check SpotGame.Settings.h file for detailed information.
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
 }
 
 void initGameSettings () {
     gameSettings = {};
 
+    // Game settings can be changed here.
+    // Check SpotGame.Settings.h file for detailed information.
+    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
     gameSettings.ledTurnedOnDurationMillis = 300;
     gameSettings.waitAfterCounterChangeMillis = 500;
-    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
     gameSettings.finalCountCorrect = 10;
     gameSettings.maxErrorRateIndex = 5.0/(double)gameSettings.finalCountCorrect;
     gameSettings.mistakesCountTolerance = 3;
-
-    // Check SpotGame.Settings.h file for detailed information.
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
 
@@ -68,11 +71,11 @@ void onGameDone() {
 
     if (gameState == STATE_GAME_OVER) {
         digitalWrite(pinSettings.mistakeLedRed, HIGH);
-        writeToSerialMonitor ("Hra prohrána", "gameOver", gameSettings, gameStateProps);
+        writeToSerialMonitor ("gameOver", gameSettings, gameStateProps);
     }
     else {
         digitalWrite(pinSettings.correctLedGreen, HIGH);
-        writeToSerialMonitor ("Hra dokončena", "gameCompleted", gameSettings, gameStateProps);
+        writeToSerialMonitor ("gameWon", gameSettings, gameStateProps);
     }
 }
 
@@ -85,7 +88,7 @@ void onFinalCountCorrectReached() {
         gameStateProps.mistakesCounter = 0;
         gameStateProps.correctCounter = 0;
         gameStateProps.missedCounter = 0;
-        writeToSerialMonitor("Překročena maximální povolená chybovost", "maxErrorRateIndexExceed", gameSettings, gameStateProps);
+        writeToSerialMonitor("maxErrorRateIndexExceeded", gameSettings, gameStateProps);
     }
     else {
         gameState = STATE_GAME_WON;
@@ -98,9 +101,7 @@ void evalCorrect(long currentMillis) {
     gameStateProps.correctCounter += 1;
     gameStateProps.correctDelayMillisCounter += currentMillis - gameStateProps.ledTurnedOnStartMillis;
 
-    writeToSerialMonitor("Zvýšen počet správných stisknutí na: " + String(gameStateProps.correctCounter)
-        + (gameSettings.mode == MODE_REACH_FINAL_COUNT_CORRECT ? (" z "+ String(gameSettings.finalCountCorrect) + " cílových") : ""),
-        "correctCountIncreased", gameSettings, gameStateProps);
+    writeToSerialMonitor("correctCountIncreased", gameSettings, gameStateProps);
 
     if (gameSettings.mode == MODE_REACH_FINAL_COUNT_CORRECT && gameStateProps.correctCounter >= gameSettings.finalCountCorrect) {
         onFinalCountCorrectReached();
@@ -114,15 +115,13 @@ void evalMistake() {
 
     gameStateProps.mistakesCounter += 1;
 
-    writeToSerialMonitor("Zvýšen počet špatných stisknutí na: " + String(gameStateProps.mistakesCounter)
-        + (gameSettings.mode == MODE_UNTIL_MISTAKE_MODE ? (" z " + String(gameSettings.mistakesCountTolerance) + " tolerovaných") : ""),
-        "mistakesCountIncreased", gameSettings, gameStateProps);
-
     if (gameSettings.mode == MODE_UNTIL_MISTAKE_MODE && gameStateProps.mistakesCounter > gameSettings.mistakesCountTolerance) {
         // In 'until mistake' mode: mistakes count tolerance was exceeded.
-        writeToSerialMonitor("Počet dosažených správných stisknutí: " + String(gameStateProps.correctCounter),
-        "correctCountReached", gameSettings, gameStateProps);
+        writeToSerialMonitor("mistakesToleranceExceeded", gameSettings, gameStateProps);
         gameState = STATE_GAME_OVER;
+    }
+    else {
+        writeToSerialMonitor("mistakesCountIncreased", gameSettings, gameStateProps);
     }
 
     delay(gameSettings.waitAfterCounterChangeMillis);
@@ -186,8 +185,8 @@ void setup() {
     pinMode(pinSettings.pressButton, INPUT);
 
     Serial.begin(9600);
-    writeToSerialMonitor("Arduino deska úspěšně resetována", "arduinoBoardReseted", gameSettings, gameStateProps);
-    writeToSerialMonitor("Hra spuštěna", "gameInitialized", gameSettings, gameStateProps);
+    writeToSerialMonitor("arduinoBoardReseted", gameSettings, gameStateProps);
+    writeToSerialMonitor("gameInitialized", gameSettings, gameStateProps);
 }
 
 void loop() {

@@ -33,16 +33,16 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
                 correctDelayMillisCounter: dataJSONhelper.getCorrectDelayMillisCounter(),
                 totalTimeMillis: self.totalTimeMillis,
             },
-            success: function (data) {
-                self.getDataJSONConsoleManager().prependNewLog(data, 'list-group-item-info');
+            success: function () {
+                self.getDataJSONConsoleManager().prependNewLog('gameResultsSaved', 'list-group-item-info');
             },
             error: function () {
-                self.getDataJSONConsoleManager().prependNewLog('Výsledky hráče se nepodařilo uložit', 'list-group-item-danger');
+                self.getDataJSONConsoleManager().prependNewLog('unableToSaveResults', 'list-group-item-danger');
             }
         });
     }
     else {
-        self.getDataJSONConsoleManager().prependNewLog('Deska nebyla správně resetována', 'list-group-item-danger');
+        self.getDataJSONConsoleManager().prependNewLog('arduinoBoardInvalidReset', 'list-group-item-danger');
     }
 
     return self;
@@ -105,7 +105,7 @@ gameManager.prototype.initializeConsole = function () {
 
 gameManager.prototype.start = function () {
     this.ended = false;
-    this.initializeConsole().prependNewLog('Čekání na manuální resetování Arduino desky', 'list-group-item-danger');
+    this.initializeConsole().prependNewLog('waitingForArduinoBoardReset', 'list-group-item-danger');
     this.getDataJSONmanager().outputElemsSetDefaults().startCheckForNewData();
     return this;
 };
@@ -126,16 +126,14 @@ gameManager.prototype.reset = function () {
 };
 
 gameManager.prototype.update = function (dataJSONhelper) {
-    //if (this.initialized || this.ended) {
-        this.getDataJSONConsoleManager().prependNewLog(dataJSONhelper.getData().message, dataJSONhelper.logAdditionalClasses);
-        this.getDataJSONmanager()
-            .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
-            .updateElemChangingValue('listGroupItemMistakesCounter', dataJSONhelper.getMistakesCounter())
-            .updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSONhelper.getRemainsMistakesCountTolerance())
-            .updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSONhelper.getRemainsFinalCountCorrect())
-            .updateElemChangingValue('listGroupItemActualErrorRateIndex', dataJSONhelper.getActualErrorRateIndex().toFixed(2))
-            .updateElemChangingValue('listGroupItemMissedCounter', dataJSONhelper.getMissedCounter());
-    //}
+    this.getDataJSONConsoleManager().prependNewLog(dataJSONhelper.getData().eventType, dataJSONhelper.logAdditionalClasses);
+    this.getDataJSONmanager()
+        .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
+        .updateElemChangingValue('listGroupItemMistakesCounter', dataJSONhelper.getMistakesCounter())
+        .updateElemChangingValue('listGroupItemRemainsMistakesCountTolerance', dataJSONhelper.getRemainsMistakesCountTolerance())
+        .updateElemChangingValue('listGroupItemRemainsFinalCountCorrect', dataJSONhelper.getRemainsFinalCountCorrect())
+        .updateElemChangingValue('listGroupItemActualErrorRateIndex', dataJSONhelper.getActualErrorRateIndex().toFixed(2))
+        .updateElemChangingValue('listGroupItemMissedCounter', dataJSONhelper.getMissedCounter());
 
     return this;
 };
