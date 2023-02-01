@@ -18,7 +18,7 @@ Attention game for Arduino board with a few components and ability to report pro
 * The goal of this attention game is to determine the moment (as accurately as possible) when a random blinking LED turns on by clicking a button.
 * Button should not be pressed in the 'pause' period when the LED is turned off. This is considered a mistake.
 * The first turning on occurs after minimal pause duration.
-* When a player loses or wins the game (depends on the mode), the random blinking LED remains turned on as well as green / red LED which indicates win or loss. Arduino board has to be manually resetted.
+* When a player loses or wins the game (depends on the mode), the random blinking LED remains turned on as well as green / red LED which indicates win or loss. Arduino board has to be manually resetted then.
 
 ### Reach final count correct mode
 
@@ -30,7 +30,7 @@ Attention game for Arduino board with a few components and ability to report pro
 ### Until mistake mode
 * Player always loses.
 * The goal in this mode is to play for the **longest possible time**, until the **mistakes count tolerance** is exceeded.
-* Mistake also occurs in the situation when lighting of the LED was missed.
+* Mistake also occurs in the situation when 'LED turned on' period was missed.
 * Permanently lighting red LED indicates end of the game. 
 
 ## Arduino project
