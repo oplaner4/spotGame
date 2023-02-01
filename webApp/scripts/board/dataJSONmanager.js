@@ -49,7 +49,7 @@ dataJSONmanager.prototype.startCheckForNewData = function () {
 
 dataJSONmanager.prototype.reset = function () {
     this.skipOffset = 0;
-}
+};
 
 dataJSONmanager.prototype.updateElemChangingValue = function (outputElemName, value) {
     $('span', this.getOutputElem(outputElemName)).first().text(value);
@@ -68,10 +68,7 @@ dataJSONmanager.prototype.checkForNewMultiple = function () {
             skipOffset: this.skipOffset,
         },
         success: function (res) {
-            if (res.skipOffset >= 0) {
-                self.skipOffset = res.skipOffset;
-            }
-            
+            self.skipOffset = res.skipOffset;
             res.queue.forEach(function (dataJSON) {
                 new dataJSONhelper(dataJSON).process(self);
             });

@@ -51,7 +51,7 @@ if ($handle) {
 } else {
     echo json_encode(array(
         "queue" => array(array("eventType" => "unableToReadSerial")),
-        "skipOffset" => -1,
+        "skipOffset" => $skipOffset,
     ));
 }
 

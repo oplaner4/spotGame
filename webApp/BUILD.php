@@ -134,7 +134,7 @@ function build_page($title, $viewName, $HTML = '', $subFolderPath = '', $toRootR
         </div>
 
 
-        <div class="footer bg-site text-white text-center px-4 py-3">&copy;'; echo date("Y"); echo' SpotGame | <span>&nbsp;Vytvořil: <a class="font-weight-bold text-info" title="napsat e-mail" href="mailto:oplaner4@gmail.com">oplaner4@gmail.com</a></span></div>
+        <div class="footer bg-site text-white text-center px-4 py-3">&copy;2019 - '; echo date("Y"); echo' SpotGame | <span>&nbsp;Vytvořil: <a class="font-weight-bold text-info" title="napsat e-mail" href="mailto:oplaner4@gmail.com">oplaner4@gmail.com</a></span></div>
         <a href="#body" class="upto bg-site px-2 py-1 rounded-circle mb-2"><i class="fa fa-arrow-up text-white font-weight-bold"></i></a>
     
         <div class="modal fade modal-confirm" tabindex="-1" role="dialog" aria-hidden="true">
