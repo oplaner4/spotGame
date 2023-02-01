@@ -38,7 +38,7 @@ struct GameSettings {
     // the button should be pressed (milliseconds).
     int ledTurnedOnDurationMillis;
     // Wait for specific time when score (counter) is changed
-    // so that user is able to notice that change (milliseconds).
+    // so that player is able to notice that change (milliseconds).
     int waitAfterCounterChangeMillis;
     // Game mode to use (see available modes above).
     enum GameMode mode;

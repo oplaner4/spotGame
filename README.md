@@ -41,9 +41,9 @@ Project is located in `./arduino` folder. More information can be found in separ
 
 1) Prepare Arduino board and components based on the `./arduino/preparedBoard.jpg`.
 2) Customize settings in `./arduino/SpotGame/SpotGame.ino` and upload this file to your Arduino board.
-3) Use Arduino Serial output:
-* **Windows:** open `./CoolTermWin/CaptureArduinoSerial.stc` and start capturing.
-* **Unix systems**: redirect Arduino Serial output **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
+3) Redirect Arduino Serial:
+* **Windows:** open `./CoolTermWin/RedirectArduinoSerial.stc`, customize Arduino Serial Port and click the 'Connect' button.
+* **Unix systems**: redirect Arduino Serial **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
 4) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
 5) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
 6) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.

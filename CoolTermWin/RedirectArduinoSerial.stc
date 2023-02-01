@@ -1,4 +1,4 @@
-Port = 
+Port = COM3
 BaudRate = 9600
 DataBits = 8
 Parity = N
