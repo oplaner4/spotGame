@@ -48,8 +48,8 @@ Project is located in `./webApp` folder. More information can be found in separa
 3) Make sure that Serial monitor is **closed** in the Arduino IDE.
 
 ### Windows
+
 4) Open `./CoolTermWin/RedirectArduinoSerial.stc` file in `./CoolTermWin/CoolTerm.exe`, customize Arduino Serial Port and click the 'Connect' button.
-* **Unix systems**: redirect Arduino Serial **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
 5) Continue with steps described in this [README](https://github.com/oplaner4/spotGame/tree/master/webApp#readme) (in the `./webApp` folder).
 
 ### Unix systems
