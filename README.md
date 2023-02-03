@@ -37,16 +37,27 @@ Attention game for Arduino board with a few components and ability to report pro
 
 Project is located in `./arduino` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/arduino).
 
+## Web Application project
+
+Project is located in `./webApp` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/webApp).
+
 ## Build & Installation
 
 1) Prepare Arduino board and components based on the `./arduino/preparedBoard.jpg`.
 2) Customize settings in `./arduino/SpotGame/SpotGame.ino` and upload this file to your Arduino board.
-3) Redirect Arduino Serial:
-* **Windows:** open `./CoolTermWin/RedirectArduinoSerial.stc` file in `./CoolTermWin/CoolTerm.exe`, customize Arduino Serial Port and click the 'Connect' button.
+3) Make sure that Serial monitor is **closed** in the Arduino IDE.
+
+### Windows
+4) Open `./CoolTermWin/RedirectArduinoSerial.stc` file in `./CoolTermWin/CoolTerm.exe`, customize Arduino Serial Port and click the 'Connect' button.
 * **Unix systems**: redirect Arduino Serial **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
-4) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
-5) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
-6) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.
+5) Continue with steps described in this [README](https://github.com/oplaner4/spotGame/tree/master/webApp (in the `./webApp` folder).
+
+### Unix systems
+
+4) Redirect Arduino Serial **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
+5) Create MySQL database called `spotgame` and call `./webApp/databases/create.sql` SQL script.
+6) Connection to the database can be changed in `./webApp/databases/access/connection.php`.
+7) Run PHP server with `./webApp` as root directory and `index.php` as an entry point.
 
 ## Author
 
