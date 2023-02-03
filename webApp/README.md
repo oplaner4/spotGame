@@ -10,11 +10,11 @@ This document contains essential information to make the Web Application working
 4) Open file `C:/wamp64/bin/apache/apacheX/conf/extra/httpd-vhosts.conf` where **X** is the version of Apache.
 5) Replace **${INSTALL_DIR}/www** (2 occurences) with **absolute path** of **this cloned directory** (webApp) there. Save changes.
 6) Restart all WampServer services.
-7) You should see App Home page on the link from the **3.** step.
+7) You should see App Home page on the link from the **3. step**.
 
 ### Make it accessible from any local computer
 
-1) In the file from the **4.** step replace `Require local` with `Require all granted`. Save changes.
+1) In the file from the **4. step** (above) replace **Require local** with **Require all granted**. Save changes.
 2) Restart all WampServer services.
 3) You may need to turn off your Firewall service or change Firewall service settings.
 4) From another computer go to **http://IPADRESS/** where IPADRESS is **Ip adress** of the hosting computer.
@@ -22,8 +22,8 @@ This document contains essential information to make the Web Application working
 ### Connect to the database from any local computer
 
 1) Open `C:\wamp64\alias\phpmyadmin.conf` file.
-2) Replace `Require local` with `Require all granted`.
-3) Replace `Allow from localhost ::1 127.0.0.1` with `Allow from all`. Save changes.
+2) Replace **Require local** with **Require all granted**.
+3) Replace **Allow from localhost ::1 127.0.0.1** with **Allow from all**. Save changes.
 4) Restart all WampServer services.
 5) You may need to turn off your Firewall service or change Firewall service settings.
 6) Note: You have to create a database user account with access from any computer.
