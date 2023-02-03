@@ -35,7 +35,7 @@ Attention game for Arduino board with a few components and ability to report pro
 
 ## Arduino project
 
-Project is located in `./arduino` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/arduino).
+Project is located in `./arduino` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/arduino#readme).
 
 ## Web Application project
 
