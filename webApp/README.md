@@ -7,8 +7,8 @@ This document contains essential information to make the Web Application working
 1) Install WampServer in version **3.2.2** (not higher), select the newest **Mysql** and **PHP**. Keep other settings unchanged.
 2) Run **WampServerXX** where **XX** is **64** or **32** bit version.
 3) Go to [http://localhost/](http://localhost/) in your favourite browser.
-4) Open file `C:/wamp64/bin/apache/apacheX/conf/extra/httpd-vhosts.conf` where **X** is the version of Apache.
-5) Replace **${INSTALL_DIR}/www** (2 occurences) with **absolute path** of **this cloned directory** (webApp) there. Save changes.
+4) Open `C:/wamp64/bin/apache/apacheX/conf/extra/httpd-vhosts.conf` file where **X** is the version of Apache.
+5) Replace **${INSTALL_DIR}/www** (2 occurences) with **absolute path of this cloned directory** (`X:\\path\to\cloned\repository\webApp`) there. Save changes.
 6) Restart all WampServer services.
 7) You should see App Home page on the link from the **3. step**.
 
