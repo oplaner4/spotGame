@@ -39,7 +39,7 @@ Project is located in `./arduino` folder. More information can be found in separ
 
 ## Web Application project
 
-Project is located in `./webApp` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/webApp).
+Project is located in `./webApp` folder. More information can be found in separate [README](https://github.com/oplaner4/spotGame/tree/master/webApp#readme).
 
 ## Build & Installation
 
@@ -50,7 +50,7 @@ Project is located in `./webApp` folder. More information can be found in separa
 ### Windows
 4) Open `./CoolTermWin/RedirectArduinoSerial.stc` file in `./CoolTermWin/CoolTerm.exe`, customize Arduino Serial Port and click the 'Connect' button.
 * **Unix systems**: redirect Arduino Serial **/dev/ttyUSB0** into `./webApp/data/serial.txt` file.
-5) Continue with steps described in this [README](https://github.com/oplaner4/spotGame/tree/master/webApp (in the `./webApp` folder).
+5) Continue with steps described in this [README](https://github.com/oplaner4/spotGame/tree/master/webApp#readme) (in the `./webApp` folder).
 
 ### Unix systems
 
