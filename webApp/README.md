@@ -28,3 +28,12 @@ This document contains essential information to make the Web Application working
 5) You may need to turn off your Firewall service or change Firewall service settings.
 6) Note: You have to create a database user account with access from any computer.
 7) Change `./databases/access/connection.php` file.
+
+## Author
+
+* Developed by Ondrej Planer ([oplaner4@gmail.com](mailto:oplaner4@gmail.com)).
+* Co-workers: Ondrej Nemec (idea), Vojtech Varecha (troubleshooter), Jiri Pokorny (board).
+
+## License
+
+SpotGame can be freely distributed under the **MIT license**.
