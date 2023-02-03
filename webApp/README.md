@@ -17,6 +17,7 @@ This document contains essential information to make the Web Application working
 1) In the file from the **4.** step replace `Require local` with `Require all granted`. Save changes.
 2) Restart all WampServer services.
 3) You may need to turn off your Firewall service or change Firewall service settings.
+4) From another computer go to **http://IPADRESS/** where IPADRESS is **Ip adress** of the hosting computer.
 
 ### Connect to the database from any local computer
 
@@ -24,4 +25,6 @@ This document contains essential information to make the Web Application working
 2) Replace `Require local` with `Require all granted`.
 3) Replace `Allow from localhost ::1 127.0.0.1` with `Allow from all`. Save changes.
 4) Restart all WampServer services.
-5) You may need to turn off your Firewall service or change Firewall service settings. 
+5) You may need to turn off your Firewall service or change Firewall service settings.
+6) Note: You have to create a database user account with access from any computer.
+7) Change `./databases/access/connection.php` file.
