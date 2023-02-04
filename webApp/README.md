@@ -28,7 +28,7 @@ This document contains essential information to make the Web Application working
 1) In the file from the **4. step** (above) replace **Require local** with **Require all granted**. Save changes.
 2) Restart all WampServer services.
 3) You may need to turn off your Firewall service or add an exception for `C:\wamp64\bin\apache\apacheXXXXX\bin\httpd.exe` executable where *XXXXX* is the version of Apache.
-4) From another computer go to **http://IPADRESS/** where *IP_ADRESS* is an **IP adress** of the hosting computer.
+4) From another computer go to **http://IPADRESS/** where *IP_ADRESS* is an **IPv4 adress** of the hosting computer. This adress can be get by the *ipconfig* command in the 'Command Prompt'.
 
 ### Connect to the database from any local computer
 
