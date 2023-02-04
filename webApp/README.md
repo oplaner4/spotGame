@@ -15,9 +15,9 @@ This document contains essential information to make the Web Application working
 ### Make database working
 
 1) Go to [phpmyadmin](http://localhost/phpmyadmin).
-2) Sign in with '**root**' as name. Do not fill password, do not change server.
+2) You should be on the **Sign in page**. Fill in name: '**root**'. Do not fill password, do not change server - keep MariaDB.
 3) Navigate to the 'Database' tab (leftmost).
-4) Fill in name of the database: **spotgame**. Click the 'Create' button.
+4) Fill in name of the database: '**spotgame**'. Click the 'Create' button.
 5) Go to [import page](http://localhost/phpmyadmin/db_import.php?db=spotgame).
 6) Click the 'Choose File' button.
 7) Select `./databases/create.sql` file.
@@ -27,7 +27,7 @@ This document contains essential information to make the Web Application working
 
 1) In the file from the **4. step** (above) replace **Require local** with **Require all granted**. Save changes.
 2) Restart all WampServer services.
-3) You may need to turn off your Firewall service or change Firewall service settings.
+3) You may need to turn off your Firewall service or add an exception for `C:\wamp64\bin\apache\apacheX\bin\httpd.exe` executable where *X* is the version of Apache.
 4) From another computer go to **http://IPADRESS/** where *IP_ADRESS* is an **IP adress** of the hosting computer.
 
 ### Connect to the database from any local computer
@@ -36,7 +36,7 @@ This document contains essential information to make the Web Application working
 2) Replace **Require local** with **Require all granted**.
 3) Replace **Allow from localhost ::1 127.0.0.1** with **Allow from all**. Save changes.
 4) Restart all WampServer services.
-5) You may need to turn off your Firewall service or change Firewall service settings.
+5) You may need to turn off your Firewall service or add an exception for `C:\wamp64\bin\mariadb\mariadbX\bin\mysqld.exe` executable where *X* is the version of MariaDB.
 6) Note: You have to create a database user account with access from any computer.
 7) Change `./databases/access/connection.php` file.
 
