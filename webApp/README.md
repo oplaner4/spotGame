@@ -15,7 +15,7 @@ This document contains essential information to make the Web Application working
 ### Make database working
 
 1) Go to [phpmyadmin](http://localhost/phpmyadmin).
-2) Sign in with **root** name. Do not fill password, do not change server.
+2) Sign in with '**root**' as name. Do not fill password, do not change server.
 3) Navigate to the 'Database' tab (leftmost).
 4) Fill in name of the database: **spotgame**. Click the 'Create' button.
 5) Go to [import page](http://localhost/phpmyadmin/db_import.php?db=spotgame).
