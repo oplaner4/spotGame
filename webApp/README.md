@@ -12,6 +12,17 @@ This document contains essential information to make the Web Application working
 6) Restart all WampServer services.
 7) You should see App Home page on the link from the **3. step**.
 
+### Make database working
+
+1) Go to [phpmyadmin](http://localhost/phpmyadmin).
+2) Sign in with **root** name. Do not fill password, do not change server.
+3) Navigate to the 'Database' tab (leftmost).
+4) Fill in name of the database: **spotgame**. Click the 'Create' button.
+5) Go to [import page](http://localhost/phpmyadmin/db_import.php?db=spotgame).
+6) Click the 'Choose File' button.
+7) Select `./databases/create.sql` file.
+8) Click the 'execute' button on the bottom.
+ 
 ### Make it accessible from any local computer
 
 1) In the file from the **4. step** (above) replace **Require local** with **Require all granted**. Save changes.
