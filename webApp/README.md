@@ -37,8 +37,9 @@ This document contains essential information to make the Web Application working
 3) Replace **Allow from localhost ::1 127.0.0.1** with **Allow from all**. Save changes.
 4) Restart all WampServer services.
 5) You may need to turn off your Firewall service or add an exception for `C:\wamp64\bin\mariadb\mariadbXXXXX\bin\mysqld.exe` executable where *XXXXX* is the version of MariaDB.
-6) Note: You have to create a database user account with access from any computer.
-7) Change `./databases/access/connection.php` file.
+6) Go to [Add user form](http://localhost/phpmyadmin/server_privileges.php?adduser=1).
+7) Fill in computer name: '**%**' and user credentials, from global privileges **grant only 'Data' section** (not other). Click the 'Execute' button on the bottom.
+8) On the other computer change `./databases/access/connection.php` file.
 
 ## Author
 
