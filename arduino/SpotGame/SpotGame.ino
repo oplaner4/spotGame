@@ -41,7 +41,7 @@ void initGameSettings () {
 
     // Game settings can be changed here.
     // Check SpotGame.Settings.h file for detailed information.
-    gameSettings.mode = MODE_UNTIL_MISTAKE;
+    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
     gameSettings.ledTurnedOnDurationMillis = 300;
