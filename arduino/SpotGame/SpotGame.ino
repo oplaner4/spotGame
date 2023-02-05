@@ -1,6 +1,6 @@
-#include "SpotGame.State.h";
-#include "SpotGame.Serial.h";
-#include "SpotGame.Settings.h";
+#include "SpotGame.State.h"
+#include "SpotGame.Serial.h"
+#include "SpotGame.Settings.h"
 
 // Ondrej Planer, oplaner4@gmail.com, 10/2019
 // SPOT GAME
@@ -41,11 +41,10 @@ void initGameSettings () {
 
     // Game settings can be changed here.
     // Check SpotGame.Settings.h file for detailed information.
-    gameSettings.mode = MODE_REACH_FINAL_COUNT_CORRECT;
+    gameSettings.mode = MODE_UNTIL_MISTAKE;
     gameSettings.minPauseMillis = 800;
     gameSettings.maxPauseMillis = 3000;
     gameSettings.ledTurnedOnDurationMillis = 300;
-    gameSettings.waitAfterCounterChangeMillis = 500;
     gameSettings.finalCountCorrect = 10;
     gameSettings.maxErrorRateIndex = 5.0/(double)gameSettings.finalCountCorrect;
     gameSettings.mistakesCountTolerance = 3;
@@ -106,8 +105,6 @@ void evalCorrect(long currentMillis) {
     if (gameSettings.mode == MODE_REACH_FINAL_COUNT_CORRECT && gameStateProps.correctCounter >= gameSettings.finalCountCorrect) {
         onFinalCountCorrectReached();
     }
-
-    delay(gameSettings.waitAfterCounterChangeMillis);
 }
 
 void evalMistake() {
@@ -115,7 +112,7 @@ void evalMistake() {
 
     gameStateProps.mistakesCounter += 1;
 
-    if (gameSettings.mode == MODE_UNTIL_MISTAKE_MODE && gameStateProps.mistakesCounter > gameSettings.mistakesCountTolerance) {
+    if (gameSettings.mode == MODE_UNTIL_MISTAKE && gameStateProps.mistakesCounter > gameSettings.mistakesCountTolerance) {
         // In 'until mistake' mode: mistakes count tolerance was exceeded.
         writeToSerialMonitor("mistakesToleranceExceeded", gameSettings, gameStateProps);
         gameState = STATE_GAME_OVER;
@@ -123,14 +120,11 @@ void evalMistake() {
     else {
         writeToSerialMonitor("mistakesCountIncreased", gameSettings, gameStateProps);
     }
-
-    delay(gameSettings.waitAfterCounterChangeMillis);
 }
 
 void evalLedTurnedOnState(long currentMillis) {
     digitalWrite(pinSettings.randomBlinkingLed, HIGH);
-    digitalWrite(pinSettings.mistakeLedRed, LOW);
-  
+
     if (digitalRead(pinSettings.pressButton) == HIGH) {
         // Pressed button
         if (gameStateProps.pressButtonExecuteOnce) {
@@ -142,7 +136,6 @@ void evalLedTurnedOnState(long currentMillis) {
 
 void evalPauseState() {
     digitalWrite(pinSettings.randomBlinkingLed, LOW);
-    digitalWrite(pinSettings.correctLedGreen, LOW);
 
     if (digitalRead(pinSettings.pressButton) == HIGH) {
         // Pressed button
@@ -156,13 +149,16 @@ void evalPauseState() {
 void evalOnMissed() {
     gameStateProps.missedCounter += 1;
 
-    if (gameSettings.mode == MODE_UNTIL_MISTAKE_MODE) {
+    if (gameSettings.mode == MODE_UNTIL_MISTAKE) {
+        digitalWrite(pinSettings.randomBlinkingLed, LOW);
         // In 'until mistake' mode it is considered a mistake.
         evalMistake();
     }
 }
 
 void setup() {
+    initGameSettings();
+
     // The game begins with pause.
     gameState = STATE_PAUSE;
     gameStateProps = {};
@@ -176,7 +172,6 @@ void setup() {
     gameStateProps.pressButtonExecuteOnce = true;
     gameStateProps.doneExecuteOnce = true;
 
-    initGameSettings();
     initPinSettings();
 
     pinMode(pinSettings.randomBlinkingLed, OUTPUT);
@@ -207,6 +202,9 @@ void loop() {
             gameStateProps.pauseStartMillis = currentMillis;
             gameStateProps.pauseDurationMillis = getRandomPauseMillis();
 
+            digitalWrite(pinSettings.correctLedGreen, LOW);
+            digitalWrite(pinSettings.mistakeLedRed, LOW);
+
             if (gameStateProps.pressButtonExecuteOnce) {
                 evalOnMissed();
             }
@@ -221,8 +219,10 @@ void loop() {
             // The end of 'pause' period.
             gameState = STATE_LED_TURNED_ON;
             gameStateProps.ledTurnedOnStartMillis = currentMillis;
-
             gameStateProps.pressButtonExecuteOnce = true;
+
+            digitalWrite(pinSettings.correctLedGreen, LOW);
+            digitalWrite(pinSettings.mistakeLedRed, LOW);
         }
     }
 }

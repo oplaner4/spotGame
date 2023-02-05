@@ -34,7 +34,7 @@ String gameModeToString (GameMode mode) {
     case MODE_REACH_FINAL_COUNT_CORRECT:
         return "reachFinalCountCorrectMode";
         break;
-    case MODE_UNTIL_MISTAKE_MODE:
+    case MODE_UNTIL_MISTAKE:
         return "untilMistakeMode";
         break;
     default:

@@ -10,7 +10,7 @@ enum GameMode {
     // Play 'reach final count of correct presses' mode.
     MODE_REACH_FINAL_COUNT_CORRECT,
     // Play more difficult 'until mistake' mode.
-    MODE_UNTIL_MISTAKE_MODE,
+    MODE_UNTIL_MISTAKE,
 };
 
 // Defines used Pins on Arduino board.
@@ -37,9 +37,6 @@ struct GameSettings {
     // Duration of LED being turned on. During this period
     // the button should be pressed (milliseconds).
     int ledTurnedOnDurationMillis;
-    // Wait for specific time when score (counter) is changed
-    // so that player is able to notice that change (milliseconds).
-    int waitAfterCounterChangeMillis;
     // Game mode to use (see available modes above).
     enum GameMode mode;
     // MODE_REACH_FINAL_COUNT_CORRECT only: final count of correct presses.
