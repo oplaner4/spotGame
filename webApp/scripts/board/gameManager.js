@@ -105,6 +105,7 @@ gameManager.prototype.initializeConsole = function () {
 
 gameManager.prototype.start = function () {
     this.ended = false;
+    this.initialized = false;
     this.initializeConsole().prependNewLog('waitingForArduinoBoardReset', 'list-group-item-danger');
     this.getDataJSONmanager().outputElemsSetDefaults().startCheckForNewData();
     return this;
@@ -126,6 +127,10 @@ gameManager.prototype.reset = function () {
 };
 
 gameManager.prototype.update = function (dataJSONhelper) {
+    if (!this.initialized || this.ended) {
+        return this;
+    }
+
     this.getDataJSONConsoleManager().prependNewLog(dataJSONhelper.getData().eventType, dataJSONhelper.logAdditionalClasses);
     this.getDataJSONmanager()
         .updateElemChangingValue('listGroupItemCorrectCounter', dataJSONhelper.getCorrectCounter())
