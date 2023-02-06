@@ -49,7 +49,7 @@ struct GameSettings {
     //      c = final count of correct presses.
     //      maxErrorRateIndex = m / c
     double maxErrorRateIndex;
-    // MODE_UNTIL_MISTAKE_MODE only: tolerated count of mistakes. Use zero when no
+    // MODE_UNTIL_MISTAKE only: tolerated count of mistakes. Use zero when no
     // mistakes can occur. Missed 'LED turned on' period is considered a mistake as well.
     int mistakesCountTolerance;
 };
