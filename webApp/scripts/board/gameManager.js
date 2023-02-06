@@ -6,7 +6,7 @@ var gameManager = function (dataJSONmanagerInstance, dataJSONconsoleManagerInsta
     this.ended = false;
 
     this.actualTimeElapsedInterval = null;
-    this.totalTimeMillis = 0;
+    this.startedUnixTimestamp = 0;
 };
 
 
@@ -31,7 +31,7 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
                 mistakesCounter: dataJSONhelper.getMistakesCounter(),
                 missedCounter: dataJSONhelper.getMissedCounter(),
                 correctDelayMillisCounter: dataJSONhelper.getCorrectDelayMillisCounter(),
-                totalTimeMillis: self.totalTimeMillis,
+                totalTimeMillis: new Date().getTime() - self.startedUnixTimestamp,
             },
             success: function () {
                 self.getDataJSONConsoleManager().prependNewLog('gameResultsSaved', 'list-group-item-info');
@@ -50,12 +50,11 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
 
 gameManager.prototype.initActualTimeElapsed = function () {
     let self = this;
-    let initTime = new Date().getTime();
+    self.startedUnixTimestamp = new Date().getTime();
 
     self.actualTimeElapsedInterval = setInterval(function () {
-        self.totalTimeMillis = new Date().getTime() - initTime;
         self.getDataJSONmanager().updateElemChangingValue('listGroupItemActualGameTimeElapsed',
-            moment.utc(self.totalTimeMillis).format(standardTimeFormat));
+            moment.utc(new Date().getTime() - self.startedUnixTimestamp).format(standardTimeFormat));
     }, 1000);
 
     return self;
