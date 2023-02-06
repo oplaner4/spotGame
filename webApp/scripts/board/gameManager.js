@@ -19,7 +19,7 @@ gameManager.prototype.getDataJSONConsoleManager = function () {
 };
 
 gameManager.prototype.savePlayerData = function (dataJSONhelper) {
-    var self = this;
+    let self = this;
     if (self.initialized && self.ended) {
         $.ajax({
             url: "/board/save",
@@ -49,9 +49,11 @@ gameManager.prototype.savePlayerData = function (dataJSONhelper) {
 };
 
 gameManager.prototype.initActualTimeElapsed = function () {
-    var self = this;
+    let self = this;
+    let initTime = new Date().getTime();
+
     self.actualTimeElapsedInterval = setInterval(function () {
-        self.totalTimeMillis += 1000;
+        self.totalTimeMillis = new Date().getTime() - initTime;
         self.getDataJSONmanager().updateElemChangingValue('listGroupItemActualGameTimeElapsed',
             moment.utc(self.totalTimeMillis).format(standardTimeFormat));
     }, 1000);
@@ -65,7 +67,7 @@ gameManager.prototype.stopActualTimeElapsed = function () {
 };
 
 gameManager.prototype.adjustOutputElemsToGameMode = function (dataJSONhelper) {
-    var elemDataTargetMode = 'data-target-mode';
+    let elemDataTargetMode = 'data-target-mode';
     $('[' + elemDataTargetMode + ']').css('display', 'none').filter('[' + elemDataTargetMode + '="' + dataJSONhelper.getGameModeName() + '"]').attr('style', '');
     this.getDataJSONmanager().updateElemChangingValue('listGroupItemGameModeTitle', getModeTitle(dataJSONhelper.getGameModeName()));
 
@@ -112,7 +114,7 @@ gameManager.prototype.start = function () {
 };
 
 gameManager.prototype.reset = function () {
-    var self = this;
+    let self = this;
     self.end().getDataJSONmanager().reset();
 
     $.ajax({
