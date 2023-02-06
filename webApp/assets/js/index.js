@@ -12,7 +12,7 @@ const eventTypeAndMessage = {
     arduinoBoardInvalidReset: 'Deska nebyla správně resetována',
     arduinoBoardReseted: 'Arduino deska úspěšně resetována',
     unableToReadSerial: 'Nelze získat data ze Serial výstupu Arduino desky',
-    gameInitialized: 'Hra spuštěna',
+    gameStarted: 'Hra spuštěna',
     gameOver: 'Hra prohrána',
     gameWon: 'Hra dokončena',
     maxErrorRateIndexExceeded: 'Překročena maximální povolená chybovost',

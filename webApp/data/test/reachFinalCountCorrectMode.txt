@@ -7,7 +7,7 @@
 {"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":10}
 {"correctCounter":0,"mistakesCounter":0,"missedCounter":0}
 {"correctDelayMillisCounter":0}
-{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"gameInitialized"}
+{"ledTurnedOnDurationMillis":300,"maxErrorRateIndex":0.50,"eventType":"gameStarted"}
 {"JSONparts":4}
 {"gameMode":"reachFinalCountCorrectMode","mistakesCountTolerance":3,"finalCountCorrect":10}
 {"correctCounter":1,"mistakesCounter":0,"missedCounter":11}

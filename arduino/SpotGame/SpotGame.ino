@@ -181,7 +181,7 @@ void setup() {
 
     Serial.begin(9600);
     writeToSerialMonitor("arduinoBoardReseted", gameSettings, gameStateProps);
-    writeToSerialMonitor("gameInitialized", gameSettings, gameStateProps);
+    writeToSerialMonitor("gameStarted", gameSettings, gameStateProps);
 }
 
 void loop() {

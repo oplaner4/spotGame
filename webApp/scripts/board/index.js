@@ -5,7 +5,7 @@ $(function () {
 
     let btnSpotGameReset = $('.btn.btn-game-reset');
 
-    spotGameDataJSONmanager.addEventTypesListener('gameInitialized', function () {
+    spotGameDataJSONmanager.addEventTypesListener('gameStarted', function () {
         spotGameManager.initActualTimeElapsed();
 
     }).addEventTypesListener('arduinoBoardReseted', function (dataJSONhelper) {
@@ -21,7 +21,7 @@ $(function () {
     }).addEventTypesListener('correctCountIncreased gameWon arduinoBoardReseted', function () {
         return { logAdditionalClasses: 'list-group-item-success' };
 
-    }).addEventTypesListener('gameInitialized mistakesToleranceExceeded', function () {
+    }).addEventTypesListener('gameStarted mistakesToleranceExceeded', function () {
         return { logAdditionalClasses: 'list-group-item-info' };
 
     }).addEventTypesListener('maxErrorRateIndexExceeded', function () {
